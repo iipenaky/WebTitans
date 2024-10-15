@@ -1,0 +1,229 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    /* Styling for the header section. */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out logo and nav items */
+    align-items: center; /* Center items vertically */
+    background-color: black; /* Set header background color to black */
+    padding: 5px 10px; /* Add padding inside the header */
+}
+header img.logo {
+    /* Set dimensions for the logo image. */
+    height: 50px; /* Set logo height */
+    width: 50px; /* Set logo width */
+}
+nav ul {
+    /* Style for the navigation menu list. */
+    list-style: none; /* Remove bullet points from the list */
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    display: flex; /* Arrange list items in a row */
+}
+
+nav ul li {
+    /* Add left margin to each navigation item. */
+    margin-left: 20px; 
+}
+
+nav ul li a {
+    /* Style for navigation links. */
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Set link color to white */
+    font-weight: bold; /* Make links bold */
+}
+
+nav ul li a.active {
+    /* Highlight the active link (current page) in red. */
+    color: red; 
+}
+nav ul li a:hover {
+    /* Change link color to red when hovered over. */
+    color: red; 
+}
+  
+  /* Video Section */
+  .video-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+  }
+  
+  .video-overlay h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ffffff;
+    padding-bottom: 10px; 
+  }
+
+
+  .video-overlay p{
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0;
+    line-height: 1.6;
+    font-style:oblique;
+    font-weight: bolder;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+   
+  .order-button {
+    display: inline-block; /* Allows padding and margin */
+    margin-top: 20px; /* Space between paragraph and button */
+    padding: 10px 20px; /* Padding for the button */
+    background-color: black; /* Default button background color */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .order-button:hover {
+    background-color: red; /* Background color on hover */
+  }
+  
+  
+  footer {
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+}
+/* About Section */
+.about-section, .service-section {
+    background-size: cover;
+    max-height: 500px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  
+  .about-section h2, .service-section h2 {
+    color: #ffffff;
+    font-size: 2rem;
+  }
+  
+  .about-text {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #cccccc;
+    line-height: 1.6;
+  }
+  
+ .searchBar {
+    /* Center and style the search bar. */
+    text-align: center; /* Center-align the search bar */
+    margin: 20px; /* Add margin around the search bar */
+}
+input[type="text"] {
+    /* Style for the search input field. */
+    padding: 10px; /* Add padding inside the input */
+    width: 50%; /* Set input width to 50% of the parent */
+    border-radius: 5px; /* Round the corners of the input */
+    border: 1px solid #ccc; /* Add a light gray border */
+}
+.featuredRecipe {
+    /* Style for the featured recipe section. */
+    margin: 20px; /* Add margin around the section */
+    padding: 20px; /* Add padding inside the section */
+    background-color: white; /* Set background color to white */
+    border-radius: 10px; /* Round the corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    text-align: center; /* Center-align text inside */
+}
+.featuredRecipe img {
+    /* Style for the featured recipe image. */
+    max-width: 100%; /* Ensure the image does not exceed the width of the container */
+    border-radius: 10px; /* Round the corners of the image */
+}
+.featuredRecipe h2 {
+    /* Style for the featured recipe title. */
+    font-size: 28px; /* Set font size */
+    margin: 10px 0; /* Add margin above and below */
+}
+.featuredRecipe p {
+    /* Style for paragraphs in the featured recipe section. */
+    font-size: 16px; /* Set font size */
+}
+h2 {
+    /* Style for general headings. */
+    font-family: 'Lucida Handwriting'; /* Set specific font for headings */
+    font-size: 28px; /* Set font size */
+    margin: 10px 0; /* Add margin above and below */
+    text-align: center; /* Center-align text */
+}
+h3 {
+    /* Style for subheadings (recipe categories). */
+    font-family: American Typewriter, serif; /* Set specific font for subheadings */
+    font-size: 28px; /* Set font size */
+    margin: 10px 0; /* Add margin above and below */
+    text-align: center; /* Center-align text */
+    color: rgb(240, 255, 243); /* Set color for subheadings */
+}
+p {
+    /* Style for general paragraphs. */
+    font-size: 14px; /* Set font size */
+}
+
+/* Scrollable container for recipe boxes */
+.recipeScroll {
+    display: flex; /* Use flexbox for layout */
+    overflow: auto; /* Allow horizontal scrolling */
+    padding: 20px; /* Add padding inside the scroll container */
+    gap: 20px; /* Add space between recipe boxes */
+    white-space: nowrap;
+}
+.recipeBox {
+    /* Style for individual recipe boxes. */
+    background-color: white; /* Set background color to white */
+    border-radius: 10px; /* Round the corners */
+    padding: 15px; /* Add padding inside the box */
+    text-align: center; /* Center-align text inside */
+    min-width: 250px; /* Set a minimum width for each box */
+    flex-shrink: 0; /* Prevent boxes from shrinking */
+}
+.recipeBox:hover {
+    /* Scale up and add shadow when hovering over the recipe box. */
+    transform: scale(1.05); /* Slightly enlarge the box */
+}
+.recipeBox img {
+    /* Style for recipe images in boxes. */
+    max-width: 100%; /* Ensure the image does not exceed the width of the box */
+    border-radius: 10px; /* Round the corners of the image */
+}
