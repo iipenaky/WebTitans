@@ -1,179 +1,187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Title displayed on the browser tab. -->
     <title>Menu</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css" />
     <style>
-        h2, p{
-            color: black;
-        }
+      h2,
+      p {
+        color: black;
+      }
     </style>
-</head>
-<body>  
-  <header>
-    <!-- Logo image displayed in the header. -->
-    <img src="Untitled design.png" alt="Logo" class="logo"> 
-    <nav>
+  </head>
+  <body>
+    <header>
+      <!-- Logo image displayed in the header. -->
+      <img src="Untitled design.png" alt="Logo" class="logo" />
+      <nav>
         <ul>
-            <!-- Navigation links for different pages on the website. -->
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="menu.html">Menu</a></li>
+          <!-- Navigation links for different pages on the website. -->
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
         </ul>
-    </nav>
-  </header>
-    
+      </nav>
+    </header>
+
     <div class="searchBar">
-        <!-- Search bar for users to search recipes. -->
-        <input type="text" placeholder="Search for recipes...">
+      <!-- Search bar for users to search recipes. -->
+      <input type="text" placeholder="Search for recipes..." />
     </div>
 
     <div class="featuredRecipe">
-        <!-- Featured recipe section with image and description. -->
-        <img src="lasagna.jpeg" alt="Featured Recipe Image"> 
-        <h2>Featured Recipe of the Day</h2>
-        <p>Lasagna is a delicious Italian dish made by layering sheets of pasta with a rich filling of ricotta and mozzarella cheese, savory meat or vegetables, and marinara sauce, then baking until golden and bubbly. Perfect for a comforting meal, it can be easily customized to suit your taste!</p>
-        <p>Rating: ★★★★★</p> 
+      <!-- Featured recipe section with image and description. -->
+      <img src="./assets/lasagna.jpeg" alt="Featured Recipe Image" />
+      <h2>Featured Recipe of the Day</h2>
+      <p>
+        Lasagna is a delicious Italian dish made by layering sheets of pasta
+        with a rich filling of ricotta and mozzarella cheese, savory meat or
+        vegetables, and marinara sauce, then baking until golden and bubbly.
+        Perfect for a comforting meal, it can be easily customized to suit your
+        taste!
+      </p>
+      <p>Rating: ★★★★★</p>
     </div>
 
     <!-- Pastries section -->
     <h3>Pastries</h3>
     <div class="recipeScroll">
-        <!-- Individual pastry recipe boxes. -->
-        <div class="recipeBox">
-            <img src="croissant.jpeg" alt="Croissant"> 
-            <h2>Croissant</h2>
-            <p>Flaky and buttery French pastry.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="danish.jpeg" alt="Danish Pastry"> 
-            <h2>Danish Pastry</h2>
-            <p>Light pastry with fruit or custard filling.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="muffin.jpeg" alt="Muffin"> 
-            <h2>Blueberry Muffin</h2>
-            <p>Moist and fluffy with bursts of blueberry.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="scone.jpeg" alt="Scone"> 
-            <h2>Classic Scone</h2>
-            <p>Buttery scones, perfect with tea.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="bagel.jpeg" alt="Bagel"> 
-            <h2>Bagel</h2>
-            <p>Chewy, dense, and perfect for breakfast.</p>
-            <p>Rating: ★★★★☆</p>
-        </div>
-        <div class="recipeBox">
-            <img src="pretzel.jpeg" alt="Pretzel"> 
-            <h2>Pretzel</h2>
-            <p>Soft pretzels with a dash of salt.</p>
-            <p>Rating: ★★★★★</p>
-        </div>
+      <!-- Individual pastry recipe boxes. -->
+      <div class="recipeBox">
+        <img src="./assets/croissant.jpeg" alt="Croissant" />
+        <h2>Croissant</h2>
+        <p>Flaky and buttery French pastry.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/danish.jpeg" alt="Danish Pastry" />
+        <h2>Danish Pastry</h2>
+        <p>Light pastry with fruit or custard filling.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/muffin.jpeg" alt="Muffin" />
+        <h2>Blueberry Muffin</h2>
+        <p>Moist and fluffy with bursts of blueberry.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/scone.jpeg" alt="Scone" />
+        <h2>Classic Scone</h2>
+        <p>Buttery scones, perfect with tea.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/bagel.jpeg" alt="Bagel" />
+        <h2>Bagel</h2>
+        <p>Chewy, dense, and perfect for breakfast.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/pretzel.jpeg" alt="Pretzel" />
+        <h2>Pretzel</h2>
+        <p>Soft pretzels with a dash of salt.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
     </div>
 
     <!-- Actual Food section -->
     <h3>Main Dishes</h3>
     <div class="recipeScroll">
-        <!-- Individual recipe boxes for main dishes. -->
-        <div class="recipeBox">
-            <img src="spaghetti.jpeg" alt="Spaghetti Bolognese"> 
-            <h2>Spaghetti Bolognese</h2>
-            <p>Classic Italian pasta dish with rich meat sauce.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="grilled-chicken.jpeg" alt="Grilled Chicken"> 
-            <h2>Grilled Chicken</h2>
-            <p>Juicy chicken grilled to perfection.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="tacos.jpeg" alt="Tacos"> 
-            <h2>Beef Tacos</h2>
-            <p>Crispy tacos filled with seasoned beef.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="salmon.jpeg" alt="Salmon"> 
-            <h2>Grilled Salmon</h2>
-            <p>Fresh salmon grilled with lemon and herbs.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="burger.jpeg" alt="Burger"> 
-            <h2>Classic Cheeseburger</h2>
-            <p>Juicy beef patty with melted cheese.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="pizza.jpeg" alt="Pizza"> 
-            <h2>Margherita Pizza</h2>
-            <p>Thin crust pizza with fresh tomatoes and basil.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
+      <!-- Individual recipe boxes for main dishes. -->
+      <div class="recipeBox">
+        <img src="./assets/spaghetti.jpeg" alt="Spaghetti Bolognese" />
+        <h2>Spaghetti Bolognese</h2>
+        <p>Classic Italian pasta dish with rich meat sauce.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/grilled-chicken.jpeg" alt="Grilled Chicken" />
+        <h2>Grilled Chicken</h2>
+        <p>Juicy chicken grilled to perfection.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/tacos.jpeg" alt="Tacos" />
+        <h2>Beef Tacos</h2>
+        <p>Crispy tacos filled with seasoned beef.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/salmon.jpeg" alt="Salmon" />
+        <h2>Grilled Salmon</h2>
+        <p>Fresh salmon grilled with lemon and herbs.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/burger.jpeg" alt="Burger" />
+        <h2>Classic Cheeseburger</h2>
+        <p>Juicy beef patty with melted cheese.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/pizza.jpeg" alt="Pizza" />
+        <h2>Margherita Pizza</h2>
+        <p>Thin crust pizza with fresh tomatoes and basil.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
     </div>
 
     <!-- Desserts section -->
     <h3>Desserts</h3>
     <div class="recipeScroll">
-        <!-- Individual dessert recipe boxes. -->
-        <div class="recipeBox">
-            <img src="cheesecake.jpeg" alt="Cheesecake">
-            <h2>Cheesecake</h2>
-            <p>Creamy cheesecake with a graham cracker crust.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="brownie.jpeg" alt="Brownie"> 
-            <h2>Chocolate Brownie</h2>
-            <p>Rich and fudgy chocolate brownie.</p>
-            <p>Rating: ★★★★☆</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="ice-cream.jpeg" alt="Ice Cream">
-            <h2>Vanilla Ice Cream</h2>
-            <p>Classic homemade vanilla ice cream.</p>
-            <p>Rating: ★★★★☆</p>
-        </div>
-        <div class="recipeBox">
-            <img src="pavlova.jpeg" alt="Pavlova"> 
-            <h2>Pavlova</h2>
-            <p>Light meringue dessert topped with fruit.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="tiramisu.jpeg" alt="Tiramisu"> 
-            <h2>Tiramisu</h2>
-            <p>Italian coffee-flavored dessert.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
-        <div class="recipeBox">
-            <img src="cupcake.jpeg" alt="Cupcake"> 
-            <h2>Chocolate Cupcake</h2>
-            <p>Delicious chocolate cupcakes with frosting.</p>
-            <p>Rating: ★★★★☆</p>
-        </div>
-        <div class="recipeBox">
-            <img src="cookies.jpeg" alt="Cookies"> 
-            <h2>Chocolate Chip Cookies</h2>
-            <p>Classic cookies loaded with chocolate chips.</p>
-            <p>Rating: ★★★★★</p> 
-        </div>
+      <!-- Individual dessert recipe boxes. -->
+      <div class="recipeBox">
+        <img src="./assets/cheesecake.jpeg" alt="Cheesecake" />
+        <h2>Cheesecake</h2>
+        <p>Creamy cheesecake with a graham cracker crust.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/brownie.jpeg" alt="Brownie" />
+        <h2>Chocolate Brownie</h2>
+        <p>Rich and fudgy chocolate brownie.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/ice-cream.jpeg" alt="Ice Cream" />
+        <h2>Vanilla Ice Cream</h2>
+        <p>Classic homemade vanilla ice cream.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/pavlova.jpeg" alt="Pavlova" />
+        <h2>Pavlova</h2>
+        <p>Light meringue dessert topped with fruit.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/tiramisu.jpeg" alt="Tiramisu" />
+        <h2>Tiramisu</h2>
+        <p>Italian coffee-flavored dessert.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/cupcake.jpeg" alt="Cupcake" />
+        <h2>Chocolate Cupcake</h2>
+        <p>Delicious chocolate cupcakes with frosting.</p>
+        <p>Rating: ★★★★☆</p>
+      </div>
+      <div class="recipeBox">
+        <img src="./assets/cookies.jpeg" alt="Cookies" />
+        <h2>Chocolate Chip Cookies</h2>
+        <p>Classic cookies loaded with chocolate chips.</p>
+        <p>Rating: ★★★★★</p>
+      </div>
     </div>
     <footer>
-        <p>Author: Hege Refsnes<br>
-        <a href="mailto:hege@example.com">hege@example.com</a></p>
+      <p>
+        Author: Hege Refsnes<br />
+        <a href="mailto:hege@example.com">hege@example.com</a>
+      </p>
     </footer>
-    
-</body>
+  </body>
 </html>
