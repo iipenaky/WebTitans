@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant - Reservations</title>
+  <link rel="stylesheet" href="reservations.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="Untitled design.png" alt="Logo" class="logo"> 
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservations.html" class="active">Reservations</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1>Make a Reservation</h1>
+    <form id="reservation-form">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="date">Reservation Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Reservation Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="guests">Number of Guests:</label>
+      <input type="number" id="guests" name="guests" min="1" max="20" required>
+
+      <input type="submit" value="Submit Reservation">
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="mailto:info@darrylrestaurant.com">info@darrylsrestaurant.com</a><br>
+      Location: 123 Food Street, Madina City
+    </p>
+  </footer>
+  
+</body>
+</html>

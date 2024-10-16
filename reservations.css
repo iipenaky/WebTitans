@@ -1,0 +1,108 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out logo and nav items */
+  align-items: center; /* Center items vertically */
+  background-color: black; /* Set header background color to black */
+  padding: 5px 10px; /* Add padding inside the header */
+}
+
+header img.logo {
+  height: 50px; /* Set logo height */
+  width: 50px; /* Set logo width */
+}
+
+nav ul {
+  list-style: none; /* Remove bullet points from the list */
+  margin: 0; /* Remove margin */
+  padding: 0; /* Remove padding */
+  display: flex; /* Arrange list items in a row */
+}
+
+nav ul li {
+  margin-left: 20px; 
+}
+
+nav ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: white; /* Set link color to white */
+  font-weight: bold; /* Make links bold */
+}
+
+nav ul li a.active {
+  color: red; /* Highlight the active link (current page) in red */
+}
+
+nav ul li a:hover {
+  color: red; /* Change link color to red when hovered over */
+}
+
+main {
+  padding: 20px; /* Add padding to the main content */
+}
+
+h1 {
+  text-align: center; /* Center the heading */
+}
+
+form {
+  max-width: 600px; /* Limit the width of the form */
+  margin: 0 auto; /* Center the form */
+  background-color: #333; /* Set a background color for the form */
+  padding: 20px; /* Add padding inside the form */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+form label {
+  display: block; /* Display each label on a new line */
+  margin-bottom: 5px; /* Space below each label */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form input[type="time"],
+form input[type="number"] {
+  width: 100%; /* Full width for input fields */
+  padding: 10px; /* Add padding inside the input fields */
+  margin-bottom: 15px; /* Space below input fields */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+form input[type="submit"] {
+  background-color: #5cb85c; /* Set background color for the button */
+  color: white; /* Set text color for the button */
+  padding: 10px; /* Add padding inside the button */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+form input[type="submit"]:hover {
+  background-color: #4cae4c; /* Darken button on hover */
+}
+
+html, body {
+  height: 100%; /* Ensure the body takes the full height */
+  margin: 0; /* Remove default margin */
+}
+
+footer {
+  position: fixed; /* Fix the footer to the bottom */
+  bottom: 0; /* Position it at the bottom of the page */
+  left: 0; /* Align it to the left */
+  width: 100%; /* Make it span the full width */
+  text-align: center; /* Center the text in the footer */
+  padding: 3px; /* Add padding */
+  background-color: black; /* Set background color for footer */
+  color: white; /* Set text color for footer */
+}
