@@ -3,54 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant - Reservations</title>
-  <link rel="stylesheet" href="reservations.css">
+  <title>Reservations|DarrylsRestaurant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body style="background-image: url(./assets/2.jpeg); background-position: center; background-repeat: no-repeat; background-size: cover;">  
+  <header class="bg-black p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <img src="Untitled design.png" alt="Logo" class="logo w-50 h-50"> 
+        
+        <nav>
+          <ul class="flex space-x-6 text-white">
+            <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
+            <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
+            <li><a href="menu.html" class="font-bold hover:text-red-600 transition duration-300">Menu</a></li>
+            <li><a href="reservations.html" class="font-bold hover:text-red-600 transition duration-300">Reservations</a></li>
+            <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
+  
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <!-- Header -->
-  <header>
-    <img src="Untitled design.png" alt="Logo" class="logo"> 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="reservations.html" class="active">Reservations</a></li>
-      </ul>
-    </nav>
-  </header>
+  <main class="container mx-auto mt-8">
+    <div class="form-container">
+      <h1 class="text-4xl font-bold mb-4">Make a Reservation</h1>
+      <form id="reservation-form" onsubmit="return validateReservationForm()">
+        <div class="mb-4">
+          <label for="name" class="block text-lg font-medium">Full Name:</label>
+          <input type="text" id="name" name="name" class="border border-gray-300 rounded-md p-2 w-full" >
+          <p id="nameError" class="text-red-500 hidden">Please enter your full name.</p>
+        </div>
 
-  <!-- Main Content -->
-  <main>
-    <h1>Make a Reservation</h1>
-    <form id="reservation-form">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required>
+        <div class="mb-4">
+          <label for="email" class="block text-lg font-medium" >Email:</label>
+          <input type="email" id="email" name="email" class="border border-gray-300 rounded-md p-2 w-full" >
+          <p id="emailError" class="text-red-500 hidden">Please enter a valid email address.</p>
+        </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+        <div class="mb-4">
+          <label for="date" class="block text-lg font-medium">Reservation Date:</label>
+          <input type="date" id="date" name="date" class="border border-gray-300 rounded-md p-2 w-full" >
+          <p id="dateError" class="text-red-500 hidden">Please select a valid reservation date.</p>
+        </div>
 
-      <label for="date">Reservation Date:</label>
-      <input type="date" id="date" name="date" required>
+        <div class="mb-4">
+          <label for="time" class="block text-lg font-medium">Reservation Time:</label>
+          <input type="time" id="time" name="time" class="border border-gray-300 rounded-md p-2 w-full" >
+          <p id="timeError" class="text-red-500 hidden">Please select a valid reservation time.</p>
+        </div>
 
-      <label for="time">Reservation Time:</label>
-      <input type="time" id="time" name="time" required>
+        <div class="mb-4">
+          <label for="guests" class="block text-lg font-medium">Number of Guests:</label>
+          <input type="number" id="guests" name="guests" min="1" max="20" class="border border-gray-300 rounded-md p-2 w-full" >
+          <p id="guestsError" class="text-red-500 hidden">Please select a valid number of guests (1-20).</p>
+        </div>
 
-      <label for="guests">Number of Guests:</label>
-      <input type="number" id="guests" name="guests" min="1" max="20" required>
-
-      <input type="submit" value="Submit Reservation">
-    </form>
+        <input type="submit" value="Submit Reservation" class="bg-blue-600 text-white py-2 px-4 rounded">
+      </form>
+    </div>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>
-      <a href="mailto:info@darrylrestaurant.com">info@darrylsrestaurant.com</a><br>
-      Location: 123 Food Street, Madina City
-    </p>
+  <footer class="bg-black text-white py-4 text-center text-sm">
+    <p><a href="mailto:info@darrylrestaurant.com" class="text-gray-400">info@darrylsrestaurant.com</a></p>
+    <p>Location: 123 Food Street, Madina City</p>
   </footer>
   
+  <script>
+    function validateReservationForm() {
+      let isValid = true;
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const guests = document.getElementById('guests').value;
+
+      // Clear previous error messages
+      document.getElementById('nameError').classList.add('hidden');
+      document.getElementById('emailError').classList.add('hidden');
+      document.getElementById('dateError').classList.add('hidden');
+      document.getElementById('timeError').classList.add('hidden');
+      document.getElementById('guestsError').classList.add('hidden');
+
+      // Validate Name
+      if (name === "") {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (date === "") {
+        document.getElementById('dateError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (time === "") {
+        document.getElementById('timeError').classList.remove('hidden');
+        isValid = false;
+      }
+
+
+      if (guests === "" || guests < 1 || guests > 20) {
+        document.getElementById('guestsError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert('Your reservation has been submitted successfully!');
+      } else {
+        alert('Please fill out all  fields correctly.');
+      }
+
+      return isValid;
+    }
+  </script>
+
 </body>
 </html>

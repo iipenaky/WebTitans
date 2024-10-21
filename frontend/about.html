@@ -4,58 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - Darryl's Restaurant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <style>
-    body{
-      background-image: url("aboutback.webp");
-      background-size: cover; /* Cover the entire background with the image */
-      background-position: center; /* Center the background image */
-      margin: 0; /* Remove default margin */
-      padding: 0; /* Remove default padding */
+    body {
+      background-image: url('./assets/aboutback.jpeg');
+      background-size: cover;
+      background-position: center;
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-black p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <img src="Untitled design.png" alt="Logo" class="logo w-50 h-50"> 
+      <nav>
+        <ul class="flex space-x-6 text-white">
+          <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
+          <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
+          <li><a href="menu.html" class="font-bold hover:text-red-600 transition duration-300">Menu</a></li>
+          <li><a href="reservations.html" class="font-bold hover:text-red-600 transition duration-300">Reservations</a></li>
+          <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
 
-  <!-- Header -->
-  <header>
-    <!-- Logo image displayed in the header. -->
-    <img src="Untitled design.png" alt="Logo" class="logo"> 
-    <nav>
-        <ul>
-            <!-- Navigation links for different pages on the website. -->
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="menu.html">Menu</a></li>
         </ul>
-    </nav>
+      </nav>
+    </div>
   </header>
 
-  <!-- About Content Section with Background Image -->
-  <section class="about-section">
-    <div>
-      <h2 class="text-center">Our Services</h2>
-      <p class="about-text">
+  <section class="min-h-screen flex flex-col items-center justify-center text-white text-center p-8 bg-opacity-75 bg-black">
+    <div class="max-w-3xl">
+      <h2 class="text-4xl font-bold mb-6">Our Services</h2>
+      <p class="text-lg">
         At Darryl's Restaurant, we offer a wide range of gourmet dishes inspired by both traditional and modern culinary techniques. Our chefs carefully select the freshest ingredients to craft dishes that will delight your senses and bring you back for more. We’re passionate about providing a warm and welcoming environment where you can enjoy a memorable dining experience, whether you're here for a casual meal or a special occasion.
       </p>
     </div>
   </section>
 
-  <!-- Staff and Customer Service Section -->
-  <section class="service-section">
-    <div class="container py-5">
-      <h2 class="text-center">Our Commitment to Customer Service</h2>
-      <p class="about-text">
+  <section class="bg-black text-white py-16">
+    <div class="container mx-auto text-center max-w-3xl">
+      <h2 class="text-4xl font-bold mb-6">Our Commitment to Customer Service</h2>
+      <p class="text-lg">
         Our dedicated staff is trained to provide outstanding customer service, ensuring that each visit to our restaurant is enjoyable and comfortable. We believe that every customer deserves the best, and our team is here to cater to your needs with a smile. At Darryl's, we cherish each guest, striving to create a unique experience for all who walk through our doors. Our goal is to make you feel valued, appreciated, and part of our family.
       </p>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <a href="info@darrylrestaurant.com">info@darrylsrestaurant.com</a><br>
-     Location: 123 Food Street, Madina City
-  </p>
-</footer>
+  <footer class="bg-black text-white py-8 text-center">
+    <p><a href="mailto:info@darrylrestaurant.com" class="text-gray-400 hover:text-red-600 transition duration-300">info@darrylsrestaurant.com</a></p>
+    <p>Location: 123 Food Street, Madina City</p>
+  </footer>
+
 </body>
 </html>
