@@ -4,33 +4,19 @@ require_once __DIR__ . "/../../services/PaymentService.php";
 require_once __DIR__ . "/../../utils.php";
 
 $PaymentService = new PaymentService();
-$fields = ["payment_id","order_id","amount",  "payment_date", "amount", "status"];
+$fields = ["payment_id","order_id","amount",  "payment_time", "amount", "status"];
 
 function validateNewPayment($data)
 {
     global $fields;
-    if (any(array_map(function ($item) use ($data) {
-        return $data->$item;
-    }, array_slice($fields, 2, sizeof($fields))), function ($item) {
-        return !isset($item);
-    })) {
-        header("HTTP/1.1 400 Bad Request");
-        throw new Exception("Invalid payment data");
-    }
+    return validateNewData($fields, $data, "payment");
 }
 
 
 function validatePayment($data)
 {
     global $fields;
-    if (any(array_map(function ($item) use ($data) {
-        return $data->$item;
-    }, $fields), function ($item) {
-        return !isset($item);
-    })) {
-        header("HTTP/1.1 400 Bad Request");
-        throw new Exception("Invalid payment data");
-    }
+    return validateData($fields, $data, "payment");
 }
 
 $paymentRoutes = array(

@@ -3,6 +3,11 @@
 require_once __DIR__."/../../services/CustomerService.php";
 require_once __DIR__ . "/../../utils.php";
 
+/**
+* Initialize the CustomerService
+* A service class handles the business logic of the application performing the actual database operations and returning responses.
+* We call the methods of the service class from the route handlers to get the data we need.
+ */
 $CustomerService = new CustomerService();
 
 function customersAll()
@@ -65,6 +70,11 @@ function customersDelete($id)
     }
 }
 
+/*
+* A map of routes for the customers resource.
+* Each key in this map corresponds to an HTTP method. and its value an array of the available routes for that method.
+* This setup allows for easy addition of new routes and methods and O (1) dispatching of requests.
+*/
 $customerRoutes = array(
 
 "GET" => array(
@@ -87,6 +97,10 @@ $customerRoutes = array(
 );
 
 
+/**
+ * The handler function for the customers resource.
+ * The function takes the HTTP verb and the URI components as arguments and dispatches the request to the appropriate route handler.
+ */
 function customersHandler($verb, $uri)
 {
     global $customerRoutes;
