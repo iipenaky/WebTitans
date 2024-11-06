@@ -1,9 +1,16 @@
 <?php
 
 define("DB_HOST", "localhost");
-define("DB_NAME", "restaurant");
-define("DB_USER", "madiba");
-define("DB_PASS", "madiba");
+define("DB_NAME", "webtech_fall2024_madiba_quansah");
+
+if ($_SERVER['SERVER_NAME'] == "localhost" || $_SERVER["SERVER_NAME"] == "127.0.0.1") {
+    define("DB_USER", "madiba");
+    define("DB_PASS", "madiba");
+} else {
+    define("DB_USER", "madiba.quansah");
+    define("DB_PASS", "madiba123");
+}
+
 define("DB_FMT", "utf8mb4");
 define("DB_ATTR", "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=".DB_FMT);
 define("DB_OPTS", [
