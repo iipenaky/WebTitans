@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__."/../db/db.php";
-/*namespace src\services;*/
 
 class CustomerService
 {
@@ -51,5 +50,14 @@ class CustomerService
         $stmt->bindParam(":address", $customer["address"]);
         $stmt->execute();
         return $this->GetById($customer["customer_id"]);
+    }
+
+    public function Delete($id)
+    {
+        global $db;
+        $stmt = $db->prepare("DELETE FROM customer WHERE customer_id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return true;
     }
 }
