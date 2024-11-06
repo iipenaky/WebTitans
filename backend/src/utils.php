@@ -31,8 +31,32 @@ function handleNoBody($uri, $func)
 
 function handleBody($func)
 {
-    $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"), associative: true);
     $func($data);
+}
+
+function validateNewData($fields, $data, $dataType)
+{
+    if (any(array_map(function ($item) use ($data) {
+        return $data[$item];
+    }, slice($fields, 2)), function ($item) {
+        return !isset($item);
+    })) {
+        header("HTTP/1.1 400 Bad Request");
+        throw new Exception("Invalid $dataType data");
+    }
+}
+
+function validateData($fields, $data, $dataType)
+{
+    if (any(array_map(function ($item) use ($data) {
+        return $data[$item];
+    }, $fields), function ($item) {
+        return !isset($item);
+    })) {
+        header("HTTP/1.1 400 Bad Request");
+        throw new Exception("Invalid $dataType data");
+    }
 }
 
 
@@ -40,6 +64,12 @@ function routeHandler($verb, $uri, $routes)
 {
     try {
         $subroute = $uri[1];
+
+        if (!isset($routes[$verb][$subroute])) {
+            header("HTTP/1.1 404 Not Found");
+            exit();
+        }
+
         $func = $routes[$verb][$subroute];
 
         if (!$func) {
