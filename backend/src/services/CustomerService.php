@@ -1,8 +1,14 @@
 <?php
 
 require_once __DIR__."/../db/db.php";
-/*namespace src\services;*/
 
+/**
+ * A service class handles all the business logic of the application performing the actual database operations and returning responses.
+* Each service class has methods that correspond to the CRUD operations of the entity it is responsible for, or more complex operations that involve multiple entities and often string many methods in the service class together
+* Here we use the $db global variable to access the database connection and perform operations on the database. This $db variable is a PDO object which differs
+* from mysqli in that it is more object-oriented and allows for more secure database operations, thus we bind paramters with the bindParam method instead of the
+* bind_param method in mysqli
+ */
 class CustomerService
 {
     public function GetAll()
@@ -51,5 +57,14 @@ class CustomerService
         $stmt->bindParam(":address", $customer["address"]);
         $stmt->execute();
         return $this->GetById($customer["customer_id"]);
+    }
+
+    public function Delete($id)
+    {
+        global $db;
+        $stmt = $db->prepare("DELETE FROM customer WHERE customer_id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return true;
     }
 }
