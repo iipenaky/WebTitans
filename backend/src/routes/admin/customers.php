@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__."/../services/CustomerService.php";
+require_once __DIR__."/../../services/CustomerService.php";
+require_once __DIR__ . "/../../utils.php";
 
 $CustomerService = new CustomerService();
 
@@ -21,6 +22,7 @@ function customersById($id)
         echo json_encode($customer);
     } else {
         header("HTTP/1.1 404 Not Found");
+        echo json_encode(["error" => "Customer not found"]);
     }
 }
 
@@ -50,7 +52,20 @@ function customersUpdate($data)
     echo json_encode($customer);
 }
 
-$routes = array(
+function customersDelete($id)
+{
+    global $CustomerService;
+    try {
+        $res = $CustomerService->Delete($id);
+        header("HTTP/1.1 200 OK");
+        echo json_encode([ "result" => $res ]);
+    } catch (Exception $e) {
+        header("HTTP/1.1 500 OK");
+        echo json_encode([ "error" => $e->getMessage() ]);
+    }
+}
+
+$customerRoutes = array(
 
 "GET" => array(
 "all" => customersAll(...),
@@ -59,44 +74,21 @@ $routes = array(
 
 "POST" => array(
 "add" => customersAdd(...),
+),
+
+"PUT" => array(
 "update" => customersUpdate(...),
+),
+
+"DELETE" => array(
+"delete" => customersDelete(...)
 )
 
 );
 
-function handleNoBody($uri, $func)
-{
-    if ($uri[3] && $uri[3] !== null) {
-        $func($uri[3]);
-    } else {
-        $func();
-    }
-}
-
-function handleBody($func)
-{
-    $data = json_decode(file_get_contents("php://input"));
-    $func($data);
-}
 
 function customersHandler($verb, $uri)
 {
-    /*try {*/
-    global $routes;
-    $subroute = $uri[2];
-    $func = $routes[$verb][$subroute];
-
-    if (!$func) {
-        header("HTTP/1.1 404 Not Found");
-        exit();
-    }
-
-    match ($verb) {
-        "GET", "DELETE" => handleNoBody($uri, $func),
-        "POST", "PUT" => handleBody($func),
-    };
-
-    /*} catch (Exception $e) {*/
-    /*    throw $e;*/
-    /*}*/
+    global $customerRoutes;
+    return routeHandler($verb, $uri, $customerRoutes);
 }
