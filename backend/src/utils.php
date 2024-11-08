@@ -43,20 +43,30 @@ function validateNewData($fields, $data, $dataType)
         return !isset($item);
     })) {
         header("HTTP/1.1 400 Bad Request");
-        throw new Exception("Invalid $dataType data");
+        echo json_encode(["error" => "Invalid $dataType data"]);
+        return false;
     }
+    return true;
 }
 
 function validateData($fields, $data, $dataType)
 {
+    if (!is_array($data)) {
+        header("HTTP/1.1 400 Bad Request");
+        echo json_encode(["error" => "Invalid $dataType data"]);
+        return false;
+    }
+
     if (any(array_map(function ($item) use ($data) {
         return $data[$item];
     }, $fields), function ($item) {
         return !isset($item);
     })) {
         header("HTTP/1.1 400 Bad Request");
-        throw new Exception("Invalid $dataType data");
+        echo json_encode(["error" => "Invalid $dataType data"]);
+        return false;
     }
+    return true;
 }
 
 
