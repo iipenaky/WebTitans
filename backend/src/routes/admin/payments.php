@@ -4,19 +4,19 @@ require_once __DIR__ . "/../../services/PaymentService.php";
 require_once __DIR__ . "/../../utils.php";
 
 $PaymentService = new PaymentService();
-$fields = ["payment_id","order_id","amount",  "payment_time", "amount", "status"];
+$pFields = ["payment_id","order_id","amount",  "payment_time", "amount", "status"];
 
 function validateNewPayment($data)
 {
-    global $fields;
-    return validateNewData($fields, $data, "payment");
+    global $pFields;
+    return validateNewData($pFields, $data, "payment");
 }
 
 
 function validatePayment($data)
 {
-    global $fields;
-    return validateData($fields, $data, "payment");
+    global $pFields;
+    return validateData($pFields, $data, "payment");
 }
 
 $paymentRoutes = array(

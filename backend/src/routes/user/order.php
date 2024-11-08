@@ -4,19 +4,38 @@ require_once __DIR__ . "/../../services/OrderService.php";
 require_once __DIR__ . "/../../utils.php";
 
 $OrderService = new OrderService();
-$fields = ["order_id","customer_id","staff_id",  "order_time", "total_amount", "status"];
+$orderFields = ["order_id","customer_id","staff_id", "total_amount"];
+$orderDetailsFields = ["order_detail_id", "menu_item_id", "quantity"];
+
+function validateOrderDetails($data)
+{
+    global $orderDetailsFields;
+    foreach ($data as $orderDetail) {
+        if (!validateNewData($orderDetailsFields, $orderDetail, "order detail")) {
+            return false;
+        }
+    }
+    return true;
+}
 
 function validateNewOrder($data)
 {
-    global $fields;
-    return validateNewData($fields, $data, "payment");
+    if (!isset($data["order"])) {
+        return false;
+    }
+    if (!isset($data["order_details"])) {
+        return false;
+    }
+
+    global $orderFields;
+    return validateNewData($orderFields, $data["order"], "order") && validateOrderDetails($data["order_details"]);
 }
 
 
 function validateOrder($data)
 {
-    global $fields;
-    return validateData($fields, $data, "payment");
+    global $orderFields;
+    return validateData($orderFields, $data, "order");
 }
 
 $userOrderRoutes = array(
@@ -42,7 +61,11 @@ function ordersByCustomer($id)
 function makeOrder($data)
 {
     global $OrderService;
-    validateNewOrder($data);
+    if (!validateNewOrder($data)) {
+        header("HTTP/1.1 400 Bad Request");
+        echo json_encode(["error" => "Invalid order data"]);
+        return;
+    }
     $order = $OrderService->Add($data);
     header("HTTP/1.1 201 Created");
     echo json_encode($order);
