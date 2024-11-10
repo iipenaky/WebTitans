@@ -1,3 +1,4 @@
+-- drop database if exists webtech_fall2024_madiba_quansah;
 CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
 
 USE webtech_fall2024_madiba_quansah;
@@ -102,7 +103,7 @@ CREATE table if not exists order_details (
   order_id int NOT NULL,
   menu_item_id int NOT NULL,
   quantity int NOT NULL,
-  FOREIGN KEY (order_id) REFERENCES `order` (order_id),
+  FOREIGN KEY (order_id) REFERENCES `order` (order_id) on delete cascade,
   FOREIGN KEY (menu_item_id) REFERENCES menu_item (menu_item_id)
 );
 
