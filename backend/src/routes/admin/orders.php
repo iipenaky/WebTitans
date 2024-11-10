@@ -32,12 +32,26 @@ $orderRoutes = array(
 /*"PUT" => array(*/
 /*"update" => paymentsUpdate(...),*/
 /*),*/
-/**/
-/*"DELETE" => array(*/
-/*"delete" => paymentsDelete(...)*/
-/*)*/
+
+"DELETE" => array(
+"deleteById" => orderDeleteById(...)
+)
 
 );
+
+function orderDeleteById($id)
+{
+    global $OrderService;
+    $order = $OrderService->GetById($id);
+    if ($order) {
+        $OrderService->Delete($id);
+        header("HTTP/1.1 200 OK");
+        echo json_encode(["message" => "Order deleted"]);
+    } else {
+        header("HTTP/1.1 404 Not Found");
+        echo json_encode(["error" => "Order not found"]);
+    }
+}
 
 function ordersAll()
 {

@@ -10,6 +10,7 @@ class OrderService
 select
 	customer.customer_id,
 	`order`.order_id,
+staff_id,
 	first_name,
 	last_name,
 	email,
@@ -69,6 +70,28 @@ SQL;
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+
+    public function GetByStaffId($id)
+    {
+        global $db;
+        $query = <<<SQL
+        SELECT
+            customer_id,
+            `order`.order_id,
+            staff_id
+        from
+            `order`
+        where 
+            staff_id = ?;
+SQL;
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
 
     public function Add($orderAndOrderDetails)
     {
