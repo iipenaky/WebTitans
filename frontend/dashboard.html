@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-image: url('./assets/2.jpeg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header Section -->
+  <header class="bg-black p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <img src="logo.png" alt="Logo" class="logo w-50 h-50"> 
+      <nav>
+        <ul class="flex space-x-6 text-white">
+            <li><a href="dashboard.html" class="font-bold hover:text-red-600 transition duration-300">Dashboard</a></li>
+            <li><a href="stock.html" class="font-bold hover:text-red-600 transition duration-300">View Stock</a></li>
+            <li><a href="staff.html" class="font-bold hover:text-red-600 transition duration-300">View Staff</a></li>
+            <li><a href="customers.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
+            <li><a href="allReservations.html" class="font-bold hover:text-red-600 transition duration-300">View Reservations</a></li>
+            <li><a href="allOrders.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
+            <li><a href="refill.html" class="font-bold hover:text-red-600 transition duration-300">Limited Stock</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto mt-8">
+    <h1 class="text-4xl font-bold mb-4">Admin Dashboard</h1>
+    
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-3 gap-8 mb-8">
+      <!-- Total Customers -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Total Customers</h2>
+        <p class="text-4xl font-bold text-gray-800" id="totalCustomers">120</p>
+      </div>
+      <!-- Total Staff -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Total Staff</h2>
+        <p class="text-4xl font-bold text-gray-800" id="totalStaff">50</p>
+      </div>
+      <!-- Pending Orders -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Pending Orders</h2>
+        <p class="text-4xl font-bold text-gray-800" id="pendingOrders">30</p>
+      </div>
+    </div>
+
+    <!-- Orders Rate Chart -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Orders Per Week</h2>
+      <canvas id="ordersChart"></canvas>
+    </div>
+  </main>
+
+  <script>
+    // Sample data for metrics
+    const totalCustomers = 120;
+    const totalStaff = 50;
+    const pendingOrders = 30;
+
+    // Updating the metrics dynamically
+    document.getElementById('totalCustomers').textContent = totalCustomers;
+    document.getElementById('totalStaff').textContent = totalStaff;
+    document.getElementById('pendingOrders').textContent = pendingOrders;
+
+    // Orders rate data for the chart
+    const ordersData = {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+      datasets: [{
+        label: 'Orders Per Week',
+        data: [15, 22, 18, 24, 30], // Example order counts for each week
+        borderColor: '#4CAF50',
+        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+        borderWidth: 2,
+        fill: true,
+      }]
+    };
+
+    // Chart.js setup
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    const ordersChart = new Chart(ctx, {
+      type: 'line',
+      data: ordersData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
