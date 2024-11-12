@@ -4,7 +4,8 @@ require_once __DIR__ . "/../../services/OrderService.php";
 require_once __DIR__ . "/../../utils.php";
 
 $OrderService = new OrderService();
-$orderFields = ["order_id","customer_id","staff_id", "total_amount"];
+/*$orderFields = ["order_id","customer_id","staff_id", "total_amount"];*/
+$orderFields = ["order_id","customer_id","staff_id" ];
 $orderDetailsFields = ["order_detail_id", "menu_item_id", "quantity"];
 
 function validateOrderDetails($data)

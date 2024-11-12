@@ -1,4 +1,4 @@
--- drop database if exists webtech_fall2024_madiba_quansah;
+drop database if exists webtech_fall2024_madiba_quansah;
 -- drop table if exists feedback;
 -- drop table if exists payment;
 -- drop table if exists order_details;
@@ -36,7 +36,6 @@ CREATE table if not exists customer (
 
 CREATE table if not exists reservations (
   reservation_id int AUTO_INCREMENT PRIMARY KEY,
-  position_id int,
   customer_id int NOT NULL,
   table_id int NOT NULL,
   reservation_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,8 +44,7 @@ CREATE table if not exists reservations (
   FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
   FOREIGN KEY (table_id) REFERENCES `table` (table_id),
   CHECK (number_of_guests > 0),
-  UNIQUE (table_id, reservation_datetime),
-  UNIQUE (position_id, reservation_datetime)
+  UNIQUE (table_id, reservation_datetime)
 );
 
 CREATE table if not exists staff (
@@ -150,6 +148,140 @@ create table if not exists admin (
   username varchar(100) not null,
   passhash varchar(255) not null
 );
+
+
+DELIMITER //
+
+-- inventory update procedure
+CREATE PROCEDURE update_inventory(
+    IN p_order_detail_id INT,
+    IN p_menu_item_id INT,
+    IN p_order_quantity INT,
+    IN p_action VARCHAR(10),
+    OUT p_error BOOLEAN
+)
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE inv_id INT;
+    DECLARE qty_used INT;
+    DECLARE cur CURSOR FOR 
+        SELECT inventory_id, quantity_used
+        FROM menu_item_inventory
+        WHERE menu_item_id = p_menu_item_id;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET p_error = TRUE;
+    END;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO inv_id, qty_used;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        IF p_action = 'REDUCE' THEN
+            UPDATE inventory
+            SET quantity = quantity - (qty_used * p_order_quantity)
+            WHERE inventory_id = inv_id;
+
+            -- Check if inventory goes below zero
+            IF (SELECT quantity FROM inventory WHERE inventory_id = inv_id) < 0 THEN
+                SET p_error = TRUE;
+                LEAVE read_loop;
+            END IF;
+        ELSEIF p_action = 'INCREASE' THEN
+            UPDATE inventory
+            SET quantity = quantity + (qty_used * p_order_quantity)
+            WHERE inventory_id = inv_id;
+        END IF;
+    END LOOP;
+
+    CLOSE cur;
+
+END //
+
+-- Trigger for order_details INSERT operations
+CREATE TRIGGER reduce_inventory_on_order_insert
+AFTER INSERT ON order_details
+FOR EACH ROW
+BEGIN
+    DECLARE error_occurred BOOLEAN DEFAULT FALSE;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET error_occurred = TRUE;
+    
+    SAVEPOINT before_inventory_update;
+    
+    CALL update_inventory(NEW.order_detail_id, NEW.menu_item_id, NEW.quantity, 'REDUCE', error_occurred);
+    
+    IF error_occurred THEN
+        ROLLBACK TO SAVEPOINT before_inventory_update;
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Inventory update failed';
+    END IF;
+    
+    RELEASE SAVEPOINT before_inventory_update;
+END //
+
+-- Trigger for order_details DELETE operations
+CREATE TRIGGER increase_inventory_on_order_delete
+AFTER DELETE ON order_details
+FOR EACH ROW
+BEGIN
+    DECLARE error_occurred BOOLEAN DEFAULT FALSE;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET error_occurred = TRUE;
+    
+    SAVEPOINT before_inventory_update;
+    
+    CALL update_inventory(OLD.order_detail_id, OLD.menu_item_id, OLD.quantity, 'INCREASE', error_occurred);
+    
+    IF error_occurred THEN
+        ROLLBACK TO SAVEPOINT before_inventory_update;
+    END IF;
+    
+    RELEASE SAVEPOINT before_inventory_update;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+-- Trigger for order INSERT operation to calculate total 
+-- amount
+CREATE TRIGGER calculate_order_total_insert
+AFTER INSERT ON order_details
+FOR EACH ROW
+BEGIN
+    CALL update_order_total(NEW.order_id);
+END //
+
+-- Trigger for UPDATE operations
+CREATE TRIGGER calculate_order_total_update
+AFTER UPDATE ON order_details
+FOR EACH ROW
+BEGIN
+    CALL update_order_total(NEW.order_id);
+END //
+
+-- Stored procedure to update the order total
+CREATE PROCEDURE update_order_total(IN p_order_id INT)
+BEGIN
+    DECLARE order_total DECIMAL(10, 2);
+
+    -- Calculate the total for the entire order
+    SELECT COALESCE(SUM(mi.price * od.quantity), 0) INTO order_total
+    FROM order_details od
+    JOIN menu_item mi ON od.menu_item_id = mi.menu_item_id
+    WHERE od.order_id = p_order_id;
+
+    -- Update the total_amount in the order table
+    UPDATE `order`
+    SET total_amount = order_total
+    WHERE order_id = p_order_id;
+END //
+
+DELIMITER ;
 
 -- -- 1. `table`
 -- INSERT INTO

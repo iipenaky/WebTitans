@@ -1,5 +1,15 @@
 <?php
 
+function mysql_datetime($timestamp)
+{
+    return date('Y-m-d H:i:s', $timestamp);
+}
+
+function mysql_datetime_from_mystring($date)
+{
+    return date('Y-m-d H:i:s', strtotime($date));
+}
+
 function any($array, $func)
 {
     foreach ($array as $item) {
@@ -43,7 +53,7 @@ function validateNewData($fields, $data, $dataType)
         return !isset($item);
     })) {
         header("HTTP/1.1 400 Bad Request");
-        echo json_encode(["error" => "Invalid $dataType data"]);
+        /*echo json_encode(["error" => "Invalid $dataType data"]);*/
         return false;
     }
     return true;
@@ -63,7 +73,7 @@ function validateData($fields, $data, $dataType)
         return !isset($item);
     })) {
         header("HTTP/1.1 400 Bad Request");
-        echo json_encode(["error" => "Invalid $dataType data"]);
+        /*echo json_encode(["error" => "Invalid $dataType data"]);*/
         return false;
     }
     return true;
