@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__."/../db/db.php";
+require_once __DIR__ . "/./MenuItemService.php";
+
 
 class OrderService
 {
@@ -17,6 +19,7 @@ staff_id,
 	name,
 	order_time,
 	total_amount,
+menu_item.price,
 	status,
 	quantity
 from
@@ -26,12 +29,39 @@ inner join order_details on
 inner join menu_item on
 	order_details.menu_item_id = menu_item.menu_item_id
 inner join customer on
-	`order`.customer_id = customer.customer_id;
+	`order`.customer_id = customer.customer_id
+order by order_time desc;
 SQL;
         global $db;
         $stmt = $db->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $res = $stmt->fetchAll();
+
+        $grouped = [];
+        foreach ($res as $row) {
+            $orderId = $row["order_id"];
+            if (!isset($grouped[$orderId])) {
+                $grouped[$orderId] = [
+                                "order_id" => $orderId,
+                                "customer_id" => $row["customer_id"],
+                                "staff_id" => $row["staff_id"],
+                                "first_name" => $row["first_name"],
+                                "last_name" => $row["last_name"],
+                                "email" => $row["email"],
+                                "order_time" => $row["order_time"],
+                                "total_amount" => $row["total_amount"],
+                                "status" => $row["status"],
+                                "items" => []
+                            ];
+            }
+
+            $grouped[$orderId]["items"][] = [
+                "name" => $row["name"],
+                "price" => $row["price"],
+                "quantity" => $row["quantity"]
+            ];
+        }
+        return array_values($grouped);
     }
 
     public function GetById($id)
@@ -95,8 +125,15 @@ SQL;
 
     public function Add($orderAndOrderDetails)
     {
+        $MenuItemService = new MenuItemService();
         $order = $orderAndOrderDetails["order"];
         $orderDetails = $orderAndOrderDetails["order_details"];
+
+        $totalAmount = 0;
+        foreach ($orderDetails as $detail) {
+            $info = $MenuItemService->GetById($detail["menu_item_id"]);
+            $totalAmount += $info["price"] * $detail["quantity"];
+        }
 
         global $db;
         $stmt = $db->prepare(
@@ -104,7 +141,7 @@ SQL;
         );
         $stmt->bindParam(":cid", $order["customer_id"]);
         $stmt->bindParam(":sid", $order["staff_id"]);
-        $stmt->bindParam(":amnt", $order["total_amount"]);
+        $stmt->bindParam(":amnt", $totalAmount);
         $stmt->execute();
         $orderId = $db->lastInsertId();
 

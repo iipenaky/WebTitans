@@ -39,7 +39,12 @@ class Database
         }
     }
 
-    public function Conn()
+    /**
+     *
+     *
+     * @return PDO
+     */
+    public function Conn(): PDO
     {
         return $this->conn;
     }
