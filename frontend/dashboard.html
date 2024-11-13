@@ -1,213 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-image: url('./assets/2.jpeg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
-    <div class="min-h-screen">
-        <nav class="bg-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex">
-                        <div class="flex-shrink-0 flex items-center">
-                            <img class="h-8 w-8" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Restaurant Logo">
-                        </div>
-                        <div class="hidden md:flex md:ml-6 md:items-center md:space-x-4">
-                            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Customers</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Staff</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stock</a>
-                        </div>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <button type="button" class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 18l-6-6 6-6"/>
-                                </svg>
-                                <span class="sr-only">View notifications</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="-mr-2 flex md:hidden">
-                        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-gray-900">Restaurant Dashboard</h1>
-            </div>
-        </header>
-        <main>
-            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Card: Customers Served -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 019 16V5a1 1 0 011-1h6a1 1 0 011 1v11a1 1 0 01-1 1H9z"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Customers Served</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">1,200</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body class="bg-gray-100">
 
-                    <!-- Card: Current Reservations -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-8 4v10a5 5 0 005 5 5 5 0 005-5V7m-10 4h10"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Current Reservations</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">45</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card: Staff Working Today -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-4.215A2 2 0 0016.667 11H7.333a2 2 0 00-1.928 1.785L4 17h5m5 0v5m-3-3h6"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Staff Working Today</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">16</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional sections can be added here -->
-                <div class="mt-8">
-                  <!-- Table: Customers -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Customer Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                <dt class="text-sm font-medium text-gray-500">First Name</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Last Name</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Contact</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Address</dt>
-                              </div>
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                  <dd class="text-sm text-gray-900">John</dd>
-                                  <dd class="text-sm text-gray-900">Doe</dd>
-                                  <dd class="text-sm text-gray-900">555-1234</dd>
-                                  <dd class="text-sm text-gray-900">jondoe@gmail.com</dd>
-                                  <dd class="text-sm text-gray-900">Ireland</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
-                  
-                  <!-- Table: Staff -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Staff Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dt class="text-sm font-medium text-gray-500">staffId</dt>  
-                                <dt class="text-sm font-medium text-gray-500">firstName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">lastName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">position</dt>
-                                  <dt class="text-sm font-medium text-gray-500">email</dt>
-                                  <dt class="text-sm font-medium text-gray-500">phoneNumber</dt>
-                                  <dt class="text-sm font-medium text-gray-500">address</dt>
-                              </div>
-
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dd class="text-sm text-gray-900">1</dd>  
-                                <dd class="text-sm text-gray-900">Gordon</dd>
-                                  <dd class="text-sm text-gray-900">Ramsey</dd>
-                                  <dd class="text-sm text-gray-900">Head Chef</dd>
-                                  <dd class="text-sm text-gray-900">gordonramsey@gmail.com</dd>
-                                  <dd class="text-sm text-gray-900">555-1234</dd>
-                                  <dd class="text-sm text-gray-900">London</dd>
-                              </div>
-
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dd class="text-sm text-gray-900">2</dd>  
-                                <dd class="text-sm text-gray-900">Jamie</dd>
-                                  <dd class="text-sm text-gray-900">Oliver</dd>
-                                  <dd class="text-sm text-gray-900">Sous Chef</dd>
-                                  <dd class="text-sm text-gray-900">jamieoliver@hotmail.com</dd>
-                                  <dd class="text-sm text-gray-900">555-1212</dd>
-                                  <dd class="text-sm text-gray-900">US</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
-                  
-                  <!-- Table: Stock -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Stock Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                  <dt class="text-sm font-medium text-gray-500">inventoryId</dt>
-                                  <dt class="text-sm font-medium text-gray-500">itemName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">quantity</dt>
-                                  <dt class="text-sm font-medium text-gray-500">reorderLevel</dt>
-                                  <dt class="text-sm font-medium text-gray-500">supplierId</dt>
-                              </div>
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                <dd class="text-sm text-gray-900">1</dd>  
-                                <dd class="text-sm text-gray-900">Tomatoes</dd>
-                                  <dd class="text-sm text-gray-900">30</dd>
-                                  <dd class="text-sm text-gray-900">50</dd>
-                                  <dd class="text-sm text-gray-900">4</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
-              </div>
-
-
-            </div>
-        </main>
+  <!-- Header Section -->
+  <header class="bg-black p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <img src="logo.png" alt="Logo" class="logo w-50 h-50"> 
+      <nav>
+        <ul class="flex space-x-6 text-white">
+            <li><a href="dashboard.html" class="font-bold hover:text-red-600 transition duration-300">Dashboard</a></li>
+            <li><a href="stock.html" class="font-bold hover:text-red-600 transition duration-300">View Stock</a></li>
+            <li><a href="staff.html" class="font-bold hover:text-red-600 transition duration-300">View Staff</a></li>
+            <li><a href="customers.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
+            <li><a href="allReservations.html" class="font-bold hover:text-red-600 transition duration-300">View Reservations</a></li>
+            <li><a href="allOrders.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
+            <li><a href="refill.html" class="font-bold hover:text-red-600 transition duration-300">Limited Stock</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto mt-8">
+    <h1 class="text-4xl font-bold mb-4">Admin Dashboard</h1>
+    
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-3 gap-8 mb-8">
+      <!-- Total Customers -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Total Customers</h2>
+        <p class="text-4xl font-bold text-gray-800" id="totalCustomers">120</p>
+      </div>
+      <!-- Total Staff -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Total Staff</h2>
+        <p class="text-4xl font-bold text-gray-800" id="totalStaff">50</p>
+      </div>
+      <!-- Pending Orders -->
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Pending Orders</h2>
+        <p class="text-4xl font-bold text-gray-800" id="pendingOrders">30</p>
+      </div>
+    </div>
+
+    <!-- Orders Rate Chart -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Orders Per Week</h2>
+      <canvas id="ordersChart"></canvas>
+    </div>
+  </main>
+
+  <script>
+    // Sample data for metrics
+    const totalCustomers = 120;
+    const totalStaff = 50;
+    const pendingOrders = 30;
+
+    // Updating the metrics dynamically
+    document.getElementById('totalCustomers').textContent = totalCustomers;
+    document.getElementById('totalStaff').textContent = totalStaff;
+    document.getElementById('pendingOrders').textContent = pendingOrders;
+
+    // Orders rate data for the chart
+    const ordersData = {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+      datasets: [{
+        label: 'Orders Per Week',
+        data: [15, 22, 18, 24, 30], // Example order counts for each week
+        borderColor: '#4CAF50',
+        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+        borderWidth: 2,
+        fill: true,
+      }]
+    };
+
+    // Chart.js setup
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    const ordersChart = new Chart(ctx, {
+      type: 'line',
+      data: ordersData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
