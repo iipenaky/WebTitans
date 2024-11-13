@@ -5,6 +5,7 @@ require_once __DIR__."/./admin/staff.php";
 require_once __DIR__."/./admin/payments.php";
 require_once __DIR__."/./admin/orders.php";
 require_once __DIR__."/./admin/menu_items.php";
+require_once __DIR__."/./admin/inventory.php";
 require_once __DIR__."/./admin/tables.php";
 require_once __DIR__."/../utils.php";
 require_once __DIR__ . "/../services/AdminService.php";
@@ -78,6 +79,9 @@ function adminHandler($verb, $subroute)
             break;
         case "tables":
             tableHandler($verb, $subroute);
+            break;
+        case "inventory":
+            inventoryHandler($verb, $subroute);
             break;
         default:
             header("HTTP/1.1 404 Not Found");
