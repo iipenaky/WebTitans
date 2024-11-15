@@ -1,132 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            background-image: url('./assets/2.jpeg'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+      body {
+        background-image: url("./assets/2.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
 
-        .form-container {
-            width: 60%;
-            height: auto;
-            background-color: rgba(0, 0, 0, 0.85);
-            color: white;
-            margin: 10% auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem;
-            border-radius: 8px;
-        }
+      .form-container {
+        width: 60%;
+        height: auto;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        margin: 10% auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        border-radius: 8px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header class="bg-black p-4 fixed top-0 w-full z-10">
-        <div class="container mx-auto flex justify-between items-center">
-            <img src="Untitled design.png" alt="Logo" class="logo w-50 h-50">
-            <nav>
-                <ul class="flex space-x-6 text-white">
-                    <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
-                    <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
-                    <li><a href="menu.html" class="font-bold hover:text-red-600 transition duration-300">Menu</a></li>
-                    <li><a href="reservations.html" class="font-bold hover:text-red-600 transition duration-300">Make Reservation</a></li>
-                    <li><a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">My Orders</a></li>
-                    <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
-                    <li><a href="signup.html" class="font-bold hover:text-red-600 transition duration-300">Sign Up</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <img src="Untitled design.png" alt="Logo" class="logo w-50 h-50" />
+        <nav>
+          <ul class="flex space-x-6 text-white">
+            <li>
+              <a
+                href="index.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="about.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                href="menu.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Menu</a
+              >
+            </li>
+            <li>
+              <a
+                href="reservations.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Make Reservation</a
+              >
+            </li>
+            <li>
+              <a
+                href="orders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >My Orders</a
+              >
+            </li>
+            <li>
+              <a
+                href="team.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Team</a
+              >
+            </li>
+            <li>
+              <a
+                href="signup.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Sign Up</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main class="container mx-auto mt-8">
-        <div class="form-container">
-            <form id="signupForm" onsubmit="return validateSignupForm()" class="text-white w-full">
-                <h1 class="text-3xl font-bold mb-4 text-center">Sign Up</h1>
-                
-                <div class="mb-4">
-                    <label for="username" class="block mb-1">Username:</label>
-                    <input type="text" name = "username" id="username" class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
-                </div>
+      <div class="form-container">
+        <form id="signupForm" class="text-white w-full">
+          <h1 class="text-3xl font-bold mb-4 text-center">Sign Up</h1>
 
-                <div class="mb-4">
-                    <label for="email" class="block mb-1">Email:</label>
-                    <input type="email" name = "email" id="email" class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
-                    <p id="emailError" class="text-red-500 hidden">Please enter a valid email address.</p>
-                </div>
+          <div class="mb-4">
+            <label for="username" class="block mb-1">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              id="first_name"
+              class="border border-gray-400 text-black rounded p-2 mb-4 w-full"
+            />
+          </div>
 
-                <div class="mb-4">
-                    <label for="password" class="block mb-1">Password:</label>
-                    <input type="password" name = "password" id="password" class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
-                    <p id="passwordError" class="text-red-500 hidden">Password must contain at least one uppercase letter, one number, and be at least 6 characters long.</p>
-                </div>
+          <div class="mb-4">
+            <label for="username" class="block mb-1">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              id="last_name"
+              class="border border-gray-400 text-black rounded p-2 mb-4 w-full"
+            />
+          </div>
 
-                <div class="mb-4">
-                    <label for="confirmPassword" class="block mb-1">Confirm Password:</label>
-                    <input type="password" id="confirmPassword" class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
-                    <p id="confirmPasswordError" class="text-red-500 hidden">Passwords do not match.</p>
-                </div>
+          <div class="mb-4">
+            <label for="email" class="block mb-1">Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="border border-gray-400 text-black rounded p-2 mb-4 w-full"
+            />
+            <p id="emailError" class="text-red-500 hidden">
+              Please enter a valid email address.
+            </p>
+          </div>
 
-                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded w-full">Sign Up</button>
-                <div id="message" class="mt-4 text-red-600 text-center"></div>
-                <p><a href="login.html">Already have an account? Login</a></p>
-            </form>
-        </div>
+          <div class="mb-4">
+            <label for="password" class="block mb-1">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="border border-gray-400 text-black rounded p-2 mb-4 w-full"
+            />
+            <p id="passwordError" class="text-red-500 hidden">
+              Password must contain at least one uppercase letter, one number,
+              and be at least 6 characters long.
+            </p>
+          </div>
+
+          <div class="mb-4">
+            <label for="confirmPassword" class="block mb-1"
+              >Confirm Password:</label
+            >
+            <input
+              type="password"
+              id="confirmPassword"
+              class="border border-gray-400 text-black rounded p-2 mb-4 w-full"
+            />
+            <p id="confirmPasswordError" class="text-red-500 hidden">
+              Passwords do not match.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-red-600 text-white px-4 py-2 rounded w-full"
+          >
+            Sign Up
+          </button>
+          <div id="message" class="mt-4 text-red-600 text-center"></div>
+          <p><a href="login.html">Already have an account? Login</a></p>
+        </form>
+      </div>
     </main>
 
     <footer class="bg-black text-white py-4 text-center text-sm">
-        <p><a href="mailto:info@darrylrestaurant.com" class="text-gray-400">info@darrylsrestaurant.com</a></p>
-        <p>Location: 123 Food Street, Madina City</p>
+      <p>
+        <a href="mailto:info@darrylrestaurant.com" class="text-gray-400"
+          >info@darrylsrestaurant.com</a
+        >
+      </p>
+      <p>Location: 123 Food Street, Madina City</p>
     </footer>
 
-    <script>
-        function validateSignupForm() {
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const messageDiv = document.getElementById('message');
-            const emailError = document.getElementById('emailError');
-            const passwordError = document.getElementById('passwordError');
-            const confirmPasswordError = document.getElementById('confirmPasswordError');
-
-            messageDiv.innerText = '';
-            emailError.classList.add('hidden');
-            passwordError.classList.add('hidden');
-            confirmPasswordError.classList.add('hidden');
-
-            if (!username || !email || !password || !confirmPassword) {
-                messageDiv.innerText = 'All fields must be filled out.';
-                return false;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                emailError.classList.remove('hidden');
-                return false;
-            }
-
-            const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/; // At least one uppercase and one number, minimum of 6 characters
-            if (!passwordPattern.test(password)) {
-                passwordError.classList.remove('hidden');
-                return false;
-            }
-
-            if (password !== confirmPassword) {
-                confirmPasswordError.classList.remove('hidden');
-                return false;
-            }
-
-            alert('Sign Up successful! You can now log in.');
-            document.getElementById('signupForm').reset();
-            return true; 
-        }
-    </script>
-</body>
+    <script defer type="module" src="./script/signup.js"></script>
+  </body>
 </html>
