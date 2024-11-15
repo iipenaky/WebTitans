@@ -1,0 +1,47 @@
+-- Admin
+POST /admin/signup
+POST /admin/login
+
+GET /admin/customers/all
+GET /admin/customers/id/{id}
+POST /admin/customers/add
+PUT /admin/customers/update
+DELETE /admin/customers/delete
+
+GET /admin/inventory/all
+GET /admin/inventory/id/{id}
+GET /admin/inventory/low-stock
+
+GET /admin/menu-items/all
+GET /admin/menu-items/id/{id}
+
+GET /admin/orders/all
+GET /admin/orders/id/{id}
+DELETE /admin/orders/deleteById/{id}
+
+-- Staff
+GET /admin/staff/all
+GET /admin/staff/id/{id}
+POST /admin/staff/signup
+POST /admin/staff/login
+PUT /admin/staff/update
+DELETE /admin/staff/delete/{id}
+
+GET /admin/tables/all
+POST /admin/tables/add
+PUT /admin/tables/update
+DELETE /admin/tables/delete/{id}
+
+-- User
+POST /user/signup
+POST /user/login
+
+GET /user/order/id/{id}
+POST /user/order/add
+POST /user/order/cancel
+
+GET /user/reserve/id/{id}
+POST /user/reserve/add
+DELETE /user/reserve/cancel/{id}
+
+GET /user/tables/available
