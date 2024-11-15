@@ -27,7 +27,7 @@ async function reserveUser(e) {
   alert(data);
   reservationform.reset();
   setTimeout(() => {
-    document.location.href = "./login.html";
+    document.location.href = "./menu.html";
   }, 1500);
 }
 
