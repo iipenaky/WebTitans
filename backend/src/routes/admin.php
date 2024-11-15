@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once __DIR__.'/./admin/customers.php';
 require_once __DIR__.'/./admin/staff.php';
 require_once __DIR__.'/./admin/payments.php';
@@ -31,7 +32,22 @@ function login($data)
         $res = $AdminService->Login($data['username'], $data['password']);
         header($res['header']);
         echo json_encode($res['data']);
+        if ($res['header'] == 'HTTP/1.1 200 OK') {
+            $_SESSION['admin'] = $res['data']['user'];
+        }
     }
+}
+
+function checkAuth()
+{
+    if (! isset($_SESSION['admin'])) {
+        header('HTTP/1.1 401 Unauthorized');
+        echo json_encode(['data' => ['error' => 'Unauthorized']]);
+
+        return false;
+    }
+
+    return true;
 }
 
 function adminHandler($verb, $subroute)
@@ -58,24 +74,45 @@ function adminHandler($verb, $subroute)
             return handleBody(login(...));
             break;
         case 'staff':
+            if (! checkAuth()) {
+                break;
+            }
             staffHandler($verb, $subroute);
             break;
         case 'customers':
+            if (! checkAuth()) {
+                break;
+            }
             customersHandler($verb, $subroute);
             break;
         case 'payments':
+            if (! checkAuth()) {
+                break;
+            }
             paymentsHandler($verb, $subroute);
             break;
         case 'orders':
+            if (! checkAuth()) {
+                break;
+            }
             ordersHandler($verb, $subroute);
             break;
         case 'menu-items':
+            if (! checkAuth()) {
+                break;
+            }
             menuItemHandler($verb, $subroute);
             break;
         case 'tables':
+            if (! checkAuth()) {
+                break;
+            }
             tableHandler($verb, $subroute);
             break;
         case 'inventory':
+            if (! checkAuth()) {
+                break;
+            }
             inventoryHandler($verb, $subroute);
             break;
         default:
