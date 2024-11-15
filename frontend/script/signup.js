@@ -26,7 +26,13 @@ async function signupUser(e) {
   }
 
   const json = await req.json();
-  console.log({ json });
+  const data = json.message;
+  console.log({ data });
+  alert(data);
+  signupForm.reset();
+  setTimeout(() => {
+    document.location.href = "./login.html";
+  }, 1500);
 }
 
 function validateSignupForm() {
