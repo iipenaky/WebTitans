@@ -138,3 +138,20 @@ document.getElementById('reservation-form')?.addEventListener('submit', (e) => {
 
   addReservation(name, date, time, guests);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Redirect to login if user is not logged in
+    if (!checkLoginStatus()) {
+        alert("Please log in to access the menu.");
+        window.location.href = "login.html";
+    }
+});
+
+/**
+ * Checks if the user is logged in.
+ * @returns {boolean} True if logged in, false otherwise.
+ */
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    return isLoggedIn === "true";
+}
