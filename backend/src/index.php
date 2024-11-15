@@ -26,6 +26,11 @@ $uri = explode('/', $uri);
 // Remove elements before and including index.php
 $uri = slice($uri, array_search('index.php', $uri) + 1);
 
+// Remove empty elements
+$uri = array_filter($uri, function ($value) {
+    return $value !== '';
+});
+
 // Get the HTTP verb
 $verb = $_SERVER['REQUEST_METHOD'];
 
@@ -37,6 +42,7 @@ if (! isset($uri[0])) {
 
 try {
     // Match the first element of the URI to the appropriate route
+    /*echo json_encode($uri);*/
     switch ($uri[0]) {
         case 'info':
             header('HTTP/1.1 200 OK');

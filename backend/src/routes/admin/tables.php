@@ -42,34 +42,29 @@ $tableRoutes = [
 function tablesAll()
 {
     global $TableService;
-    $tables = $TableService->GetAll();
-    header('HTTP/1.1 200 OK');
-    echo json_encode($tables);
+    $res = $TableService->GetAll();
+    header($res['header']);
+    echo json_encode($res['data']);
 }
 
 function tableDelete($id)
 {
     global $TableService;
-    if ($TableService->Delete($id)) {
-        header('HTTP/1.1 200 OK');
-        echo json_encode(['message' => 'Table deleted']);
-    } else {
-        header('HTTP/1.1 400 Bad Request');
-        echo json_encode(['error' => 'Table not found']);
-
-    }
+    $res = $TableService->GetById($id);
+    header($res['header']);
+    echo json_encode($res['data']);
 }
 
 function tablesAdd($data)
 {
     global $TableService;
     if (validateNewTable($data)) {
-        $table = $TableService->Add($data);
-        header('HTTP/1.1 201 Created');
-        echo json_encode($table);
+        $res = $TableService->Add($data);
+        header($res['header']);
+        echo json_encode($res['data']);
     } else {
         header('HTTP/1.1 400 Bad Request');
-        echo json_encode(['error' => 'Invalid data']);
+        echo json_encode(['error' => 'Invalid table data']);
     }
 }
 
@@ -77,9 +72,9 @@ function tablesUpdate($data)
 {
     global $TableService;
     if (validateTable($data)) {
-        $table = $TableService->Update($data);
-        header('HTTP/1.1 200 OK');
-        echo json_encode($table);
+        $res = $TableService->Update($data);
+        header($res['header']);
+        echo json_encode($res['data']);
     } else {
         header('HTTP/1.1 400 Bad Request');
         echo json_encode(['error' => 'Invalid data']);

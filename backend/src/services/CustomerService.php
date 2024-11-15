@@ -74,6 +74,13 @@ class CustomerService
     public function Update($customer)
     {
         global $db;
+        $res = $this->GetById($customer['customer_id']);
+        if (! isset($res['data']) || ! is_array($res['data']) || count($res['data']) === 0) {
+            return [
+                'header' => 'HTTP/1.1 404 Not Found',
+                'data' => ['error' => 'Customer not found'],
+            ];
+        }
         $stmt = $db->prepare(
             'UPDATE customer SET first_name = :first_name, last_name = :last_name, phone_number = :phone_number, email = :email, address = :address WHERE customer_id = :id'
         );
@@ -99,6 +106,13 @@ class CustomerService
     public function Delete($id)
     {
         global $db;
+        $res = $this->GetById($id);
+        if (! isset($res['data']) || ! is_array($res['data']) || count($res['data']) === 0) {
+            return [
+                'header' => 'HTTP/1.1 404 Not Found',
+                'data' => ['error' => 'Customer not found'],
+            ];
+        }
         $stmt = $db->prepare('DELETE FROM customer WHERE customer_id = :id');
         $stmt->bindParam(':id', $id);
         if (! $stmt->execute()) {

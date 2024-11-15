@@ -13,35 +13,54 @@ function mysql_datetime_from_mystring($date)
 function any($array, $func)
 {
     foreach ($array as $item) {
-        if (!$func($item)) {
+        if (! $func($item)) {
             return false;
-        };
+        }
     }
+
     return true;
 }
 
 function slice($array, $start = 1, $end = null)
 {
     if ($end == null) {
-        return array_slice($array, $start, sizeof($array));
+        return array_slice($array, $start, count($array));
     } else {
         return array_slice($array, $start, $end);
     }
 }
 
-
 function handleNoBody($uri, $func)
 {
-    if (isset($uri[2]) && $uri[2] !== null) {
-        $func($uri[2]);
-    } else {
-        $func();
+    try {
+        // Determine if $func is a callable function or a method
+        $reflection = is_array($func)
+            ? new ReflectionMethod($func[0], $func[1]) // For class methods
+            : new ReflectionFunction($func);          // For standalone functions or closures
+
+        // Get the number of required parameters
+        $requiredParams = $reflection->getNumberOfRequiredParameters();
+
+        // Call $func with or without arguments based on the number of required parameters
+        if ($requiredParams === 0) {
+            $func(); // No arguments required
+        } elseif (isset($uri[2]) && $uri[2] !== null) {
+            $func($uri[2]); // Provide the argument
+        } else {
+            throw new InvalidArgumentException('Insufficient arguments for the function.');
+        }
+    } catch (ReflectionException $e) {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo json_encode(['error' => 'Internal Server Error']);
+    } catch (InvalidArgumentException $e) {
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Bad Request']);
     }
 }
 
 function handleBody($func)
 {
-    $data = json_decode(file_get_contents("php://input"), associative: true);
+    $data = json_decode(file_get_contents('php://input'), associative: true);
     $func($data);
 }
 
@@ -50,56 +69,60 @@ function validateNewData($fields, $data, $dataType)
     if (any(array_map(function ($item) use ($data) {
         return $data[$item];
     }, slice($fields, 2)), function ($item) {
-        return !isset($item);
+        return ! isset($item);
     })) {
-        header("HTTP/1.1 400 Bad Request");
+        header('HTTP/1.1 400 Bad Request');
+
         /*echo json_encode(["error" => "Invalid $dataType data"]);*/
         return false;
     }
+
     return true;
 }
 
 function validateData($fields, $data, $dataType)
 {
-    if (!is_array($data)) {
-        header("HTTP/1.1 400 Bad Request");
-        echo json_encode(["error" => "Invalid $dataType data"]);
+    if (! is_array($data)) {
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => "Invalid $dataType data"]);
+
         return false;
     }
 
     if (any(array_map(function ($item) use ($data) {
         return $data[$item];
     }, $fields), function ($item) {
-        return !isset($item);
+        return ! isset($item);
     })) {
-        header("HTTP/1.1 400 Bad Request");
+        header('HTTP/1.1 400 Bad Request');
+
         /*echo json_encode(["error" => "Invalid $dataType data"]);*/
         return false;
     }
+
     return true;
 }
-
 
 function routeHandler($verb, $uri, $routes)
 {
     try {
         $subroute = $uri[1];
 
-        if (!isset($routes[$verb][$subroute])) {
-            header("HTTP/1.1 404 Not Found");
+        if (! isset($routes[$verb][$subroute])) {
+            header('HTTP/1.1 404 Not Found');
             exit();
         }
 
         $func = $routes[$verb][$subroute];
 
-        if (!$func) {
-            header("HTTP/1.1 404 Not Found");
+        if (! $func) {
+            header('HTTP/1.1 404 Not Found');
             exit();
         }
 
         match ($verb) {
-            "GET", "DELETE" => handleNoBody($uri, $func),
-            "POST", "PUT" => handleBody($func),
+            'GET', 'DELETE' => handleNoBody($uri, $func),
+            'POST', 'PUT' => handleBody($func),
         };
 
     } catch (Exception $e) {
