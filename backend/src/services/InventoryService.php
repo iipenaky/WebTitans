@@ -53,4 +53,29 @@ class InventoryService
         ];
 
     }
+
+    public function Restock($id, $quantity)
+{
+    if ($quantity <= 0) {
+        return [
+            "header" => "HTTP/1.1 400 Bad Request",
+            "data" => ["error" => "Quantity must be greater than 0"]
+        ];
+    }
+    
+    global $db;
+    $stmt = $db->prepare("update inventory set quantity = quantity + ? where inventory_id = ?");
+    $stmt->bindParam(1, $quantity);
+    $stmt->bindParam(2, $id);
+    if (!$stmt->execute()) {
+        return [
+            "header" => "HTTP/1.1 500 Internal Server Error",
+            "data" => ["error" => "An error occurred while trying to restock inventory with id $id"]
+        ];
+    }
+    return [
+        "header" => "HTTP/1.1 200 OK",
+        "data" => ["message" => "Successfully restocked inventory with id $id by $quantity units"]
+    ];
+}
 }
