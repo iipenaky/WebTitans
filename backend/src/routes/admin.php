@@ -8,6 +8,7 @@ require_once __DIR__.'/./admin/orders.php';
 require_once __DIR__.'/./admin/menu_items.php';
 require_once __DIR__.'/./admin/inventory.php';
 require_once __DIR__.'/./admin/tables.php';
+require_once __DIR__.'/./admin/reservations.php';
 require_once __DIR__.'/../utils.php';
 require_once __DIR__.'/../services/AdminService.php';
 
@@ -114,6 +115,12 @@ function adminHandler($verb, $subroute)
                 break;
             }
             inventoryHandler($verb, $subroute);
+            break;
+        case 'reservations':
+            if (! checkAuth()) {
+                break;
+            }
+            reservationHandler($verb, $subroute);
             break;
         default:
             header('HTTP/1.1 404 Not Found');
