@@ -76,13 +76,11 @@ CREATE table if not exists inventory (
   inventory_id int AUTO_INCREMENT PRIMARY KEY,
   item_name varchar(40) NOT NULL,
   quantity int NOT NULL,
-  unit int NOT NULL,
   reorder_level int NOT NULL,
   CHECK (
     quantity >= 0
     AND reorder_level >= 0
   ),
-  CHECK (unit > 0)
 );
 
 CREATE table if not exists menu_item_inventory (
@@ -90,8 +88,8 @@ CREATE table if not exists menu_item_inventory (
   inventory_id int NOT NULL,
   quantity_used int NOT NULL,
   PRIMARY KEY (menu_item_id, inventory_id),
-  FOREIGN KEY (menu_item_id) REFERENCES menu_item (menu_item_id),
-  FOREIGN KEY (inventory_id) REFERENCES inventory (inventory_id),
+  FOREIGN KEY (menu_item_id) REFERENCES menu_item (menu_item_id) on delete cascade,
+  FOREIGN KEY (inventory_id) REFERENCES inventory (inventory_id) on delete cascade,
   CHECK (quantity_used >= 0)
 );
 

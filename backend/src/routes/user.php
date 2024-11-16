@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once __DIR__.'/./user/order.php';
 require_once __DIR__.'/./user/tables.php';
 require_once __DIR__.'/./user/reserve.php';
@@ -28,7 +30,22 @@ function login($data)
         $res = $UserService->Login($data['email'], $data['password']);
         header($res['header']);
         echo json_encode($res['data']);
+        if ($res['header'] == 'HTTP/1.1 200 OK') {
+            $_SESSION['customer'] = $res['data']['user'];
+        }
     }
+}
+
+function checkAuth()
+{
+    if (! isset($_SESSION['customer'])) {
+        header('HTTP/1.1 401 Unauthorized');
+        echo json_encode(['data' => ['error' => 'Unauthorized']]);
+
+        return false;
+    }
+
+    return true;
 }
 
 function userHandler($verb, $subroute)
@@ -55,12 +72,21 @@ function userHandler($verb, $subroute)
             return handleBody(login(...));
             break;
         case 'order':
+            if (! checkAuth()) {
+                break;
+            }
             userOrderHandler($verb, $subroute);
             break;
         case 'tables':
+            if (! checkAuth()) {
+                break;
+            }
             tableHandler($verb, $subroute);
             break;
         case 'reserve':
+            if (! checkAuth()) {
+                break;
+            }
             reserveHandler($verb, $subroute);
             break;
         default:
