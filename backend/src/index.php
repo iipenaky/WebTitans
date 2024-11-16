@@ -13,23 +13,46 @@ $out = <<<'_GAN'
     They are coming.
     _GAN;
 
-// Set headers
-$allowedOrigins = [
-    'http://localhost:8080',
-    'http://169.239.251.102:3341',
-];
+define('HEADERS', [
+    'Content-Type: application/json; charset=UTF-8',
+    'Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE',
+    'Acess-Control-Max-Age: 3600',
+    'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
+]);
 
-if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
-    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+// Set headers
+if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {
+    header('Access-Control-Allow-Origin: http://localhost:8080');
     header('Access-Control-Allow-Credentials: true');
-    header('Content-Type: application/json; charset=UTF-8');
-    header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE');
-    header('Access-Control-Max-Age: 3600');
-    header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, Set-Cookie');
+    foreach (HEADERS as $header) {
+        header($header);
+    }
 } else {
-    header('HTTP/1.1 403 Forbidden');
-    echo json_encode(['error' => 'Origin not allowed']);
-    exit();
+    $requestOrigin = rtrim($_SERVER['HTTP_ORIGIN'], '/');
+    $allowedOrigins = [
+        'http://localhost:8080',
+        'http://169.239.251.102:3341',
+    ];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+        header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        header('HTTP/1.1 204 No Content');
+        exit();
+    }
+
+    if (isset($requestOrigin) && in_array($requestOrigin, $allowedOrigins)) {
+        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+        header('Access-Control-Allow-Credentials: true');
+        foreach (HEADERS as $header) {
+            header($header);
+        }
+    } else {
+        header('HTTP/1.1 403 Forbidden');
+        echo json_encode(['error' => 'Origin not allowed']);
+        exit();
+    }
 }
 
 // Get the URI and split it into its components
