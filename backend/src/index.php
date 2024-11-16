@@ -16,7 +16,7 @@ $out = <<<'_GAN'
 // Set headers
 $allowedOrigins = [
     'http://localhost:8080',
-    'http://169.239.251.102:3341/~madiba.quansah/frontend',
+    'http://169.239.251.102:3341',
 ];
 
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
