@@ -20,6 +20,7 @@ define('HEADERS', [
     'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
 ]);
 
+$requestOrigin = rtrim($_SERVER['HTTP_ORIGIN'], '/');
 // Set headers
 if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {
     header('Access-Control-Allow-Origin: http://localhost:8080');
@@ -27,8 +28,13 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
     foreach (HEADERS as $header) {
         header($header);
     }
+} elseif ($requestOrigin == '') {
+    header('Access-Control-Allow-Origin: http://169.239.251.102:3341');
+    header('Access-Control-Allow-Credentials: true');
+    foreach (HEADERS as $header) {
+        header($header);
+    }
 } else {
-    $requestOrigin = rtrim($_SERVER['HTTP_ORIGIN'], '/');
     $allowedOrigins = [
         'http://localhost:8080',
         'http://169.239.251.102:3341',
