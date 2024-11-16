@@ -16,7 +16,7 @@ $out = <<<'_GAN'
 define('HEADERS', [
     'Content-Type: application/json; charset=UTF-8',
     'Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE',
-    'Acess-Control-Max-Age: 3600',
+    'Access-Control-Max-Age: 3600',
     'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
 ]);
 
@@ -32,6 +32,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
     $allowedOrigins = [
         'http://localhost:8080',
         'http://169.239.251.102:3341',
+        'http://169.239.251.102:3341/~madiba.quansah/frontend',
     ];
 
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
