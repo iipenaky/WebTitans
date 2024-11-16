@@ -51,7 +51,11 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
         }
     } else {
         header('HTTP/1.1 403 Forbidden');
-        echo json_encode(['error' => 'Origin not allowed']);
+        echo json_encode([
+            'error' => 'Origin not allowed',
+            'requestOrigin' => $requestOrigin,
+            'allowedOrigins' => $allowedOrigins,
+        ]);
         exit();
     }
 }
