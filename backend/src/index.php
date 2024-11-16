@@ -1,8 +1,9 @@
 <?php
 
+session_start();
 require_once __DIR__.'/./utils.php';
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+/*ini_set('display_errors', 1);*/
+/*error_reporting(E_ALL);*/
 
 $out = <<<'_GAN'
     They have taken the bridge and the second hall.
@@ -13,11 +14,23 @@ $out = <<<'_GAN'
     _GAN;
 
 // Set headers
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=UTF-8');
-header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE');
-header('Access-Control-Max-Age: 3600');
-header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+$allowedOrigins = [
+    'http://localhost:8080',
+    'http://169.239.251.102:3341/~madiba.quansah/frontend',
+];
+
+if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Content-Type: application/json; charset=UTF-8');
+    header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE');
+    header('Access-Control-Max-Age: 3600');
+    header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, Set-Cookie');
+} else {
+    header('HTTP/1.1 403 Forbidden');
+    echo json_encode(['error' => 'Origin not allowed']);
+    exit();
+}
 
 // Get the URI and split it into its components
 $uri = parse_url($_SERVER['PHP_SELF'], PHP_URL_PATH);

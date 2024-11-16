@@ -29,7 +29,7 @@ inner join menu_item on
 	order_details.menu_item_id = menu_item.menu_item_id
 inner join customer on
 	`order`.customer_id = customer.customer_id
-order by order_time desc;
+order by order_id asc;
 SQL;
         global $db;
         $stmt = $db->prepare($query);

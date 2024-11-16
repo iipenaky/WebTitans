@@ -31,11 +31,11 @@ function login($data)
     $fields = ['username', 'password'];
     if (validateData($fields, $data, 'login')) {
         $res = $AdminService->Login($data['username'], $data['password']);
-        header($res['header']);
-        echo json_encode($res['data']);
         if ($res['header'] == 'HTTP/1.1 200 OK') {
             $_SESSION['admin'] = $res['data']['user'];
         }
+        header($res['header']);
+        echo json_encode($res['data']);
     }
 }
 
