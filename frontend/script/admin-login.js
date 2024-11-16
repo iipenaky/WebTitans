@@ -7,17 +7,21 @@ async function loginUser(e) {
 
   const formData = new FormData(loginForm);
 
-  const req = await fetch(`${BASE_URL}/admin/login`, {
+  const res = await fetch(`${BASE_URL}/admin/login`, {
     method: "POST",
     body: JSON.stringify(Object.fromEntries(formData)),
+    credentials: "include",
   });
 
-  if (!req.ok) {
-    console.log({ req });
+  if (!res.ok) {
+    console.log({ req: res });
     alert("Login Error! Please try again");
+    return;
   }
 
-  const json = await req.json();
+  const json = await res.json();
+  console.log({ res });
+  console.log(res.headers);
   console.log({ json });
   const msg = json.message;
   alert(msg);
