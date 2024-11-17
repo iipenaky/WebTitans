@@ -1,0 +1,12 @@
+{
+  "formatter": {
+    "indentStyle": "space", // default is `tab`
+    "lineWidth": 120, // default is `80`
+    "indentSize": 4, // default is `2`
+  },
+  "json": {
+    "formatter": {
+      "enabled": false,
+    },
+  },
+}
