@@ -1,105 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <style>
-    body{
-        background-image: url('./assets/2.jpeg'); 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Management</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      body {
+        background-image: url("./assets/2.jpeg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 40%;
-      border-radius: 8px;
-    }
-  </style>
-</head>
-<body>
-  <header class="bg-black p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <img src="#logo.png" alt="Logo" class="logo w-50 h-50"> 
-      <nav>
-        <ul class="flex space-x-6 text-white">
-            <li><a href="dashboard.html" class="font-bold hover:text-red-600 transition duration-300">Dashboard</a></li>
-            <li><a href="stock.html" class="font-bold hover:text-red-600 transition duration-300">View Stock</a></li>
-            <li><a href="staff.html" class="font-bold hover:text-red-600 transition duration-300">View Staff</a></li>
-            <li><a href="customers.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
-            <li><a href="allReservations.html" class="font-bold hover:text-red-600 transition duration-300">View Reservations</a></li>
-            <li><a href="allOrders.html" class="font-bold hover:text-red-600 transition duration-300">View Orders</a></li>
-            <li><a href="refill.html" class="font-bold hover:text-red-600 transition duration-300">Limited Stock</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <h1 class="text-2xl font-bold p-4">Inventory</h1>
-  <button onclick="openAddInventoryModal()" class="bg-green-500 text-white px-4 py-2 mb-4">Add Inventory Item</button>
-  
-  <table class="min-w-full bg-white border">
-    <thead class="bg-gray-800 text-white">
-      <tr>
-        <th class="py-2 px-4">ID</th>
-        <th class="py-2 px-4">Item Name</th>
-        <th class="py-2 px-4">Quantity</th>
-        <th class="py-2 px-4">Unit</th>
-        <th class="py-2 px-4">Reorder Level</th>
-        <th class="py-2 px-4">Actions</th>
-      </tr>
-    </thead>
-    <tbody id="inventoryTableBody">
-      <!-- JavaScript will populate this table with data -->
-    </tbody>
-  </table>
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-black p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <img src="#logo.png" alt="Logo" class="logo w-50 h-50" />
+        <nav>
+          <ul class="flex space-x-6 text-white">
+            <li>
+              <a
+                href="dashboard.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="stock.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Stock</a
+              >
+            </li>
+            <li>
+              <a
+                href="staff.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Staff</a
+              >
+            </li>
+            <li>
+              <a
+                href="customers.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="allReservations.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Reservations</a
+              >
+            </li>
+            <li>
+              <a
+                href="allOrders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Orders</a
+              >
+            </li>
+            <li>
+              <a
+                href="refill.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Limited Stock</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <h1 class="text-2xl font-bold p-4">Inventory</h1>
+    <button id="add-button" class="bg-green-500 text-white px-4 py-2 mb-4">
+      Add Inventory Item
+    </button>
 
-  <!-- Modal for adding new inventory item -->
-  <div id="addInventoryModal" class="modal hidden">
-    <div class="modal-content">
-      <h2 class="text-2xl font-bold mb-4">Add Inventory Item</h2>
-      <form id="addInventoryForm">
-        <div class="mb-4">
-          <label for="item_name" class="block text-lg">Item Name</label>
-          <input type="text" id="item_name" name="item_name" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="quantity" class="block text-lg">Quantity</label>
-          <input type="number" id="quantity" name="quantity" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="unit" class="block text-lg">Unit</label>
-          <input type="number" id="unit" name="unit" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="reorder_level" class="block text-lg">Reorder Level</label>
-          <input type="number" id="reorder_level" name="reorder_level" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="flex justify-end">
-          <button type="button" onclick="closeAddInventoryModal()" class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4">Cancel</button>
-          <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">Save</button>
-        </div>
-      </form>
+    <table class="min-w-full bg-white border">
+      <thead class="bg-gray-800 text-white">
+        <tr>
+          <th class="py-2 px-4">ID</th>
+          <th class="py-2 px-4">Item Name</th>
+          <th class="py-2 px-4">Quantity</th>
+          <th class="py-2 px-4">Reorder Level</th>
+          <th class="py-2 px-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryTableBody">
+        <!-- JavaScript will populate this table with data -->
+      </tbody>
+    </table>
+
+    <!-- Modal for adding new inventory item -->
+    <div id="addInventoryModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 class="text-2xl font-bold mb-4">Add Inventory Item</h2>
+        <form id="addInventoryForm">
+          <div class="mb-4">
+            <label for="item_name" class="block text-lg">Item Name</label>
+            <input
+              type="text"
+              id="item_name"
+              name="item_name"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="quantity" class="block text-lg">Quantity</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="reorder_level" class="block text-lg"
+              >Reorder Level</label
+            >
+            <input
+              type="number"
+              id="reorder_level"
+              name="reorder_level"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              onclick="closeAddInventoryModal()"
+              class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white py-2 px-4 rounded-md"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <script defer type="module" src="./script/stock.js"></script>
-</body>
+    <script defer type="module" src="./script/stock.js"></script>
+  </body>
 </html>

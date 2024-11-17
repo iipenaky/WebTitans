@@ -80,7 +80,7 @@ CREATE table if not exists inventory (
   CHECK (
     quantity >= 0
     AND reorder_level >= 0
-  ),
+  )
 );
 
 CREATE table if not exists menu_item_inventory (
@@ -563,18 +563,18 @@ VALUES
 
 -- 5. `inventory`
 INSERT INTO
-  inventory (item_name, quantity, unit, reorder_level)
+  inventory (item_name, quantity, reorder_level)
 VALUES
-  ('Tomatoes', 50, 1, 10),
-  ('Lettuce', 30, 1, 5),
-  ('Flour', 100, 1, 20),
-  ('Beef', 40, 1, 10),
-  ('Chicken', 60, 1, 15),
-  ('Butter', 80, 1, 10),
-  ('Cheese', 75, 1, 20),
-  ('Wine Bottles', 40, 1, 10),
-  ('Coffee Beans', 50, 1, 10),
-  ('Pasta', 90, 1, 15);
+  ('Tomatoes', 50,  10),
+  ('Lettuce', 30,  5),
+  ('Flour', 100,  20),
+  ('Beef', 40,  10),
+  ('Chicken', 60,  15),
+  ('Butter', 80,  10),
+  ('Cheese', 75,  20),
+  ('Wine Bottles', 40,  10),
+  ('Coffee Beans', 50,  10),
+  ('Pasta', 90,  15);
 
 -- 6. `menu_item_inventory`
 INSERT INTO
