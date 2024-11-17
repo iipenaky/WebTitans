@@ -36,6 +36,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
     }
 } else {
     $allowedOrigins = [
+        'http://localhost:80',
         'http://localhost:8080',
         'http://169.239.251.102:3341',
         'http://169.239.251.102:3341/~madiba.quansah/frontend',
