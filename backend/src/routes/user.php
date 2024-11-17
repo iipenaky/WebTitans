@@ -31,7 +31,7 @@ function login($data)
         header($res['header']);
         echo json_encode($res['data']);
         if ($res['header'] == 'HTTP/1.1 200 OK') {
-            $_SESSION['customer'] = $res['data']['user'];
+            $_SESSION['customer'] = $res['data'];
         }
     }
 }
