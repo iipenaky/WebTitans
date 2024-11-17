@@ -4,7 +4,7 @@ const itemNameElement = document.getElementById("item_name");
 const quantElem = document.getElementById("quantity");
 const reorderlevelElement = document.getElementById("reorder_level");
 const submitElem = document.getElementById("submit");
-
+let inventoryItems = [];
 function validateAddInventory() {
     messageDiv.innerText = "";
     itemNameError.classList.add("hidden");
@@ -60,13 +60,29 @@ async function addInventory(e) {
     console.log({ data });
     return data;
   }
-  (async function () {
-    const data = await getinventory();
-  })();
 
-  function loadInventoryTable() {
+  async function getinventorybyId() {
+  
+    const req = await fetch(`${BASE_URL}/admin/inventory/id`,);
+  
+    if (!req.ok) {
+      console.log({ req });
+    }
+  
+    const json = await req.json();
+    const data = json;
+    console.log({ data });
+    return data;
+  }
+
+  async function loadInventoryTable() {
+    const data = await getinventory();
     const tbody = document.getElementById('inventoryTableBody');
     tbody.innerHTML = '';
+    if (data.length === 0) {
+      tbody.innerHTML = "<tr><td colspan='6'>No inventory data available.</td></tr>";
+      return;
+    }  
     data.forEach((item) => {
       const row = `
         <tr>
@@ -77,7 +93,7 @@ async function addInventory(e) {
           <td class="border px-4 py-2">${item.reorder_level}</td>
           <td class="border px-4 py-2">
             <button onclick="editInventoryItem(${item.inventory_id})" class="bg-yellow-500 text-white px-2 py-1">Edit</button>
-            <button onclick="deleteInventoryItem(${item.inventory_id})" class="bg-red-500 text-white px-2 py-1">Restock</button>
+            <button onclick="restock(${item.inventory_id})" class="bg-red-500 text-white px-2 py-1">Restock</button>
           </td>
         </tr>
       `;
@@ -90,7 +106,7 @@ async function addInventory(e) {
   }
 
   function closeAddInventoryModal() {
-    document.getElementById('addInventoryModal').style.display = 'none';
+    document.getElementById('addInventoryModal').classList.display = 'none';
   }
 
   document.getElementById('addInventoryForm').addEventListener('submit', function(event) {
@@ -108,13 +124,8 @@ async function addInventory(e) {
     closeAddInventoryModal();
   });
 
-  function viewInventoryItem(itemId) {
-    const item = inventoryItems.find(i => i.inventory_id === itemId);
-    alert(`Item Name: ${item.item_name}\nQuantity: ${item.quantity}\nUnit: ${item.unit}\nReorder Level: ${item.reorder_level}`);
-  }
-
-  function editInventoryItem(itemId) {
-    const item = inventoryItems.find(i => i.inventory_id === itemId);
+  async function editInventoryItem(itemId) {
+    const item = await getinventorybyId();
     item.item_name = prompt("Update Item Name", item.item_name);
     item.quantity = parseInt(prompt("Update Quantity", item.quantity), 10);
     item.unit = parseInt(prompt("Update Unit", item.unit), 10);
@@ -122,12 +133,10 @@ async function addInventory(e) {
     loadInventoryTable();
   }
 
-  function deleteInventoryItem(itemId) {
+  function restock(itemId) {
     const confirmed = confirm("Are you sure you want to delete this item?");
     if (confirmed) {
-      const index = inventoryItems.findIndex(i => i.inventory_id === itemId);
-      inventoryItems.splice(index, 1);
-      loadInventoryTable();
+      // an update for restocking update for editing the name snd other attributes to inventory php
     }
   }
 
