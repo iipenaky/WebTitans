@@ -67,7 +67,7 @@ async function addInventory(e) {
   function loadInventoryTable() {
     const tbody = document.getElementById('inventoryTableBody');
     tbody.innerHTML = '';
-    inventoryItems.forEach((item) => {
+    data.forEach((item) => {
       const row = `
         <tr>
           <td class="border px-4 py-2">${item.inventory_id}</td>

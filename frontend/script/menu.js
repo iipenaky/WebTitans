@@ -2,17 +2,17 @@
 let orders = JSON.parse(localStorage.getItem('orders')) || [];
 let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
-// Open the order form
 function openOrderForm(foodName, foodImage) {
   document.getElementById('formTitle').innerText = foodName;
   document.getElementById('formImage').src = foodImage;
   document.getElementById('orderForm').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
 }
 
-// Close the order form
 function closeOrderForm() {
   document.getElementById('orderForm').style.display = 'none';
-  document.getElementById('orderDetails').reset();
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('orderDetails').reset(); 
 }
 
 // Add order
@@ -154,4 +154,57 @@ document.addEventListener("DOMContentLoaded", () => {
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     return isLoggedIn === "true";
+}
+
+function validateForm() {
+  const name = document.getElementById('name').value;
+  const phoneNumber = document.getElementById('phoneNumber').value;
+  const quantity = document.getElementById('quantity').value;
+  const paymentMethod = document.getElementById('paymentMethod').value;
+  const orderType = document.getElementById('orderType').value;
+
+  let isValid = true;
+
+  if (name === "") {
+      document.getElementById('nameError').classList.remove('hidden');
+      isValid = false;
+  } else {
+      document.getElementById('nameError').classList.add('hidden');
+  }
+
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(phoneNumber)) {
+      document.getElementById('phoneError').classList.remove('hidden');
+      isValid = false;
+  } else {
+      document.getElementById('phoneError').classList.add('hidden');
+  }
+
+  if (quantity === "" || quantity < 1) {
+      document.getElementById('quantityError').classList.remove('hidden');
+      isValid = false;
+  } else {
+      document.getElementById('quantityError').classList.add('hidden');
+  }
+
+  if (paymentMethod === "") {
+      document.getElementById('paymentError').classList.remove('hidden');
+      isValid = false;
+  } else {
+      document.getElementById('paymentError').classList.add('hidden');
+  }
+
+  if (orderType === "") {
+      document.getElementById('orderTypeError').classList.remove('hidden');
+      isValid = false;
+  } else {
+      document.getElementById('orderTypeError').classList.add('hidden');
+  }
+
+  if (isValid) {
+      alert('Thank you ' + name + '! Your order has been placed successfully.');
+      closeOrderForm();
+  }
+
+  return isValid;
 }
