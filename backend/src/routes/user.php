@@ -51,6 +51,9 @@ function checkAuth()
 function userHandler($verb, $subroute)
 {
     switch ($subroute[0]) {
+        case 'logout':
+            destroySession();
+            break;
         case 'info':
             header('HTTP/1.1 200 OK');
             echo json_encode(['data' => 'User route']);

@@ -54,6 +54,9 @@ function checkAuth()
 function adminHandler($verb, $subroute)
 {
     switch ($subroute[0]) {
+        case 'logout':
+            destroySession();
+            break;
         case 'info':
             header('HTTP/1.1 200 OK');
             echo json_encode(['data' => 'Admin route']);

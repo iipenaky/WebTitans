@@ -1,5 +1,23 @@
 <?php
 
+function destroySession()
+{
+    session_start();
+    $destroy = session_destroy();
+    $unset = session_unset();
+    $abort = session_abort();
+
+    return [
+        'header' => 'HTTP/1.1 200 OK',
+        'data' => [
+            'destroy' => $destroy,
+            'unset' => $unset,
+            'abort' => $abort,
+
+        ],
+    ];
+}
+
 function mysql_datetime($timestamp)
 {
     return date('Y-m-d H:i:s', $timestamp);
