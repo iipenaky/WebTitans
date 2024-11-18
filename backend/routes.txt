@@ -11,6 +11,7 @@ DELETE /admin/customers/delete
 GET /admin/inventory/all
 GET /admin/inventory/id/{id}
 GET /admin/inventory/low-stock
+PUT /admin/inventory/restock
 
 GET /admin/menu-items/all
 GET /admin/menu-items/id/{id}

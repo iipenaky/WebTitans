@@ -82,8 +82,25 @@ function handleBody($func)
     $func($data);
 }
 
+function isAnyEmpty($array)
+{
+    return any($array, function ($item) {
+        if (gettype($item) == 'string') {
+            return empty($item);
+        }
+    });
+}
+
 function validateNewData($fields, $data, $dataType)
 {
+    $data = trimArray($data);
+    if (isAnyEmpty($data)) {
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Empty fields']);
+
+        return false;
+    }
+
     if (any(array_map(function ($item) use ($data) {
         return $data[$item];
     }, slice($fields, 2)), function ($item) {
@@ -91,15 +108,44 @@ function validateNewData($fields, $data, $dataType)
     })) {
         header('HTTP/1.1 400 Bad Request');
 
-        /*echo json_encode(["error" => "Invalid $dataType data"]);*/
+        echo json_encode(['error' => "Invalid $dataType data"]);
+
         return false;
     }
 
     return true;
 }
 
+function trimArray($array)
+{
+    if ($array == null) {
+        return $array;
+    }
+
+    if (count($array) == 0) {
+        return $array;
+    }
+
+    if (! is_array($array)) {
+        return trim($array);
+    }
+
+    return array_map(function ($item) {
+        return trim($item);
+    }, $array);
+}
+
 function validateData($fields, $data, $dataType)
 {
+    $data = trimArray($data);
+
+    if (isAnyEmpty($data)) {
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Empty fields']);
+
+        return false;
+    }
+
     if (! is_array($data)) {
         header('HTTP/1.1 400 Bad Request');
         echo json_encode(['error' => "Invalid $dataType data"]);
@@ -114,7 +160,8 @@ function validateData($fields, $data, $dataType)
     })) {
         header('HTTP/1.1 400 Bad Request');
 
-        /*echo json_encode(["error" => "Invalid $dataType data"]);*/
+        echo json_encode(['error' => "Invalid $dataType data"]);
+
         return false;
     }
 

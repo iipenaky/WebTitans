@@ -11,6 +11,9 @@ $inventoryRoutes = [
         'id' => inventoryById(...),
         'low-stock' => inventoryLowStock(...),
     ],
+    'PUT' => [
+        'restock' => inventoryRestock(...),
+    ],
 ];
 
 function inventoryAll()
@@ -35,6 +38,23 @@ function inventoryLowStock()
     $res = $InventoryService->GetLowStock();
     header($res['header']);
     echo json_encode($res['data']);
+}
+
+function inventoryRestock($data)
+{
+    global $InventoryService;
+    if (validateData(['id', 'quantity'], $data, 'restock')) {
+        try {
+            $quantInt = intval($data['quantity']);
+        } catch (Exception $e) {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid quantity data']);
+        }
+        $res = $InventoryService->Restock($data['id'], $quantInt);
+        header($res['header']);
+        echo json_encode($res['data']);
+    }
+
 }
 
 function inventoryHandler($verb, $uri)
