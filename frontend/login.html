@@ -30,45 +30,57 @@
 </head>
 <body>
     <header class="bg-black p-4 fixed top-0 w-full z-10">
-        <div class="container mx-auto flex justify-between items-center">
-            <img src="./assets/Untitled design.png" alt="Logo" class="logo w-50 h-50">
-            <nav>
-                <ul class="flex space-x-6 text-white">
-                    <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
-                    <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
-                    <li><a href="menu.html" class="font-bold hover:text-red-600 transition duration-300">Menu</a></li>
-                    <li><a href="reservations.html" class="font-bold hover:text-red-600 transition duration-300">Make Reservation</a></li>
-                    <li><a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">My Orders</a></li>
-                    <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
-                    <li><a href="signup.html" class="font-bold hover:text-red-600 transition duration-300">Sign Up</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div class="container mx-auto flex justify-between items-center">
+        <img src="./assets/Untitled design.png" alt="Darryl's Restaurant Logo" class="w-12 h-12">
+        <nav>
+            <ul class="flex space-x-6 text-white">
+                <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
+                <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
+                <li><a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">My Orders</a></li>
+                <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
+                <li><a href="signup.html" class="font-bold hover:text-red-600 transition duration-300">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <main class="container mx-auto mt-8">
-        <div class="form-container">
-            <form id="loginForm" class="text-white w-full">
-                <h1 class="text-3xl font-bold mb-4 text-center">Login</h1>
-                <div class="mb-4">
-                    <label for="loginEmail" class="block mb-1">Email:</label>
-                    <input type="email" name = "email" id="loginEmail" class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
-                    <p id="emailError" class="text-red-500 hidden" aria-live="assertive">Please enter a valid email address.</p>
-                </div>
-                <div class="mb-4">
-                    <label for="loginPassword" class="block mb-1">Password:</label>
-                    <input type="password" name = "password" id="loginPassword" class="border border-gray-400 text-black p-2 mb-4 w-full">
-                    <p id="passwordError" class="text-red-500 hidden" aria-live="assertive">Please enter your password.</p>
-                </div>
-                <input type="submit" value="Login" class="bg-red-600 text-white px-4 py-2 rounded w-full">
-                <p><a href="signup.html">Don't have an account? Signup</a></p>
-            </form>
-        </div>
-    </main>
+<main class="container mx-auto mt-16">
+    <div class="form-container">
+        <form id="loginForm" class="text-white w-full">
+            <h1 class="text-3xl font-bold mb-4 text-center">Login</h1>
+            <div class="mb-4">
+                <label for="loginEmail" class="block mb-1">Email:</label>
+                <input type="email" name="email" id="loginEmail" aria-required="true" 
+                    class="border border-gray-400 text-black rounded p-2 mb-4 w-full">
+                <p id="emailError" class="text-red-500 hidden" aria-live="assertive">
+                    Please enter a valid email address.
+                </p>
+            </div>
+            <div class="mb-4">
+                <label for="loginPassword" class="block mb-1">Password:</label>
+                <input type="password" name="password" id="loginPassword" aria-required="true" 
+                    class="border border-gray-400 text-black p-2 mb-4 w-full">
+                <p id="passwordError" class="text-red-500 hidden" aria-live="assertive">
+                    Please enter your password.
+                </p>
+            </div>
+            <input type="submit" value="Login" class="bg-red-600 text-white px-4 py-2 rounded w-full">
+            <p class="text-sm mt-2">
+                <a href="signup.html" class="text-gray-400 hover:text-red-600 transition duration-300">
+                    Don't have an account? Signup
+                </a>
+            </p>
+        </form>
+    </div>
+</main>
 
-    <footer class="bg-black text-white py-4 text-center text-sm">
-        <p><a href="mailto:info@darrylrestaurant.com" class="text-gray-400">info@darrylsrestaurant.com</a></p>
-        <p>Location: 123 Food Street, Madina City</p>
-    </footer>
+<footer class="bg-black text-white py-4 text-center text-sm fixed bottom-0 inset-x-0">
+    <p><a href="mailto:info@darrylsrestaurant.com" class="text-gray-400 hover:text-red-600 transition duration-300">
+        info@darrylsrestaurant.com
+    </a></p>
+    <p>Location: 123 Food Street, Madina City</p>
+</footer>
+
+    
 </body>
 </html>
