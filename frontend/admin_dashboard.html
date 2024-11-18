@@ -1,213 +1,338 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 text-gray-900 font-sans">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans">
     <div class="min-h-screen">
-        <nav class="bg-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex">
-                        <div class="flex-shrink-0 flex items-center">
-                            <img class="h-8 w-8" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Restaurant Logo">
-                        </div>
-                        <div class="hidden md:flex md:ml-6 md:items-center md:space-x-4">
-                            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Customers</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Staff</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stock</a>
-                        </div>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <button type="button" class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 18l-6-6 6-6"/>
-                                </svg>
-                                <span class="sr-only">View notifications</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="-mr-2 flex md:hidden">
-                        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-gray-900">Restaurant Dashboard</h1>
-            </div>
-        </header>
-        <main>
-            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Card: Customers Served -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 019 16V5a1 1 0 011-1h6a1 1 0 011 1v11a1 1 0 01-1 1H9z"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Customers Served</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">1,200</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card: Current Reservations -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-8 4v10a5 5 0 005 5 5 5 0 005-5V7m-10 4h10"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Current Reservations</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">45</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card: Staff Working Today -->
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="p-5">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-4.215A2 2 0 0016.667 11H7.333a2 2 0 00-1.928 1.785L4 17h5m5 0v5m-3-3h6"/>
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Staff Working Today</dt>
-                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">16</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional sections can be added here -->
-                <div class="mt-8">
-                  <!-- Table: Customers -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Customer Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                <dt class="text-sm font-medium text-gray-500">First Name</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Last Name</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Contact</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                  <dt class="text-sm font-medium text-gray-500">Address</dt>
-                              </div>
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                  <dd class="text-sm text-gray-900">John</dd>
-                                  <dd class="text-sm text-gray-900">Doe</dd>
-                                  <dd class="text-sm text-gray-900">555-1234</dd>
-                                  <dd class="text-sm text-gray-900">jondoe@gmail.com</dd>
-                                  <dd class="text-sm text-gray-900">Ireland</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
-                  
-                  <!-- Table: Staff -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Staff Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dt class="text-sm font-medium text-gray-500">staffId</dt>  
-                                <dt class="text-sm font-medium text-gray-500">firstName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">lastName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">position</dt>
-                                  <dt class="text-sm font-medium text-gray-500">email</dt>
-                                  <dt class="text-sm font-medium text-gray-500">phoneNumber</dt>
-                                  <dt class="text-sm font-medium text-gray-500">address</dt>
-                              </div>
-
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dd class="text-sm text-gray-900">1</dd>  
-                                <dd class="text-sm text-gray-900">Gordon</dd>
-                                  <dd class="text-sm text-gray-900">Ramsey</dd>
-                                  <dd class="text-sm text-gray-900">Head Chef</dd>
-                                  <dd class="text-sm text-gray-900">gordonramsey@gmail.com</dd>
-                                  <dd class="text-sm text-gray-900">555-1234</dd>
-                                  <dd class="text-sm text-gray-900">London</dd>
-                              </div>
-
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7">
-                                <dd class="text-sm text-gray-900">2</dd>  
-                                <dd class="text-sm text-gray-900">Jamie</dd>
-                                  <dd class="text-sm text-gray-900">Oliver</dd>
-                                  <dd class="text-sm text-gray-900">Sous Chef</dd>
-                                  <dd class="text-sm text-gray-900">jamieoliver@hotmail.com</dd>
-                                  <dd class="text-sm text-gray-900">555-1212</dd>
-                                  <dd class="text-sm text-gray-900">US</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
-                  
-                  <!-- Table: Stock -->
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
-                      <div class="px-4 py-5 sm:px-6">
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Stock Information</h2>
-                      </div>
-                      <div class="border-t border-gray-200">
-                          <dl>
-                              <div class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                  <dt class="text-sm font-medium text-gray-500">inventoryId</dt>
-                                  <dt class="text-sm font-medium text-gray-500">itemName</dt>
-                                  <dt class="text-sm font-medium text-gray-500">quantity</dt>
-                                  <dt class="text-sm font-medium text-gray-500">reorderLevel</dt>
-                                  <dt class="text-sm font-medium text-gray-500">supplierId</dt>
-                              </div>
-                              <div class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5">
-                                <dd class="text-sm text-gray-900">1</dd>  
-                                <dd class="text-sm text-gray-900">Tomatoes</dd>
-                                  <dd class="text-sm text-gray-900">30</dd>
-                                  <dd class="text-sm text-gray-900">50</dd>
-                                  <dd class="text-sm text-gray-900">4</dd>
-                              </div>
-                              <!-- More rows -->
-                          </dl>
-                      </div>
-                  </div>
+      <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex">
+              <div class="flex-shrink-0 flex items-center">
+                <img
+                  class="h-8 w-8"
+                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+                  alt="Restaurant Logo"
+                />
               </div>
-
-
+              <div class="hidden md:flex md:ml-6 md:items-center md:space-x-4">
+                <a
+                  href="#"
+                  class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                  aria-current="page"
+                  >Dashboard</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >Customers</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >Staff</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >Stock</a
+                >
+              </div>
             </div>
-        </main>
+            <div class="hidden md:block">
+              <div class="ml-4 flex items-center md:ml-6">
+                <button
+                  type="button"
+                  class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                >
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 18l-6-6 6-6"
+                    />
+                  </svg>
+                  <span class="sr-only">View notifications</span>
+                </button>
+              </div>
+            </div>
+            <div class="-mr-2 flex md:hidden">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg
+                  class="h-6 w-6"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold text-gray-900">Restaurant Dashboard</h1>
+        </div>
+      </header>
+      <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Card: Customers Served -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-6 w-6 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 20l-5.447-2.724A1 1 0 019 16V5a1 1 0 011-1h6a1 1 0 011 1v11a1 1 0 01-1 1H9z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Customers Served
+                      </dt>
+                      <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                        1,200
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card: Current Reservations -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-6 w-6 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 7V3m8 4V3m-8 4v10a5 5 0 005 5 5 5 0 005-5V7m-10 4h10"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Current Reservations
+                      </dt>
+                      <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                        45
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card: Staff Working Today -->
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-6 w-6 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 17h5l-1.405-4.215A2 2 0 0016.667 11H7.333a2 2 0 00-1.928 1.785L4 17h5m5 0v5m-3-3h6"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Staff Working Today
+                      </dt>
+                      <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                        16
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional sections can be added here -->
+          <div class="mt-8">
+            <!-- Table: Customers -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                  Customer Information
+                </h2>
+              </div>
+              <div class="border-t border-gray-200">
+                <dl>
+                  <div
+                    class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5"
+                  >
+                    <dt class="text-sm font-medium text-gray-500">
+                      First Name
+                    </dt>
+                    <dt class="text-sm font-medium text-gray-500">Last Name</dt>
+                    <dt class="text-sm font-medium text-gray-500">Contact</dt>
+                    <dt class="text-sm font-medium text-gray-500">Email</dt>
+                    <dt class="text-sm font-medium text-gray-500">Address</dt>
+                  </div>
+                  <div
+                    class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5"
+                  >
+                    <dd class="text-sm text-gray-900">John</dd>
+                    <dd class="text-sm text-gray-900">Doe</dd>
+                    <dd class="text-sm text-gray-900">555-1234</dd>
+                    <dd class="text-sm text-gray-900">jondoe@gmail.com</dd>
+                    <dd class="text-sm text-gray-900">Ireland</dd>
+                  </div>
+                  <!-- More rows -->
+                </dl>
+              </div>
+            </div>
+
+            <!-- Table: Staff -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                  Staff Information
+                </h2>
+              </div>
+              <div class="border-t border-gray-200">
+                <dl>
+                  <div
+                    class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-7"
+                  >
+                    <dt class="text-sm font-medium text-gray-500">staffId</dt>
+                    <dt class="text-sm font-medium text-gray-500">firstName</dt>
+                    <dt class="text-sm font-medium text-gray-500">lastName</dt>
+                    <dt class="text-sm font-medium text-gray-500">position</dt>
+                    <dt class="text-sm font-medium text-gray-500">email</dt>
+                    <dt class="text-sm font-medium text-gray-500">
+                      phoneNumber
+                    </dt>
+                    <dt class="text-sm font-medium text-gray-500">address</dt>
+                  </div>
+
+                  <div
+                    class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7"
+                  >
+                    <dd class="text-sm text-gray-900">1</dd>
+                    <dd class="text-sm text-gray-900">Gordon</dd>
+                    <dd class="text-sm text-gray-900">Ramsey</dd>
+                    <dd class="text-sm text-gray-900">Head Chef</dd>
+                    <dd class="text-sm text-gray-900">
+                      gordonramsey@gmail.com
+                    </dd>
+                    <dd class="text-sm text-gray-900">555-1234</dd>
+                    <dd class="text-sm text-gray-900">London</dd>
+                  </div>
+
+                  <div
+                    class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-7"
+                  >
+                    <dd class="text-sm text-gray-900">2</dd>
+                    <dd class="text-sm text-gray-900">Jamie</dd>
+                    <dd class="text-sm text-gray-900">Oliver</dd>
+                    <dd class="text-sm text-gray-900">Sous Chef</dd>
+                    <dd class="text-sm text-gray-900">
+                      jamieoliver@hotmail.com
+                    </dd>
+                    <dd class="text-sm text-gray-900">555-1212</dd>
+                    <dd class="text-sm text-gray-900">US</dd>
+                  </div>
+                  <!-- More rows -->
+                </dl>
+              </div>
+            </div>
+
+            <!-- Table: Stock -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                  Stock Information
+                </h2>
+              </div>
+              <div class="border-t border-gray-200">
+                <dl>
+                  <div
+                    class="bg-gray-50 px-4 py-5 grid grid-cols-1 sm:grid-cols-5"
+                  >
+                    <dt class="text-sm font-medium text-gray-500">
+                      inventoryId
+                    </dt>
+                    <dt class="text-sm font-medium text-gray-500">itemName</dt>
+                    <dt class="text-sm font-medium text-gray-500">quantity</dt>
+                    <dt class="text-sm font-medium text-gray-500">
+                      reorderLevel
+                    </dt>
+                    <dt class="text-sm font-medium text-gray-500">
+                      supplierId
+                    </dt>
+                  </div>
+                  <div
+                    class="bg-white px-4 py-5 grid grid-cols-1 sm:grid-cols-5"
+                  >
+                    <dd class="text-sm text-gray-900">1</dd>
+                    <dd class="text-sm text-gray-900">Tomatoes</dd>
+                    <dd class="text-sm text-gray-900">30</dd>
+                    <dd class="text-sm text-gray-900">50</dd>
+                    <dd class="text-sm text-gray-900">4</dd>
+                  </div>
+                  <!-- More rows -->
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-</body>
+  </body>
 </html>

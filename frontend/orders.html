@@ -1,124 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Reservations and Orders</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-            background-image: url('2.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        background-image: url("2.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
 
-        .dialogue {
-            flex: 1;
-            width: 60%;
-            height: auto;
-            background-color: rgba(0, 0, 0, 0.85);
-            color: white;
-            margin: 10% auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem;
-            border-radius: 8px;
-        }
+      .dialogue {
+        flex: 1;
+        width: 60%;
+        height: auto;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        margin: 10% auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        border-radius: 8px;
+      }
 
-        .order {
-            border: 1px solid #444;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-        }
+      .order {
+        border: 1px solid #444;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header class="bg-black p-4 fixed top-0 w-full z-10">
-        <div class="container mx-auto flex justify-between items-center">
-            <img src="./assets/Untitled design.png" alt="Logo" class="logo w-50 h-50">
-            <nav>
-                <ul class="flex space-x-6 text-white">
-                    <li><a href="index.html" class="font-bold hover:text-red-600 transition duration-300">Home</a></li>
-                    <li><a href="about.html" class="font-bold hover:text-red-600 transition duration-300">About</a></li>
-                    <li><a href="menu.html" class="font-bold hover:text-red-600 transition duration-300">Menu</a></li>
-                    <li><a href="reservations.html" class="font-bold hover:text-red-600 transition duration-300">Make Reservation</a></li>
-                    <li><a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">My Orders</a></li>
-                    <li><a href="team.html" class="font-bold hover:text-red-600 transition duration-300">Team</a></li>
-                    <li><a href="signup.html" class="font-bold hover:text-red-600 transition duration-300">Sign Up</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <img
+          src="./assets/Untitled design.png"
+          alt="Logo"
+          class="logo w-50 h-50"
+        />
+        <nav>
+          <ul class="flex space-x-6 text-white">
+            <li>
+              <a
+                href="dashboard.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="stock.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Stock</a
+              >
+            </li>
+            <li>
+              <a
+                href="staff.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Staff</a
+              >
+            </li>
+            <li>
+              <a
+                href="customers.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="allReservations.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Reservations</a
+              >
+            </li>
+            <li>
+              <a
+                href="allOrders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Orders</a
+              >
+            </li>
+            <li>
+              <a
+                href="allOrders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="refill.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Limited Stock</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main class="container mx-auto mt-8">
-        <div class="dialogue">
-            <h1 class="text-3xl font-bold mb-4 text-center">My Reservations and Orders</h1>
-            <div id="ordersContainer">
-            </div>
-            <div id="message" class="text-red-600 text-center mt-4"></div>
-        </div>
+      <div class="dialogue">
+        <h1 class="text-3xl font-bold mb-4 text-center">
+          My Reservations and Orders
+        </h1>
+        <div id="ordersContainer"></div>
+        <div id="message" class="text-red-600 text-center mt-4"></div>
+      </div>
     </main>
 
     <footer class="bg-black text-white py-4 text-center text-sm">
-        <p><a href="mailto:info@darrylrestaurant.com" class="text-gray-400">info@darrylsrestaurant.com</a></p>
-        <p>Location: 123 Food Street, Madina City</p>
+      <p>
+        <a href="mailto:info@darrylrestaurant.com" class="text-gray-400"
+          >info@darrylsrestaurant.com</a
+        >
+      </p>
+      <p>Location: 123 Food Street, Madina City</p>
     </footer>
 
     <script>
-        const orders = [
-            { id: 1, date: '2024-10-20', time: '19:00', name: 'Table for 2', status: 'Reserved' },
-            { id: 2, date: '2024-10-21', time: '20:00', name: 'Order #101', status: 'Ready for Pickup' },
-            { id: 3, date: '2024-10-22', time: '18:30', name: 'Order #102', status: 'Ready for Pickup' }
-        ];
+      const orders = [
+        {
+          id: 1,
+          date: "2024-10-20",
+          time: "19:00",
+          name: "Table for 2",
+          status: "Reserved",
+        },
+        {
+          id: 2,
+          date: "2024-10-21",
+          time: "20:00",
+          name: "Order #101",
+          status: "Ready for Pickup",
+        },
+        {
+          id: 3,
+          date: "2024-10-22",
+          time: "18:30",
+          name: "Order #102",
+          status: "Ready for Pickup",
+        },
+      ];
 
-        const ordersContainer = document.getElementById('ordersContainer');
-        const messageDiv = document.getElementById('message');
+      const ordersContainer = document.getElementById("ordersContainer");
+      const messageDiv = document.getElementById("message");
 
-        function renderOrders() {
-            ordersContainer.innerHTML = '';
+      function renderOrders() {
+        ordersContainer.innerHTML = "";
 
-            if (orders.length === 0) {
-                ordersContainer.innerHTML = '<p class="text-center text-gray-400">No reservations or orders found.</p>';
-                return;
-            }
+        if (orders.length === 0) {
+          ordersContainer.innerHTML =
+            '<p class="text-center text-gray-400">No reservations or orders found.</p>';
+          return;
+        }
 
-            orders.forEach(order => {
-                const orderDiv = document.createElement('div');
-                orderDiv.classList.add('order');
-                orderDiv.innerHTML = `
+        orders.forEach((order) => {
+          const orderDiv = document.createElement("div");
+          orderDiv.classList.add("order");
+          orderDiv.innerHTML = `
                     <h2 class="text-xl font-bold">${order.name}</h2>
                     <p>Date: ${order.date}</p>
                     <p>Time: ${order.time}</p>
                     <p>Status: ${order.status}</p>
                     <button class="bg-red-600 text-white px-4 py-1 rounded mt-2" onclick="confirmCancelOrder(${order.id})">Cancel</button>
                 `;
-                ordersContainer.appendChild(orderDiv);
-            });
-        }
+          ordersContainer.appendChild(orderDiv);
+        });
+      }
 
-        function confirmCancelOrder(orderId) {
-            const confirmation = confirm("Are you sure you want to cancel this order?");
-            if (confirmation) {
-                cancelOrder(orderId);
-            }
+      function confirmCancelOrder(orderId) {
+        const confirmation = confirm(
+          "Are you sure you want to cancel this order?",
+        );
+        if (confirmation) {
+          cancelOrder(orderId);
         }
+      }
 
-        function cancelOrder(orderId) {
-            const orderIndex = orders.findIndex(order => order.id === orderId);
-            if (orderIndex > -1) {
-                orders.splice(orderIndex, 1); 
-                messageDiv.innerText = 'Order cancelled successfully.';
-                renderOrders(); 
-            }
+      function cancelOrder(orderId) {
+        const orderIndex = orders.findIndex((order) => order.id === orderId);
+        if (orderIndex > -1) {
+          orders.splice(orderIndex, 1);
+          messageDiv.innerText = "Order cancelled successfully.";
+          renderOrders();
         }
+      }
 
-        renderOrders();
+      renderOrders();
     </script>
-</body>
+  </body>
 </html>

@@ -1,97 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservations Management</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-    body{
-        background-image: url('./assets/2.jpeg'); 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations Management</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        background-image: url("./assets/2.jpeg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-}
-</style>
-</head>
-<body class="bg-gray-100">
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header Section -->
+    <header class="bg-black p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <img src="#logo.png" alt="Logo" class="logo w-50 h-50" />
+        <nav>
+          <ul class="flex space-x-6 text-white">
+            <li>
+              <a
+                href="dashboard.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="stock.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Stock</a
+              >
+            </li>
+            <li>
+              <a
+                href="staff.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Staff</a
+              >
+            </li>
+            <li>
+              <a
+                href="customers.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="allReservations.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Reservations</a
+              >
+            </li>
+            <li>
+              <a
+                href="allOrders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >View Orders</a
+              >
+            </li>
+            <li>
+              <a
+                href="refill.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Limited Stock</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <!-- Header Section -->
-  <header class="bg-black p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <img src="#logo.png" alt="Logo" class="logo w-50 h-50"> 
-      <nav>
-        <ul class="flex space-x-6 text-white">
-          <li><a href="dashboard.html" class="font-bold hover:text-red-600 transition duration-300">Dashboard</a></li>
-          <li><a href="stock.html" class="font-bold hover:text-red-600 transition duration-300">View Stock</a></li>
-          <li><a href="staff.html" class="font-bold hover:text-red-600 transition duration-300">View Staff</a></li>
-          <li><a href="customers.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
-          <li><a href="allReservations.html" class="font-bold hover:text-red-600 transition duration-300">View Reservations</a></li>
-          <li><a href="allOrders.html" class="font-bold hover:text-red-600 transition duration-300">View Orders</a></li>
-          <li><a href="allOrders.html" class="font-bold hover:text-red-600 transition duration-300">View Customers</a></li>
-          <li><a href="refill.html" class="font-bold hover:text-red-600 transition duration-300">Limited Stock</a></li>
-        </ul>
-      </nav>
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8">
+      <h1 class="text-4xl font-bold mb-4">Reservations Management</h1>
+
+      <!-- Reservations Table -->
+      <table class="min-w-full table-auto bg-white rounded-lg shadow-lg">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="py-2 px-4">Reservation ID</th>
+            <th class="py-2 px-4">Customer ID</th>
+            <th class="py-2 px-4">Table ID</th>
+            <th class="py-2 px-4">Reservation DateTime</th>
+            <th class="py-2 px-4">Guests</th>
+            <th class="py-2 px-4">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="reservationTableBody">
+          <!-- Reservations Rows will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </main>
+
+    <!-- Edit Reservation Modal -->
+    <div
+      id="editModal"
+      class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg w-96">
+        <h2 class="text-2xl font-bold mb-4">Edit Reservation</h2>
+        <form id="editReservationForm">
+          <input type="hidden" id="editReservationId" name="reservationId" />
+          <div class="mb-4">
+            <label for="editCustomerId" class="block text-lg font-medium"
+              >Customer ID</label
+            >
+            <input
+              type="number"
+              id="editCustomerId"
+              name="customerId"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="editTableId" class="block text-lg font-medium"
+              >Table ID</label
+            >
+            <input
+              type="number"
+              id="editTableId"
+              name="tableId"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="editReservationDateTime"
+              class="block text-lg font-medium"
+              >Reservation Date & Time</label
+            >
+            <input
+              type="datetime-local"
+              id="editReservationDateTime"
+              name="reservationDateTime"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="editGuests" class="block text-lg font-medium"
+              >Number of Guests</label
+            >
+            <input
+              type="number"
+              id="editGuests"
+              name="numberOfGuests"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              onclick="closeEditModal()"
+              class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white py-2 px-4 rounded-md"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="container mx-auto mt-8">
-    <h1 class="text-4xl font-bold mb-4">Reservations Management</h1>
-    
-    <!-- Reservations Table -->
-    <table class="min-w-full table-auto bg-white rounded-lg shadow-lg">
-      <thead class="bg-gray-800 text-white">
-        <tr>
-          <th class="py-2 px-4">Reservation ID</th>
-          <th class="py-2 px-4">Position ID</th>
-          <th class="py-2 px-4">Customer ID</th>
-          <th class="py-2 px-4">Table ID</th>
-          <th class="py-2 px-4">Reservation DateTime</th>
-          <th class="py-2 px-4">Guests</th>
-          <th class="py-2 px-4">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="reservationTableBody">
-        <!-- Reservations Rows will be populated by JavaScript -->
-      </tbody>
-    </table>
-  </main>
-
-  <!-- Edit Reservation Modal -->
-  <div id="editModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
-    <div class="bg-white p-6 rounded-lg w-96">
-      <h2 class="text-2xl font-bold mb-4">Edit Reservation</h2>
-      <form id="editReservationForm">
-        <input type="hidden" id="editReservationId" name="reservationId">
-        <div class="mb-4">
-          <label for="editPositionId" class="block text-lg font-medium">Position ID</label>
-          <input type="number" id="editPositionId" name="positionId" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="editCustomerId" class="block text-lg font-medium">Customer ID</label>
-          <input type="number" id="editCustomerId" name="customerId" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="editTableId" class="block text-lg font-medium">Table ID</label>
-          <input type="number" id="editTableId" name="tableId" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="editReservationDateTime" class="block text-lg font-medium">Reservation Date & Time</label>
-          <input type="datetime-local" id="editReservationDateTime" name="reservationDateTime" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="mb-4">
-          <label for="editGuests" class="block text-lg font-medium">Number of Guests</label>
-          <input type="number" id="editGuests" name="numberOfGuests" class="border border-gray-300 rounded-md p-2 w-full" required>
-        </div>
-        <div class="flex justify-end">
-          <button type="button" onclick="closeEditModal()" class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4">Cancel</button>
-          <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <script defer type="module" src="./script/all_reservations.js"></script>
-</body>
+    <script defer type="module" src="./script/all_reservations.js"></script>
+  </body>
 </html>
