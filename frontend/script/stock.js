@@ -71,6 +71,27 @@ async function getinventory() {
     return data;
 }
 
+async function restockByQty(id, qty) {
+    const req = await fetch(`${BASE_URL}/admin/inventory/restock`, {
+        method: "PUT",
+        credentials: "include",
+        body: JSON.stringify({ id, quantity: qty }),
+    });
+
+    if (!req.ok) {
+        console.log({ req });
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to restock");
+    }
+
+    const json = await req.json();
+    const data = json;
+    console.log({ data });
+    return data;
+}
+
 async function getinventorybyId() {
     const req = await fetch(`${BASE_URL}/admin/inventory/id`, {
         credentials: "include",
@@ -95,7 +116,7 @@ async function loadInventoryTable() {
         const data = await getinventory();
         const tbody = document.getElementById("inventoryTableBody");
         tbody.innerHTML = "";
-        data.forEach((item) => {
+        data.forEach((item, key) => {
             const row = `
         <tr>
           <td class="border px-4 py-2">${item.inventory_id}</td>
@@ -103,11 +124,20 @@ async function loadInventoryTable() {
           <td class="border px-4 py-2">${item.quantity}</td>
           <td class="border px-4 py-2">${item.reorder_level}</td>
           <td class="border px-4 py-2">
-            <button id = "restock-inventory" class="bg-red-500 text-white px-2 py-1 restock-btn">Restock</button>
+            <button id = "restock-inventory-${item.inventory_id}" class="bg-red-500 text-white px-2 py-1 restock-btn">Restock</button>
           </td>
         </tr>
       `;
             tbody.insertAdjacentHTML("beforeend", row);
+            document.getElementById(`restock-inventory-${item.inventory_id}`).onclick = async () => {
+                try {
+                    const res = await restockByQty(item.inventory_id, 10);
+                    alert(`Restocked ${item.item_name} by 10 units`);
+                    loadInventoryTable();
+                } catch (error) {
+                    console.error(error);
+                }
+            };
         });
     } catch (error) {
         console.error(error);
