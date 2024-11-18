@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { sendBackToLogin } from "./utils.js";
 
 const itemNameElement = document.getElementById("item_name");
 const quantElem = document.getElementById("quantity");
@@ -36,6 +37,10 @@ async function addInventory(e) {
 
     if (!req.ok) {
         console.log({ req });
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to add inventory");
     }
 
     const json = await req.json();
@@ -55,7 +60,10 @@ async function getinventory() {
 
     if (!req.ok) {
         console.log({ req });
-        throw new Error("An error occurred");
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to fetch inventory");
     }
 
     const json = await req.json();
@@ -71,6 +79,10 @@ async function getinventorybyId() {
 
     if (!req.ok) {
         console.log({ req });
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to fetch inventory");
     }
 
     const json = await req.json();

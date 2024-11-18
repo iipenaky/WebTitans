@@ -26,6 +26,10 @@ export const readFromCookieStorage = (key) => {
     });
 };
 
+export const sendBackToLogin = () => {
+    window.location.href = "index.html";
+};
+
 export const logout = async () => {
     const req = await fetch(`${BASE_URL}/user/logout`, {
         method: "POST",

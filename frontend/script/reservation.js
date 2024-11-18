@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { sendBackToLogin } from "./utils.js";
 
 const fullnameElem = document.getElementById("name");
 const email = document.getElementById("email");
@@ -20,6 +21,10 @@ async function reserveUser(e) {
 
     if (!req.ok) {
         console.log({ req });
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to reserve table");
     }
 
     const json = await req.json();

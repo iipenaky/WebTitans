@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { sendBackToLogin } from "./utils.js";
 
 async function getOrders() {
     const req = await fetch(`${BASE_URL}/admin/orders/all`, {
@@ -7,7 +8,10 @@ async function getOrders() {
 
     if (!req.ok) {
         console.log({ req });
-        return;
+        if (req.status === 401) {
+            sendBackToLogin();
+        }
+        throw new Error("Failed to fetch orders");
     }
 
     const json = await req.json();
@@ -16,9 +20,13 @@ async function getOrders() {
 }
 
 (async function () {
-    const orders = await getOrders();
-    console.log({ orders });
-    loadOrderTable(orders);
+    try {
+        const orders = await getOrders();
+        console.log({ orders });
+        loadOrderTable(orders);
+    } catch (e) {
+        console.log(e);
+    }
 })();
 
 // Populate the orders table
