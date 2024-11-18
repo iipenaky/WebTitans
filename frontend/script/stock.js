@@ -83,10 +83,6 @@ async function loadInventoryTable() {
     const data = await getinventory();
     const tbody = document.getElementById("inventoryTableBody");
     tbody.innerHTML = "";
-    if (data.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='6'>No inventory data available.</td></tr>";
-        return;
-    }
     data.forEach((item) => {
         const row = `
         <tr>
@@ -112,20 +108,8 @@ function closeAddInventoryModal() {
     document.getElementById("addInventoryModal").classList.display = "none";
 }
 
-document.getElementById("addInventoryForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+submitElem.addEventListener("submit", addInventory);
 
-    const newItem = {
-        inventory_id: inventoryItems.length + 1,
-        item_name: document.getElementById("item_name").value,
-        quantity: parseInt(document.getElementById("quantity").value, 10),
-        unit: parseInt(document.getElementById("unit").value, 10),
-        reorder_level: parseInt(document.getElementById("reorder_level").value, 10),
-    };
-    inventoryItems.push(newItem);
-    loadInventoryTable();
-    closeAddInventoryModal();
-});
 
 async function editInventoryItem(itemId) {
     const item = await getinventorybyId();
