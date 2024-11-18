@@ -55,7 +55,7 @@ async function getinventory() {
 
     if (!req.ok) {
         console.log({ req });
-        return;
+        throw new Error("An error occurred");
     }
 
     const json = await req.json();
@@ -80,11 +80,12 @@ async function getinventorybyId() {
 }
 
 async function loadInventoryTable() {
-    const data = await getinventory();
-    const tbody = document.getElementById("inventoryTableBody");
-    tbody.innerHTML = "";
-    data.forEach((item) => {
-        const row = `
+    try {
+        const data = await getinventory();
+        const tbody = document.getElementById("inventoryTableBody");
+        tbody.innerHTML = "";
+        data.forEach((item) => {
+            const row = `
         <tr>
           <td class="border px-4 py-2">${item.inventory_id}</td>
           <td class="border px-4 py-2">${item.item_name}</td>
@@ -96,8 +97,11 @@ async function loadInventoryTable() {
           </td>
         </tr>
       `;
-        tbody.insertAdjacentHTML("beforeend", row);
-    });
+            tbody.insertAdjacentHTML("beforeend", row);
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function openAddInventoryModal() {
@@ -109,7 +113,6 @@ function closeAddInventoryModal() {
 }
 
 submitElem.addEventListener("submit", addInventory);
-
 
 async function editInventoryItem(itemId) {
     const item = await getinventorybyId();
@@ -129,4 +132,3 @@ function restock(itemId) {
 
 document.getElementById("add-button").onclick = openAddInventoryModal;
 loadInventoryTable();
-
