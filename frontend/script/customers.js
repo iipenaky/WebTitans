@@ -53,7 +53,7 @@ async function loadCustomerTable() {
           <td class="py-2 px-4">${customer.last_name}</td>
           <td class="py-2 px-4">${customer.email}</td>
           <td class="py-2 px-4">
-            <button onclick="viewCustomer(${customer.id})" class="bg-blue-500 text-white py-1 px-2 rounded-md mr-2">View</button>
+            <button id = "view-customer" class="bg-blue-500 text-white py-1 px-2 rounded-md mr-2">View</button>
             <button onclick="editCustomer(${customer.id})" class="bg-yellow-500 text-white py-1 px-2 rounded-md mr-2">Edit</button>
             <button onclick="deleteCustomer(${customer.id})" class="bg-red-500 text-white py-1 px-2 rounded-md">Delete</button>
           </td>
@@ -63,16 +63,16 @@ async function loadCustomerTable() {
 }
 
 // View Customer
-function viewCustomer(customerId) {
-	const customer = getCustomerId();
+async function viewCustomer() {
+	const customer = await getCustomerId();
 	alert(
 		`Viewing Customer: \n\nFirst Name: ${customer.firstName}\nLast Name: ${customer.lastName}\nEmail: ${customer.email}\nAddress: ${customer.address}\nPhone: ${customer.phone}`,
 	);
 }
 
-// Edit Customer
-function editCustomer(customerId) {
-	const customer = getCustomerId();
+// Edit Customer continue
+async function editCustomer() {
+	const customer = await getCustomerId();
 	document.getElementById("editCustomerId").value = customer.id;
 	document.getElementById("editCustomerFirstName").value = customer.firstName;
 	document.getElementById("editCustomerLastName").value = customer.lastName;
@@ -142,7 +142,9 @@ function deleteCustomer(customerId) {
 function closeEditModal() {
 	document.getElementById("editModal").classList.add("hidden");
 }
-
+document.getElementById("view-customer").onclick = viewCustomer;
+document.getElementById("edit-customer").onclick = editCustomer;
+document.getElementById("delete-customer").onclick = deleteCustomer;
 // Load the customer table initially
 loadCustomerTable();
 

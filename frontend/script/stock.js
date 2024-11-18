@@ -4,7 +4,7 @@ const itemNameElement = document.getElementById("item_name");
 const quantElem = document.getElementById("quantity");
 const reorderlevelElement = document.getElementById("reorder_level");
 const submitElem = document.getElementById("submit");
-let inventoryItems = [];
+
 function validateAddInventory() {
     messageDiv.innerText = "";
     itemNameError.classList.add("hidden");
@@ -126,6 +126,7 @@ async function restockInventory(id, quantity) {
         // Send the PUT request with the required data
         const req = await fetch(`${BASE_URL}/admin/inventory/restock`, {
             method: "PUT",
+            credentials : "include",
             headers: {
                 "Content-Type": "application/json", // Specify JSON content
             },
