@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { readFromSessionStorage, writeToSessionStorage } from "./utils.js";
 const loginForm = document.getElementById("loginForm");
 
 async function loginUser(e) {
@@ -9,12 +10,15 @@ async function loginUser(e) {
 
     const req = await fetch(`${BASE_URL}/user/login`, {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify(Object.fromEntries(formData)),
     });
 
     if (!req.ok) {
         console.log({ req });
-        alert("Login Error! Please try again");
+        const json = await req.json();
+        const error = json.error;
+        alert(error);
         return;
     }
 
@@ -22,7 +26,8 @@ async function loginUser(e) {
     console.log({ json });
 
     // Save login state (e.g., token or flag) to localStorage
-    localStorage.setItem("isLoggedIn", "true");
+
+    writeToSessionStorage("isLoggedIn", "true");
 
     // Redirect to the menu page after successful login
     window.location.href = "menu.html";
