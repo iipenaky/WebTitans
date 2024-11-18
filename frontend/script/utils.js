@@ -26,6 +26,12 @@ export const readFromCookieStorage = (key) => {
     });
 };
 
+export const addElementToElementOnCondition = (element, condition, elementToAdd) => {
+    if (condition) {
+        element.appendChild(elementToAdd);
+    }
+};
+
 export const sendBackToLogin = () => {
     window.location.href = "index.html";
 };

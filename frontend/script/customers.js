@@ -76,22 +76,22 @@ async function loadCustomerTable() {
 
 // View Customer
 async function viewCustomer() {
-	const customer = await getCustomerId();
-	alert(
-		`Viewing Customer: \n\nFirst Name: ${customer.firstName}\nLast Name: ${customer.lastName}\nEmail: ${customer.email}\nAddress: ${customer.address}\nPhone: ${customer.phone}`,
-	);
+    const customer = await getCustomerId();
+    alert(
+        `Viewing Customer: \n\nFirst Name: ${customer.firstName}\nLast Name: ${customer.lastName}\nEmail: ${customer.email}\nAddress: ${customer.address}\nPhone: ${customer.phone}`,
+    );
 }
 
 // Edit Customer continue
 async function editCustomer() {
-	const customer = await getCustomerId();
-	document.getElementById("editCustomerId").value = customer.id;
-	document.getElementById("editCustomerFirstName").value = customer.firstName;
-	document.getElementById("editCustomerLastName").value = customer.lastName;
-	document.getElementById("editCustomerEmail").value = customer.email;
-	document.getElementById("editCustomerAddress").value = customer.address;
-	document.getElementById("editCustomerPhone").value = customer.phone;
-	document.getElementById("editModal").classList.remove("hidden");
+    const customer = await getCustomerId();
+    document.getElementById("editCustomerId").value = customer.id;
+    document.getElementById("editCustomerFirstName").value = customer.firstName;
+    document.getElementById("editCustomerLastName").value = customer.lastName;
+    document.getElementById("editCustomerEmail").value = customer.email;
+    document.getElementById("editCustomerAddress").value = customer.address;
+    document.getElementById("editCustomerPhone").value = customer.phone;
+    document.getElementById("editModal").classList.remove("hidden");
 }
 
 // Save Edited Customer
@@ -150,8 +150,8 @@ function deleteCustomer(customerId) {
 function closeEditModal() {
     document.getElementById("editModal").classList.add("hidden");
 }
-document.getElementById("view-customer").onclick = viewCustomer;
-document.getElementById("edit-customer").onclick = editCustomer;
-document.getElementById("delete-customer").onclick = deleteCustomer;
+//document.getElementById("view-customer").onclick = viewCustomer;
+//document.getElementById("edit-customer").onclick = editCustomer;
+//document.getElementById("delete-customer").onclick = deleteCustomer;
 // Load the customer table initially
 loadCustomerTable();

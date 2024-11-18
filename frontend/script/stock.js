@@ -124,8 +124,6 @@ async function loadInventoryTable() {
 
 // submitElem.addEventListener("submit", addInventory);
 
-
-
 async function restockInventory(id, quantity) {
     try {
         // Validate the inputs
@@ -138,7 +136,7 @@ async function restockInventory(id, quantity) {
         // Send the PUT request with the required data
         const req = await fetch(`${BASE_URL}/admin/inventory/restock`, {
             method: "PUT",
-            credentials : "include",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json", // Specify JSON content
             },
@@ -166,11 +164,11 @@ async function restockInventory(id, quantity) {
     }
 }
 // Attach a click event listener to all "Restock" buttons
-document.getElementById('inventory-table').addEventListener('click', async function (event) {
+document.getElementById("inventory-table").addEventListener("click", async function (event) {
     // Check if the clicked element is a restock button
-    if (event.target.classList.contains('restock-btn')) {
+    if (event.target.classList.contains("restock-btn")) {
         // Get the inventory ID from the button's data-id attribute
-        const id = event.target.getAttribute('data-id');
+        const id = event.target.getAttribute("data-id");
         if (!id) {
             console.error("Button does not have an associated ID.");
             return;
@@ -198,10 +196,8 @@ document.getElementById('inventory-table').addEventListener('click', async funct
     }
 });
 
-
-
 // document.getElementById("add-button").onclick = openAddInventoryModal;
 // document.getElementById("close-form").onclick = closeAddInventoryModal;
-document.getElementById("restock-inventory").onclick = restockInventory;
+//document.getElementById("restock-inventory").onclick = restockInventory;
 
 loadInventoryTable();

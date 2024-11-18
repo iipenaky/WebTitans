@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackToLogin } from "./utils.js";
+import { sendBackToLogin, readFromSessionStorage } from "./utils.js";
 
 const fullnameElem = document.getElementById("name");
 const email = document.getElementById("email");
@@ -7,6 +7,13 @@ const date = document.getElementById("date");
 const time = document.getElementById("time");
 const guests = document.getElementById("guests");
 const reservationform = document.getElementById("reservation-form");
+
+(async function () {
+    //if (readFromSessionStorage("isLoggedIn") !== "true") {
+    //    alert("Please log in to make a reservation");
+    //    sendBackToLogin();
+    //}
+})();
 
 async function reserveUser(e) {
     e.preventDefault();

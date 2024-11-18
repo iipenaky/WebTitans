@@ -1,4 +1,4 @@
-import { readFromSessionStorage, writeToSessionStorage } from "./utils.js";
+import { readFromSessionStorage, writeToSessionStorage, addElementToElementOnCondition } from "./utils.js";
 
 (async function () {
     const req = await fetch("http://169.239.251.102:3341/~madiba.quansah/backend/src/index.php/health");
@@ -26,6 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+//addElementToElementOnCondition(document.getElementById("topbar"), checkLoginStatus(), () => {
+//    const listItem = document.createElement("li");
+//    const logoutButton = document.createElement("a");
+//    logoutButton.className = "font-bold hover:text-red-600 transition duration-300";
+//    listItem.appendChild(logoutButton);
+//});
 
 /**
  * Checks if the user is logged in.
