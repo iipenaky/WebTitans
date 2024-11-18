@@ -66,6 +66,14 @@ class InventoryService
             ];
         }
 
+        $res = $this->GetById($id);
+        if (! isset($res['data']) || ! is_array($res['data']) || count($res['data']) === 0) {
+            return [
+                'header' => 'HTTP/1.1 404 Not Found',
+                'data' => ['error' => 'Inventory item not found'],
+            ];
+        }
+
         global $db;
         $stmt = $db->prepare('update inventory set quantity = quantity + ? where inventory_id = ?');
         $stmt->bindParam(1, $quantity);
