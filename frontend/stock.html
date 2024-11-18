@@ -102,9 +102,6 @@
 
     <main class="container mx-auto mt-8">
       <h1 class="text-4xl font-bold p-4">Inventory</h1>
-      <button id="add-button" class="bg-green-500 text-white px-4 py-2 mb-4">
-        Add Inventory Item
-      </button>
 
       <table class="min-w-full bg-white border">
         <thead class="bg-gray-800 text-white">
@@ -121,63 +118,61 @@
         </tbody>
       </table>
 
-      <!-- Modal for adding new inventory item -->
-      <div id="addInventoryModal" class="modal hidden">
-        <div class="modal-content">
-          <h2 class="text-2xl font-bold mb-4">Add Inventory Item</h2>
-          <form id="addInventoryForm">
-            <div class="mb-4">
-              <label for="item_name" class="block text-lg">Item Name</label>
-              <input
-                type="text"
-                id="item_name"
-                name="item_name"
-                class="border border-gray-300 rounded-md p-2 w-full"
-                required
-              />
-            </div>
-            <div class="mb-4">
-              <label for="quantity" class="block text-lg">Quantity</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                class="border border-gray-300 rounded-md p-2 w-full"
-                required
-              />
-            </div>
-            <div class="mb-4">
-              <label for="reorder_level" class="block text-lg"
-                >Reorder Level</label
-              >
-              <input
-                type="number"
-                id="reorder_level"
-                name="reorder_level"
-                class="border border-gray-300 rounded-md p-2 w-full"
-                required
-              />
-            </div>
-            <div class="flex justify-end">
-              <button
-                type="button"
-                onclick="closeAddInventoryModal()"
-                class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
-              >
-                Cancel
-              </button>
-              <button
-                id="submit"
-                type="submit"
-                class="bg-blue-600 text-white py-2 px-4 rounded-md"
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+    <!-- Modal for adding new inventory item -->
+    <!-- <div id="addInventoryModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 class="text-2xl font-bold mb-4">Add Inventory Item</h2>
+        <form id="addInventoryForm">
+          <div class="mb-4">
+            <label for="item_name" class="block text-lg">Item Name</label>
+            <input
+              type="text"
+              id="item_name"
+              name="item_name"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="quantity" class="block text-lg">Quantity</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="reorder_level" class="block text-lg"
+              >Reorder Level</label
+            >
+            <input
+              type="number"
+              id="reorder_level"
+              name="reorder_level"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              required
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              onclick="closeAddInventoryModal()"
+              class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white py-2 px-4 rounded-md"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </div>
-    </main>
+    </div> -->
     <script defer type="module" src="./script/stock.js"></script>
   </body>
 </html>
