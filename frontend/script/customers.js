@@ -1,6 +1,13 @@
 import { BASE_URL } from "./constants.js";
 import { sendBackTo } from "./utils.js";
 
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+import { handleAdminLoggedIn } from "./utils.js";
+handleAdminLoggedIn();
+
 async function getCustomer() {
     const req = await fetch(`${BASE_URL}/admin/customers/all`, {
         method: "GET",

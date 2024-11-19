@@ -27,7 +27,7 @@ async function loginUser(e) {
     console.log(res.headers);
     console.log({ json });
     const msg = json.message;
-    writeToSessionStorage("isLoggedIn", "true");
+    writeToSessionStorage("isAdminLoggedIn", "true");
     loginForm.reset();
     alert(msg);
     document.location.href = "./dashboard.html";

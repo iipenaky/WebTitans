@@ -97,14 +97,24 @@
         <!-- Total Customers -->
         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
           <h2 class="text-xl font-semibold">Total Customers</h2>
-          <p class="text-4xl font-bold text-gray-800" id="totalCustomers">
-            120
+          <p
+            id="cust-num"
+            class="text-4xl font-bold text-gray-800"
+            id="totalCustomers"
+          >
+            0
           </p>
         </div>
         <!-- Total Staff -->
         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
           <h2 class="text-xl font-semibold">Total Staff</h2>
-          <p class="text-4xl font-bold text-gray-800" id="totalStaff">50</p>
+          <p
+            id="staff-num"
+            class="text-4xl font-bold text-gray-800"
+            id="totalStaff"
+          >
+            0
+          </p>
         </div>
         <!-- Pending Orders -->
         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -121,16 +131,6 @@
     </main>
 
     <script>
-      // Sample data for metrics
-      const totalCustomers = 120;
-      const totalStaff = 50;
-      const pendingOrders = 30;
-
-      // Updating the metrics dynamically
-      document.getElementById("totalCustomers").textContent = totalCustomers;
-      document.getElementById("totalStaff").textContent = totalStaff;
-      document.getElementById("pendingOrders").textContent = pendingOrders;
-
       // Orders rate data for the chart
       const ordersData = {
         labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],

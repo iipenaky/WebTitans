@@ -6,6 +6,13 @@ const quantElem = document.getElementById("quantity");
 const reorderlevelElement = document.getElementById("reorder_level");
 const submitElem = document.getElementById("submit");
 
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+import { handleAdminLoggedIn } from "./utils.js";
+handleAdminLoggedIn();
+
 function validateAddInventory() {
     messageDiv.innerText = "";
     itemNameError.classList.add("hidden");

@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer type="module" src="./script/staff.js"></script>
     <style>
       body {
         background-image: url("./assets/2.jpeg");
@@ -94,6 +95,14 @@
                 >Limited Stock</a
               >
             </li>
+            <li>
+              <a
+                id="logout"
+                href="#0"
+                class="font-bold hover:text-red-600 transition duration-300"
+                >Logout</a
+              >
+            </li>
           </ul>
         </nav>
       </div>
@@ -101,14 +110,14 @@
 
     <main class="container mx-auto mt-8">
       <h1 class="text-2xl font-bold p-4">Staff Management</h1>
-      <button
-        onclick="openAddStaffModal()"
-        class="bg-green-500 text-white px-4 py-2 mb-4"
-      >
+      <button id="add-staff" class="bg-green-500 text-white px-4 py-2 mb-4">
         Add Staff
       </button>
 
-      <table class="min-w-full table-auto bg-white rounded-lg shadow-lg">
+      <table
+        id="staff-table"
+        class="min-w-full table-auto bg-white rounded-lg shadow-lg"
+      >
         <thead class="bg-gray-800 text-white">
           <tr>
             <th class="py-2 px-4">Staff ID</th>
@@ -126,10 +135,86 @@
         </tbody>
       </table>
 
+      <div id="updateStaffModal" class="modal">
+        <div class="modal-content">
+          <h2 id="modal-header" class="text-2xl font-bold mb-4">
+            Update Staff
+          </h2>
+          <form id="updateStaffForm">
+            <div class="mb-4">
+              <label for="firstName" class="block text-lg">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="lastName" class="block text-lg">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="position" class="block text-lg">Position</label>
+              <input
+                type="text"
+                id="position"
+                name="position"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-lg">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="salary" class="block text-lg">Salary</label>
+              <input
+                type="number"
+                id="salary"
+                name="salary"
+                step=".01"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="update-modal-close"
+                class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
+              >
+                Cancel
+              </button>
+              <button
+                id="update-modal-submit"
+                type="submit"
+                class="bg-blue-600 text-white py-2 px-4 rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- Modal for adding new staff -->
       <div id="addStaffModal" class="modal">
         <div class="modal-content">
-          <h2 class="text-2xl font-bold mb-4">Add Staff</h2>
+          <h2 id="modal-header" class="text-2xl font-bold mb-4">Add Staff</h2>
           <form id="addStaffForm">
             <div class="mb-4">
               <label for="firstName" class="block text-lg">First Name</label>
@@ -177,6 +262,17 @@
                 type="number"
                 id="salary"
                 name="salary"
+                step=".01"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="password" class="block text-lg">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
                 class="border border-gray-300 rounded-md p-2 w-full"
                 required
               />
@@ -184,12 +280,13 @@
             <div class="flex justify-end">
               <button
                 type="button"
-                onclick="closeAddStaffModal()"
+                id="modal-close"
                 class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
               >
                 Cancel
               </button>
               <button
+                id="modal-submit"
                 type="submit"
                 class="bg-blue-600 text-white py-2 px-4 rounded-md"
               >
@@ -201,123 +298,120 @@
       </div>
     </main>
 
-    <script>
-      const staffMembers = JSON.parse(localStorage.getItem("staffMembers")) || [
-        {
-          staff_id: 1,
-          first_name: "John",
-          last_name: "Doe",
-          position: "Manager",
-          email: "john.doe@example.com",
-          hire_date: "2021-01-01",
-          salary: 50000.0,
-        },
-        {
-          staff_id: 2,
-          first_name: "Jane",
-          last_name: "Smith",
-          position: "Assistant",
-          email: "jane.smith@example.com",
-          hire_date: "2022-02-15",
-          salary: 35000.0,
-        },
-      ];
-
-      function loadStaffTable() {
-        const tbody = document.getElementById("staffTableBody");
-        tbody.innerHTML = "";
-        staffMembers.forEach((staff) => {
-          const row = `
-          <tr>
-            <td class="border px-4 py-2">${staff.staff_id}</td>
-            <td class="border px-4 py-2">${staff.first_name}</td>
-            <td class="border px-4 py-2">${staff.last_name}</td>
-            <td class="border px-4 py-2">${staff.position}</td>
-            <td class="border px-4 py-2">${staff.email}</td>
-            <td class="border px-4 py-2">${staff.hire_date}</td>
-            <td class="border px-4 py-2">${staff.salary}</td>
-            <td class="border px-4 py-2">
-              <button onclick="viewStaff(${staff.staff_id})" class="bg-blue-500 text-white px-2 py-1">View</button>
-              <button onclick="editStaff(${staff.staff_id})" class="bg-yellow-500 text-white px-2 py-1">Edit</button>
-              <button onclick="deleteStaff(${staff.staff_id})" class="bg-red-500 text-white px-2 py-1">Delete</button>
-            </td>
-          </tr>
-        `;
-          tbody.insertAdjacentHTML("beforeend", row);
-        });
-      }
-
-      function openAddStaffModal() {
-        document.getElementById("addStaffModal").style.display = "block";
-      }
-
-      function closeAddStaffModal() {
-        document.getElementById("addStaffModal").style.display = "none";
-      }
-
-      document
-        .getElementById("addStaffForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const newStaff = {
-            staff_id: staffMembers.length + 1,
-            first_name: document.getElementById("firstName").value,
-            last_name: document.getElementById("lastName").value,
-            position: document.getElementById("position").value,
-            email: document.getElementById("email").value,
-            hire_date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD format
-            salary: parseFloat(document.getElementById("salary").value),
-          };
-          staffMembers.push(newStaff);
-          localStorage.setItem("staffMembers", JSON.stringify(staffMembers));
-          loadStaffTable();
-          closeAddStaffModal();
-        });
-
-      function viewStaff(staffId) {
-        const staff = staffMembers.find((s) => s.staff_id === staffId);
-        alert(
-          `Staff Name: ${staff.first_name} ${staff.last_name}\nPosition: ${staff.position}\nEmail: ${staff.email}\nHire Date: ${staff.hire_date}\nSalary: $${staff.salary}`,
-        );
-      }
-
-      function editStaff(staffId) {
-        const staff = staffMembers.find((s) => s.staff_id === staffId);
-        const firstName = prompt("Edit First Name:", staff.first_name);
-        const lastName = prompt("Edit Last Name:", staff.last_name);
-        const position = prompt("Edit Position:", staff.position);
-        const email = prompt("Edit Email:", staff.email);
-        const salary = parseFloat(prompt("Edit Salary:", staff.salary));
-
-        if (firstName && lastName && position && email && salary > 0) {
-          staff.first_name = firstName;
-          staff.last_name = lastName;
-          staff.position = position;
-          staff.email = email;
-          staff.salary = salary;
-          localStorage.setItem("staffMembers", JSON.stringify(staffMembers));
-          loadStaffTable();
-        } else {
-          alert("Invalid input. Please try again.");
-        }
-      }
-
-      function deleteStaff(staffId) {
-        const staffIndex = staffMembers.findIndex(
-          (s) => s.staff_id === staffId,
-        );
-        if (staffIndex !== -1) {
-          if (confirm("Are you sure you want to delete this staff member?")) {
-            staffMembers.splice(staffIndex, 1);
-            localStorage.setItem("staffMembers", JSON.stringify(staffMembers));
-            loadStaffTable();
-          }
-        }
-      }
-
-      // Initial loading of staff table
-      loadStaffTable();
-    </script>
+    <!--<script>-->
+    <!--  const staffMembers = JSON.parse(localStorage.getItem("staffMembers")) || [-->
+    <!--    {-->
+    <!--      staff_id: 1,-->
+    <!--      first_name: "John",-->
+    <!--      last_name: "Doe",-->
+    <!--      position: "Manager",-->
+    <!--      email: "john.doe@example.com",-->
+    <!--      hire_date: "2021-01-01",-->
+    <!--      salary: 50000.0,-->
+    <!--    },-->
+    <!--    {-->
+    <!--      staff_id: 2,-->
+    <!--      first_name: "Jane",-->
+    <!--      last_name: "Smith",-->
+    <!--      position: "Assistant",-->
+    <!--      email: "jane.smith@example.com",-->
+    <!--      hire_date: "2022-02-15",-->
+    <!--      salary: 35000.0,-->
+    <!--    },-->
+    <!--  ];-->
+    <!---->
+    <!--  function loadStaffTable() {-->
+    <!--    const tbody = document.getElementById("staffTableBody");-->
+    <!--    tbody.innerHTML = "";-->
+    <!--    staffMembers.forEach((staff) => {-->
+    <!--      const row = `-->
+    <!--      <tr>-->
+    <!--        <td class="border px-4 py-2">${staff.staff_id}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.first_name}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.last_name}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.position}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.email}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.hire_date}</td>-->
+    <!--        <td class="border px-4 py-2">${staff.salary}</td>-->
+    <!--        <td class="border px-4 py-2">-->
+    <!--          <button onclick="viewStaff(${staff.staff_id})" class="bg-blue-500 text-white px-2 py-1">View</button>-->
+    <!--          <button onclick="editStaff(${staff.staff_id})" class="bg-yellow-500 text-white px-2 py-1">Edit</button>-->
+    <!--          <button onclick="deleteStaff(${staff.staff_id})" class="bg-red-500 text-white px-2 py-1">Delete</button>-->
+    <!--        </td>-->
+    <!--      </tr>-->
+    <!--    `;-->
+    <!--      tbody.insertAdjacentHTML("beforeend", row);-->
+    <!--    });-->
+    <!--  }-->
+    <!---->
+    <!--  function openAddStaffModal() {-->
+    <!--    document.getElementById("addStaffModal").style.display = "block";-->
+    <!--  }-->
+    <!---->
+    <!--  function closeAddStaffModal() {-->
+    <!--    document.getElementById("addStaffModal").style.display = "none";-->
+    <!--  }-->
+    <!---->
+    <!--  document-->
+    <!--    .getElementById("addStaffForm")-->
+    <!--    .addEventListener("submit", function (event) {-->
+    <!--      event.preventDefault();-->
+    <!---->
+    <!--      const newStaff = {-->
+    <!--        staff_id: staffMembers.length + 1,-->
+    <!--        first_name: document.getElementById("firstName").value,-->
+    <!--        last_name: document.getElementById("lastName").value,-->
+    <!--        position: document.getElementById("position").value,-->
+    <!--        email: document.getElementById("email").value,-->
+    <!--        hire_date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD format-->
+    <!--        salary: parseFloat(document.getElementById("salary").value),-->
+    <!--      };-->
+    <!--      staffMembers.push(newStaff);-->
+    <!--      localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
+    <!--      loadStaffTable();-->
+    <!--      closeAddStaffModal();-->
+    <!--    });-->
+    <!---->
+    <!--  function viewStaff(staffId) {-->
+    <!--    const staff = staffMembers.find((s) => s.staff_id === staffId);-->
+    <!--    alert(-->
+    <!--      `Staff Name: ${staff.first_name} ${staff.last_name}\nPosition: ${staff.position}\nEmail: ${staff.email}\nHire Date: ${staff.hire_date}\nSalary: $${staff.salary}`,-->
+    <!--    );-->
+    <!--  }-->
+    <!---->
+    <!--  function editStaff(staffId) {-->
+    <!--    const staff = staffMembers.find((s) => s.staff_id === staffId);-->
+    <!--    const firstName = prompt("Edit First Name:", staff.first_name);-->
+    <!--    const lastName = prompt("Edit Last Name:", staff.last_name);-->
+    <!--    const position = prompt("Edit Position:", staff.position);-->
+    <!--    const email = prompt("Edit Email:", staff.email);-->
+    <!--    const salary = parseFloat(prompt("Edit Salary:", staff.salary));-->
+    <!---->
+    <!--    if (firstName && lastName && position && email && salary > 0) {-->
+    <!--      staff.first_name = firstName;-->
+    <!--      staff.last_name = lastName;-->
+    <!--      staff.position = position;-->
+    <!--      staff.email = email;-->
+    <!--      staff.salary = salary;-->
+    <!--      localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
+    <!--      loadStaffTable();-->
+    <!--    } else {-->
+    <!--      alert("Invalid input. Please try again.");-->
+    <!--    }-->
+    <!--  }-->
+    <!---->
+    <!--  function deleteStaff(staffId) {-->
+    <!--    const staffIndex = staffMembers.findIndex(-->
+    <!--      (s) => s.staff_id === staffId,-->
+    <!--    );-->
+    <!--    if (staffIndex !== -1) {-->
+    <!--      if (confirm("Are you sure you want to delete this staff member?")) {-->
+    <!--        staffMembers.splice(staffIndex, 1);-->
+    <!--        localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
+    <!--        loadStaffTable();-->
+    <!--      }-->
+    <!--    }-->
+    <!--  }-->
+    <!--</script>-->
   </body>
 </html>

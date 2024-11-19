@@ -27,7 +27,7 @@ async function loginUser(e) {
 
     // Save login state (e.g., token or flag) to localStorage
 
-    writeToSessionStorage("isLoggedIn", "true");
+    writeToSessionStorage("isUserLoggedIn", "true");
 
     // Redirect to the menu page after successful login
     window.location.href = "menu.html";
