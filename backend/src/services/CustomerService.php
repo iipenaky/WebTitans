@@ -11,6 +11,25 @@ require_once __DIR__.'/../db/db.php';
  */
 class CustomerService
 {
+    public function GetNum()
+    {
+        global $db;
+        $stmt = $db->prepare('SELECT COUNT(*) as num FROM customer');
+        if (! $stmt->execute()) {
+
+            return [
+                'header' => 'HTTP/1.1 500 Internal Server Error',
+                'data' => ['error' => 'Failed to fetch customers'],
+            ];
+        }
+
+        return [
+            'header' => 'HTTP/1.1 200 OK',
+            'data' => $stmt->fetch(),
+        ];
+
+    }
+
     public function GetAll()
     {
         global $db;

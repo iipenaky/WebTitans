@@ -94,12 +94,6 @@ class CorsMiddleware implements Middleware
     public function handle(): bool
     {
         try {
-            // Debug information in development
-            if (defined('DEVELOPMENT') && DEVELOPMENT === true) {
-                error_log('Request Origin: '.($this->getOrigin() ?? 'None'));
-                error_log('Same Origin: '.($this->isSameOrigin() ? 'Yes' : 'No'));
-                error_log('Server Variables: '.print_r($_SERVER, true));
-            }
 
             // If it's same origin, just continue without CORS headers
             if ($this->isSameOrigin()) {
@@ -137,40 +131,6 @@ class JsonMiddleware implements Middleware
     public function handle()
     {
         header('Content-Type: application/json; charset=UTF-8');
-
-        return true;
-    }
-}
-
-class ValidationMiddleware implements Middleware
-{
-    private array $rules;
-
-    public function __construct(array $rules = [])
-    {
-        $this->rules = $rules;
-    }
-
-    public function handle()
-    {
-        $method = $_SERVER['REQUEST_METHOD'];
-        $uri = parseURI();
-        $uri = '/'.implode('/', $uri);
-
-        if (isset($this->rules["$method $uri"])) {
-            $data = $_REQUEST;
-            $data = array_merge($data, json_decode(file_get_contents('php://input'), true) ?? []);
-            $rules = $this->rules["$method $uri"];
-
-            foreach ($rules as $field => $rule) {
-                if ((! isset($data[$field])) && $rule['required']) {
-                    sendError("Missing required field: $field", 400);
-
-                    return false;
-                }
-                // Add more validation as needed
-            }
-        }
 
         return true;
     }

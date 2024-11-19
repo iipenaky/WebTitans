@@ -28,6 +28,7 @@ function validateStaff($data, $fields = null)
 $staffRoutes = [
     'GET' => [
         'all' => staffAll(...),
+        'num' => staffNum(...),
         'id' => staffById(...),
     ],
 
@@ -103,6 +104,14 @@ function staffLogin($data)
         header($res['header']);
         echo json_encode($res['data']);
     }
+}
+
+function staffNum()
+{
+    global $StaffService;
+    $res = $StaffService->GetNum();
+    header($res['header']);
+    echo json_encode($res['data']);
 }
 
 function staffHandler($verb, $uri)

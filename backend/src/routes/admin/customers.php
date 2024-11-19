@@ -61,6 +61,14 @@ function customersDelete($id)
     echo json_encode($res['data']);
 }
 
+function customersNum()
+{
+    global $CustomerService;
+    $res = $CustomerService->GetNum();
+    header($res['header']);
+    echo json_encode($res['data']);
+}
+
 /*
 * A map of routes for the customers resource.
 * Each key in this map corresponds to an HTTP method. and its value an array of the available routes for that method.
@@ -71,6 +79,7 @@ $customerRoutes = [
     'GET' => [
         'all' => customersAll(...),
         'id' => customersById(...),
+        'num' => customersNum(...),
     ],
 
     'POST' => [

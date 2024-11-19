@@ -3,6 +3,7 @@ POST /admin/signup
 POST /admin/login
 
 GET /admin/customers/all
+GET /admin/customers/num
 GET /admin/customers/id/{id}
 POST /admin/customers/add
 PUT /admin/customers/update
@@ -22,6 +23,7 @@ DELETE /admin/orders/deleteById/{id}
 
 -- Staff
 GET /admin/staff/all
+GET /admin/staff/num
 GET /admin/staff/id/{id}
 POST /admin/staff/signup
 POST /admin/staff/login
