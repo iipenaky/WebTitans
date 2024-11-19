@@ -48,9 +48,7 @@ async function signupUser(e) {
     const json = await req.json();
     alert(json.message);
     signupForm.reset();
-    setTimeout(() => {
-        document.location.href = "./login.html";
-    }, 1500);
+    document.location.href = "./login.html";
 }
 
 function validateSignupForm() {

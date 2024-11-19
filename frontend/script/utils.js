@@ -32,18 +32,21 @@ export const addElementToElementOnCondition = (element, condition, elementToAdd)
     }
 };
 
-export const sendBackToLogin = () => {
-    window.location.href = "index.html";
+export const sendBackTo = (location = "index.html") => {
+    window.location.href = location;
 };
 
-export const logout = async () => {
-    const req = await fetch(`${BASE_URL}/user/logout`, {
+export const logout = async (redirect = "index.html") => {
+    const req = await fetch(`${BASE_URL}/admin/logout`, {
         method: "POST",
         credentials: "include",
     });
 
     if (!req.ok) {
         console.log({ req });
+        const err = await req.json();
+        console.log({ err });
+        throw new Error("Failed to log out");
         return;
     }
 
@@ -51,5 +54,5 @@ export const logout = async () => {
     console.log({ json });
 
     sessionStorage.removeItem("isLoggedIn");
-    window.location.href = "login.html";
+    sendBackTo(redirect);
 };

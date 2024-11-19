@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackToLogin, readFromSessionStorage } from "./utils.js";
+import { sendBackTo, readFromSessionStorage } from "./utils.js";
 
 const fullnameElem = document.getElementById("name");
 const email = document.getElementById("email");
@@ -11,7 +11,7 @@ const reservationform = document.getElementById("reservation-form");
 (async function () {
     //if (readFromSessionStorage("isLoggedIn") !== "true") {
     //    alert("Please log in to make a reservation");
-    //    sendBackToLogin();
+    //    sendBackTo();
     //}
 })();
 
@@ -29,7 +29,7 @@ async function reserveUser(e) {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to reserve table");
     }
@@ -39,9 +39,7 @@ async function reserveUser(e) {
     console.log({ data });
     alert(data);
     reservationform.reset();
-    setTimeout(() => {
-        document.location.href = "./menu.html";
-    }, 1500);
+    document.location.href = "./menu.html";
 }
 
 function validateReservationForm() {
