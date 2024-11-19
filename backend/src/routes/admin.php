@@ -55,7 +55,14 @@ function adminHandler($verb, $subroute)
 {
     switch ($subroute[0]) {
         case 'logout':
-            destroySession();
+            if ($verb != 'POST') {
+                header('HTTP/1.1 405 Method Not Allowed');
+                echo json_encode(['data' => 'Method Not Allowed']);
+                break;
+            }
+            $res = destroySession();
+            header($res['header']);
+            echo json_encode($res['data']);
             break;
         case 'info':
             header('HTTP/1.1 200 OK');
