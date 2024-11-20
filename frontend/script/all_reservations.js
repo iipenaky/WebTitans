@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackTo, readFromSessionStorage } from "./utils.js";
+import { sendBackTo, readFromSessionStorage, check401 } from "./utils.js";
 
 import { handleAdminLoggedIn } from "./utils.js";
 handleAdminLoggedIn();
@@ -14,6 +14,7 @@ async function getReservations() {
     });
 
     if (!req.ok) {
+        check401();
         console.log({ req });
     }
 

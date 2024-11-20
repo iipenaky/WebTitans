@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants.js";
-import { handleLogout, handleError } from "./utils.js";
+import { handleLogout, handleError, check401 } from "./utils.js";
 
 import { handleAdminLoggedIn } from "./utils.js";
 handleAdminLoggedIn();
@@ -13,6 +13,7 @@ const getNum = async (path) => {
     });
 
     if (!res.ok) {
+        check401();
         await handleError(res);
     }
 
