@@ -36,7 +36,18 @@ export const sendBackTo = (location = "index.html") => {
     window.location.href = location;
 };
 
+export const check401 = (res) => {
+    if (res.status === 401) {
+        sendBackTo();
+    }
+};
+
 export const handleAdminLoggedIn = () => {
+    fetch(`${BASE_URL}/admin/info`)
+        .then((res) => {
+            if (res.status == 401) sendBackTo();
+        })
+        .catch((e) => console.log({ e }));
     if (readFromSessionStorage("isAdminLoggedIn") !== "true") {
         sendBackTo();
     }

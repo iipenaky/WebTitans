@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackTo } from "./utils.js";
+import { sendBackTo, check401 } from "./utils.js";
 
 import { handleLogout } from "./utils.js";
 const logoutButton = document.getElementById("logout");
@@ -16,9 +16,7 @@ async function getCustomer() {
 
     if (!req.ok) {
         console.log({ req });
-        if (req.status === 401) {
-            sendBackTo();
-        }
+        check401();
         throw new Error("Failed to fetch customers");
     }
 

@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { check401 } from "./utils.js";
 import { sendBackTo } from "./utils.js";
 
 const itemNameElement = document.getElementById("item_name");
@@ -42,10 +43,8 @@ async function addInventory(e) {
     });
 
     if (!req.ok) {
+        check401();
         console.log({ req });
-        if (req.status === 401) {
-            sendBackTo();
-        }
         throw new Error("Failed to add inventory");
     }
 

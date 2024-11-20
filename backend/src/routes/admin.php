@@ -65,6 +65,9 @@ function adminHandler($verb, $subroute)
             echo json_encode($res['data']);
             break;
         case 'info':
+            if (! checkAuth()) {
+                break;
+            }
             header('HTTP/1.1 200 OK');
             echo json_encode(['data' => 'Admin route']);
             break;
