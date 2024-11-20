@@ -3,6 +3,7 @@
 session_start();
 require_once __DIR__.'/./utils.php';
 require_once __DIR__.'/./middleware.php';
+
 /*ini_set('display_errors', 1);*/
 /*error_reporting(E_ALL);*/
 
@@ -31,13 +32,14 @@ define('RULES', [
 $requestOrigin = rtrim($_SERVER['HTTP_ORIGIN'], '/');
 // Set headers
 $handler = new MiddlewareHandler;
-if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {
-    header('Access-Control-Allow-Origin: http://localhost:8080');
-    header('Access-Control-Allow-Credentials: true');
-    foreach (HEADERS as $header) {
-        header($header);
-    }
-} elseif ($requestOrigin == '') {
+/*if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {*/
+/*    header('Access-Control-Allow-Origin: http://localhost:8080');*/
+/*    header('Access-Control-Allow-Credentials: true');*/
+/*    foreach (HEADERS as $header) {*/
+/*        header($header);*/
+/*    }*/
+/*}*/
+if ($requestOrigin == '') {
     header('Access-Control-Allow-Origin: http://169.239.251.102:3341');
     header('Access-Control-Allow-Credentials: true');
     foreach (HEADERS as $header) {

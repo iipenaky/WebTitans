@@ -1,5 +1,5 @@
 // Initialize storage for orders and reservations
-import { readFromSessionStorage, writeToSessionStorage } from "./utils.js";
+import { readFromSessionStorage, writeToSessionStorage, handleUserLoggedIn } from "./utils.js";
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 let reservations = JSON.parse(localStorage.getItem("reservations")) || [];
 
@@ -142,10 +142,8 @@ document.getElementById("reservation-form")?.addEventListener("submit", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Redirect to login if user is not logged in
-    if (!checkLoginStatus()) {
-        alert("Please log in to access the menu.");
-        window.location.href = "login.html";
-    }
+    console.log("Here");
+    handleUserLoggedIn("login.html");
 });
 
 /**

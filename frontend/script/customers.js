@@ -1,5 +1,12 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackToLogin } from "./utils.js";
+import { sendBackTo } from "./utils.js";
+
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+import { handleAdminLoggedIn } from "./utils.js";
+handleAdminLoggedIn();
 
 async function getCustomer() {
     const req = await fetch(`${BASE_URL}/admin/customers/all`, {
@@ -10,7 +17,7 @@ async function getCustomer() {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to fetch customers");
     }
@@ -30,7 +37,7 @@ async function getCustomerId() {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to fetch customer");
     }

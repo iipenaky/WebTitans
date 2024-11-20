@@ -1,5 +1,12 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackToLogin } from "./utils.js";
+import { sendBackTo } from "./utils.js";
+
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+import { handleAdminLoggedIn } from "./utils.js";
+handleAdminLoggedIn();
 
 async function getOrders() {
     const req = await fetch(`${BASE_URL}/admin/orders/all`, {
@@ -9,7 +16,7 @@ async function getOrders() {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to fetch orders");
     }

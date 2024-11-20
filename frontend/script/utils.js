@@ -32,24 +32,57 @@ export const addElementToElementOnCondition = (element, condition, elementToAdd)
     }
 };
 
-export const sendBackToLogin = () => {
-    window.location.href = "index.html";
+export const sendBackTo = (location = "index.html") => {
+    window.location.href = location;
 };
 
-export const logout = async () => {
-    const req = await fetch(`${BASE_URL}/user/logout`, {
+export const handleAdminLoggedIn = () => {
+    if (readFromSessionStorage("isAdminLoggedIn") !== "true") {
+        sendBackTo();
+    }
+};
+
+export const handleUserLoggedIn = (redirect = "index.html") => {
+    if (readFromSessionStorage("isUserLoggedIn") !== "true") {
+        sendBackTo(redirect);
+    }
+};
+
+export const handleError = async (err) => {
+    const e = await err.json();
+    alert(e.error);
+    console.log({ e });
+    throw new Error(e.error);
+};
+
+export const logout = async (redirect = "index.html") => {
+    const req = await fetch(`${BASE_URL}/admin/logout`, {
         method: "POST",
         credentials: "include",
     });
 
     if (!req.ok) {
         console.log({ req });
-        return;
+        const err = await req.json();
+        console.log({ err });
+        throw new Error("Failed to log out");
     }
 
     const json = await req.json();
     console.log({ json });
 
     sessionStorage.removeItem("isLoggedIn");
-    window.location.href = "login.html";
+    sessionStorage.removeItem("isAdminLoggedIn");
+    sessionStorage.removeItem("isUserLoggedIn");
+    sendBackTo(redirect);
+};
+
+export const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+        const res = await logout();
+    } catch (error) {
+        console.log(error);
+        alert("Failed to log out");
+    }
 };

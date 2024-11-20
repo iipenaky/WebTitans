@@ -1,10 +1,17 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackToLogin } from "./utils.js";
+import { sendBackTo } from "./utils.js";
 
 const itemNameElement = document.getElementById("item_name");
 const quantElem = document.getElementById("quantity");
 const reorderlevelElement = document.getElementById("reorder_level");
 const submitElem = document.getElementById("submit");
+
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+import { handleAdminLoggedIn } from "./utils.js";
+handleAdminLoggedIn();
 
 function validateAddInventory() {
     messageDiv.innerText = "";
@@ -37,7 +44,7 @@ async function addInventory(e) {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to add inventory");
     }
@@ -47,9 +54,7 @@ async function addInventory(e) {
     console.log({ data });
     alert(data);
     signupForm.reset();
-    setTimeout(() => {
-        document.location.href = "./stock.html";
-    }, 1500);
+    document.location.href = "./stock.html";
 }
 
 async function getinventory() {
@@ -60,7 +65,7 @@ async function getinventory() {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to fetch inventory");
     }
@@ -81,7 +86,7 @@ async function restockByQty(id, qty) {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to restock");
     }
@@ -100,7 +105,7 @@ async function getinventorybyId() {
     if (!req.ok) {
         console.log({ req });
         if (req.status === 401) {
-            sendBackToLogin();
+            sendBackTo();
         }
         throw new Error("Failed to fetch inventory");
     }

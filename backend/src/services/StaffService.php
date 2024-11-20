@@ -5,6 +5,23 @@ require_once __DIR__.'/./OrderService.php';
 
 class StaffService
 {
+    public function GetNum()
+    {
+        global $db;
+        $stmt = $db->prepare('SELECT COUNT(*) as num FROM staff');
+        if (! $stmt->execute()) {
+            return [
+                'header' => 'HTTP/1.1 500 Internal Server Error',
+                'data' => ['error' => 'Failed to fetch staff count'],
+            ];
+        }
+
+        return [
+            'header' => 'HTTP/1.1 200 OK',
+            'data' => $stmt->fetch(),
+        ];
+    }
+
     public function GetAllOfPosition($position)
     {
         global $db;
@@ -70,7 +87,7 @@ class StaffService
         }
 
         $stmt = $db->prepare(
-            'UPDATE staff SET first_name = :first_name, last_name = :last_name, position = :position, email = :email, salary = :salary, passhash = :passhash WHERE staff_id = :id'
+            'UPDATE staff SET first_name = :first_name, last_name = :last_name, position = :position, email = :email, salary = :salary WHERE staff_id = :id'
         );
         $stmt->bindParam(':id', $staff['staff_id']);
         $stmt->bindParam(':first_name', $staff['first_name']);
@@ -78,7 +95,7 @@ class StaffService
         $stmt->bindParam(':position', $staff['position']);
         $stmt->bindParam(':email', $staff['email']);
         $stmt->bindParam(':salary', $staff['salary']);
-        $stmt->bindParam(':passhash', $staff['passhash']);
+        /*$stmt->bindParam(':passhash', $staff['passhash']);*/
         $stmt->execute();
 
         return $this->GetById($staff['staff_id']);
