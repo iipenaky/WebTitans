@@ -42,9 +42,9 @@ export const handleAdminLoggedIn = () => {
     }
 };
 
-export const handleUserLoggedIn = () => {
+export const handleUserLoggedIn = (redirect = "index.html") => {
     if (readFromSessionStorage("isUserLoggedIn") !== "true") {
-        sendBackTo();
+        sendBackTo(redirect);
     }
 };
 

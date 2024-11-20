@@ -142,10 +142,8 @@ document.getElementById("reservation-form")?.addEventListener("submit", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Redirect to login if user is not logged in
-    if (!handleUserLoggedIn()) {
-        alert("Please log in to access the menu.");
-        window.location.href = "login.html";
-    }
+    console.log("Here");
+    handleUserLoggedIn("login.html");
 });
 
 /**
