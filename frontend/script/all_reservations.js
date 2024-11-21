@@ -178,7 +178,6 @@ const populateReservationTable = (reservation) => {
             tableID,
             reservationDate,
             numGuests,
-            requests,
             actions
         ]) {
             element.className = tdClass;
