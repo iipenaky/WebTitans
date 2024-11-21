@@ -29,28 +29,21 @@ function customersById($id)
 
 function validateCustomer($data)
 {
-    if (! isset($data->first_name) || ! isset($data->last_name) || ! isset($data->phone_number) || ! isset($data->email) || ! isset($data->address)) {
-        header('HTTP/1.1 400 Bad Request');
-        throw new Exception('Invalid customer data');
+    if (validateData(['first_name', 'last_name', 'email', 'password'], $data, 'sign up')) {
+        return true;
     }
-}
 
-function customersAdd($data)
-{
-    global $CustomerService;
-    validateCustomer($data);
-    $res = $CustomerService->Add($data);
-    header($res['header']);
-    echo json_encode($res['data']);
+    return false;
 }
 
 function customersUpdate($data)
 {
     global $CustomerService;
-    validateCustomer($data);
-    $res = $CustomerService->Update($data);
-    header($res['header']);
-    echo json_encode($res['data']);
+    if (validateCustomer($data)) {
+        $res = $CustomerService->Update($data);
+        header($res['header']);
+        echo json_encode($res['data']);
+    }
 }
 
 function customersDelete($id)
@@ -80,10 +73,6 @@ $customerRoutes = [
         'all' => customersAll(...),
         'id' => customersById(...),
         'num' => customersNum(...),
-    ],
-
-    'POST' => [
-        'add' => customersAdd(...),
     ],
 
     'PUT' => [
