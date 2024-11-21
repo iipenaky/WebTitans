@@ -1,5 +1,5 @@
 import { handleAdminLoggedIn } from "./utils.js";
-// import { handleEmail, validateFieldsFilled } from "./validation.js";
+import { handleEmail, validateFieldsFilled } from "./validation.js";
 handleAdminLoggedIn();
 
 import { handleLogout, handleError } from "./utils.js";
@@ -52,14 +52,14 @@ const populateOrderTable = (order) => {
         const staffId = document.createElement("td");
         const orderTime = document.createElement("td");
         const orderAmount = document.createElement("td");
-        const orderStaus = document.createElement("td");
+        const orderStatus = document.createElement("td");
 
         orderId.textContent = order_id;
         customerId.textContent = customer_id;
         staffId.textContent = staff_id;
         orderTime.textContent = order_date;
         orderAmount.textContent = amount;
-        orderStaus.textContent = status;
+        orderStatus.textContent = status;
 
 
         const actions = document.createElement("td");
@@ -159,8 +159,8 @@ const populateOrderTable = (order) => {
             customerId,
             staffId,
             orderTime,
-            amount,
-            status
+            orderAmount,
+            orderStatus,
         ]) {
             element.className = tdClass;
             orderRow.appendChild(element);
