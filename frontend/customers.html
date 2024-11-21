@@ -86,7 +86,7 @@
       <h1 class="text-4xl font-bold mb-4">Customer Management</h1>
 
       <!-- Customers Table -->
-      <table class="min-w-full table-auto bg-white rounded-lg shadow-lg">
+      <table id = "customer-table" class="min-w-full table-auto bg-white rounded-lg shadow-lg">
         <thead class="bg-gray-800 text-white">
           <tr>
             <th class="py-2 px-4">ID</th>
@@ -100,71 +100,66 @@
           <!-- Customer Rows will be populated by JavaScript -->
         </tbody>
       </table>
+
+      <!--Updating Customer-->
+      <div id="updateCustomer" class="modal">
+        <div class="modal-content">
+          <h2 id="modal-header" class="text-2xl font-bold mb-4">
+            Update Customer
+          </h2>
+          <form id="updateCustomerForm">
+            <div class="mb-4">
+              <label for="firstName" class="block text-lg">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="lastName" class="block text-lg">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-lg">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="border border-gray-300 rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="update-modal-close"
+                class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
+              >
+                Cancel
+              </button>
+              <button
+                id="update-modal-submit"
+                type="submit"
+                class="bg-blue-600 text-white py-2 px-4 rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </main>
 
-    <!-- Edit Customer Modal -->
-    <div
-      id="editModal"
-      class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden"
-    >
-      <div class="bg-white p-6 rounded-lg w-96">
-        <h2 class="text-2xl font-bold mb-4">Edit Customer</h2>
-        <form id="editCustomerForm">
-          <input type="hidden" id="editCustomerId" name="customerId" />
-          <div class="mb-4">
-            <label for="editCustomerFirstName" class="block text-lg font-medium"
-              >First Name</label
-            >
-            <input
-              type="text"
-              id="editCustomerFirstName"
-              name="firstName"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editCustomerLastName" class="block text-lg font-medium"
-              >Last Name</label
-            >
-            <input
-              type="text"
-              id="editCustomerLastName"
-              name="lastName"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editCustomerEmail" class="block text-lg font-medium"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="editCustomerEmail"
-              name="email"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            />
-          </div>
-          <div class="flex justify-end">
-            <button
-              type="button"
-              onclick="closeEditModal()"
-              class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="bg-blue-600 text-white py-2 px-4 rounded-md"
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+
     <script defer type="module" src="./script/customers.js"></script>
   </body>
 </html>

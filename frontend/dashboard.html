@@ -8,8 +8,6 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" defer src="./script/dash.js"></script>
     <style>
       body {
         background-image: url("./assets/2.jpeg");
@@ -122,37 +120,7 @@
         <canvas id="ordersChart"></canvas>
       </div>
     </main>
-
-    <script>
-      // Orders rate data for the chart
-      const ordersData = {
-        labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
-        datasets: [
-          {
-            label: "Orders Per Week",
-            data: [15, 22, 18, 24, 30], // Example order counts for each week
-            borderColor: "#4CAF50",
-            backgroundColor: "rgba(76, 175, 80, 0.2)",
-            borderWidth: 2,
-            fill: true,
-          },
-        ],
-      };
-
-      // Chart.js setup
-      const ctx = document.getElementById("ordersChart").getContext("2d");
-      const ordersChart = new Chart(ctx, {
-        type: "line",
-        data: ordersData,
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" defer src="./script/dash.js"></script>
   </body>
 </html>

@@ -28,3 +28,33 @@ const getNum = async (path) => {
     document.getElementById("cust-num").innerText = numCustomers;
     document.getElementById("staff-num").innerText = numStaff;
 })();
+
+// // Orders rate data for the chart
+// const ordersData = {
+//     labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+//     datasets: [
+//       {
+//         label: "Orders Per Week",
+//         data: [15, 22, 18, 24, 30], // Example order counts for each week
+//         borderColor: "#4CAF50",
+//         backgroundColor: "rgba(76, 175, 80, 0.2)",
+//         borderWidth: 2,
+//         fill: true,
+//       },
+//     ],
+//   };
+
+//   // Chart.js setup
+//   const ctx = document.getElementById("ordersChart").getContext("2d");
+//   const ordersChart = new Chart(ctx, {
+//     type: "line",
+//     data: ordersData,
+//     options: {
+//       responsive: true,
+//       scales: {
+//         y: {
+//           beginAtZero: true,
+//         },
+//       },
+//     },
+//   });
