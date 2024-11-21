@@ -147,7 +147,7 @@ const populateCustomerTable = (customer) => {
                 try {
                     const res = await updateCustomer(data);
                     console.log({ res });
-                    await refreshcustomerTable();
+                    await refreshCustomerTable();
                     alert("customer updated successfully");
                     modal.onsubmit = null;
                     modal.reset();
@@ -168,7 +168,6 @@ const populateCustomerTable = (customer) => {
             customerId,
             customerFirstName,
             customerLastName,
-            customerPosition,
             customerEmail,
             actions,
         ]) {
@@ -193,7 +192,7 @@ function closeUpdateCustomerModal() {
 
 document.getElementById("update-modal-close").onclick = closeUpdateCustomerModal;
 
-async function refreshcustomerTable() {
+async function refreshCustomerTable() {
     const customer = await getAllCustomer();
     const customerTable = document.getElementById("customer-table");
     customerTable.children[1].innerHTML = "";
@@ -201,5 +200,5 @@ async function refreshcustomerTable() {
 }
 
 (async function () {
-    await refreshcustomerTable();
+    await refreshCustomerTable();
 })();
