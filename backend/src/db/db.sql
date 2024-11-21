@@ -282,20 +282,20 @@ END //
 DELIMITER ;
 
 -- -- 1. `table`
--- INSERT INTO
---   `table` (table_number, seating_capacity, location)
--- VALUES
---   (1, 4, 'Patio'),
---   (2, 2, 'Near Window'),
---   (3, 6, 'Main Hall'),
---   (4, 8, 'VIP Lounge'),
---   (5, 10, 'Banquet Hall'),
---   (6, 4, 'Garden'),
---   (7, 2, 'Bar Area'),
---   (8, 6, 'Balcony'),
---   (9, 8, 'Private Room'),
---   (10, 12, 'Conference Hall');
--- 
+INSERT INTO
+  `table` (table_number, seating_capacity, location)
+VALUES
+  (1, 4, 'Patio'),
+  (2, 2, 'Near Window'),
+  (3, 6, 'Main Hall'),
+  (4, 8, 'VIP Lounge'),
+  (5, 10, 'Banquet Hall'),
+  (6, 4, 'Garden'),
+  (7, 2, 'Bar Area'),
+  (8, 6, 'Balcony'),
+  (9, 8, 'Private Room'),
+  (10, 12, 'Conference Hall');
+
 -- -- 2. `customer`
 -- INSERT INTO
 --   customer (

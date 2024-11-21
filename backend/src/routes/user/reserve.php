@@ -62,7 +62,7 @@ function makeReservation($data)
 function cancelReservation($id)
 {
     global $ReservationService;
-    $res = $ReservationService->GetById($id);
+    $res = $ReservationService->Delete($id);
     header($res['header']);
     echo json_encode($res['data']);
 
