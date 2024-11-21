@@ -101,14 +101,12 @@ class CustomerService
             ];
         }
         $stmt = $db->prepare(
-            'UPDATE customer SET first_name = :first_name, last_name = :last_name, phone_number = :phone_number, email = :email, address = :address WHERE customer_id = :id'
+            'UPDATE customer SET first_name = :first_name, last_name = :last_name, email = :email WHERE customer_id = :id'
         );
         $stmt->bindParam(':id', $customer['customer_id']);
         $stmt->bindParam(':first_name', $customer['first_name']);
         $stmt->bindParam(':last_name', $customer['last_name']);
-        $stmt->bindParam(':phone_number', $customer['phone_number']);
         $stmt->bindParam(':email', $customer['email']);
-        $stmt->bindParam(':address', $customer['address']);
         if (! $stmt->execute()) {
             return [
                 'header' => 'HTTP/1.1 500 Internal Server Error',
