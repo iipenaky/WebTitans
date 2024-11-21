@@ -1,108 +1,212 @@
-import { BASE_URL } from "./constants.js";
-import { sendBackTo, readFromSessionStorage, check401 } from "./utils.js";
-
 import { handleAdminLoggedIn } from "./utils.js";
+import { handleEmail, validateFieldsFilled } from "./validation.js";
 handleAdminLoggedIn();
 
-import { handleLogout } from "./utils.js";
+import { handleLogout, handleError } from "./utils.js";
 const logoutButton = document.getElementById("logout");
 logoutButton.onclick = handleLogout;
 
-async function getReservations() {
-    const req = await fetch(`${BASE_URL}/admin/reservations/all`, {
+import { BASE_URL } from "./constants.js";
+
+const getAllReservations = async () => {
+    const res = await fetch(`${BASE_URL}/admin/reservations/all`, {
         credentials: "include",
     });
 
-    if (!req.ok) {
-        check401();
-        console.log({ req });
+    if (!res.ok) {
+        await handleError(res);
     }
 
-    const json = await req.json();
-    const data = json;
+    const data = await res.json();
     console.log({ data });
     return data;
-}
-async function loadReservationTable() {
-    try {
-        const data = await getReservations();
-        const tbody = document.getElementById("inventoryTableBody");
-        tbody.innerHTML = "";
-        data.forEach((reservation) => {
-            const row = `
-        <tr>
-          <td class="py-2 px-4">${reservation.reservation_id}</td>
-        <td class="py-2 px-4">${reservation.position_id}</td>
-        <td class="py-2 px-4">${reservation.customer_id}</td>
-        <td class="py-2 px-4">${reservation.table_id}</td>
-        <td class="py-2 px-4">${reservation.reservation_datetime}</td>
-        <td class="py-2 px-4">${reservation.number_of_guests}</td>
-        <td class="py-2 px-4">
-          <button onclick="viewReservation(${reservation.reservation_id})" class="bg-blue-500 text-white py-1 px-2 rounded-md mr-2">View</button>
-          <button onclick="editReservation(${reservation.reservation_id})" class="bg-yellow-500 text-white py-1 px-2 rounded-md mr-2">Edit</button>
-          <button onclick="deleteReservation(${reservation.reservation_id})" class="bg-red-500 text-white py-1 px-2 rounded-md">Delete</button>
-        </td>
-        </tr>
-      `;
-            tbody.insertAdjacentHTML("beforeend", row);
-        });
-    } catch (error) {
-        console.error(error);
+};
+
+// const updateReservation = async (reservation) => {
+//     const res = await fetch(`${BASE_URL}/admin/reservations/update`, {
+//         method: "PUT",
+//         body: JSON.stringify(reservation),
+//         credentials: "include",
+//     });
+
+//     if (!res.ok) {
+//         await handleError(res);
+//     }
+
+//     const data = await res.json();
+//     console.log({ data });
+//     return data;
+// };
+
+const deleteReservation = async (reservationId) => {
+    const res = await fetch(`${BASE_URL}/admin/reservations/delete/${reservationId}`, {
+        method: "DELETE",
+        credentials: "include",
+    });
+
+    if (!res.ok) {
+        await handleError(res);
     }
-}
 
-// Edit Reservation
-function editReservation(reservationId) {
-    const reservation = reservations.find((r) => r.reservation_id === reservationId);
-    document.getElementById("editReservationId").value = reservation.reservation_id;
-    document.getElementById("editPositionId").value = reservation.position_id;
-    document.getElementById("editCustomerId").value = reservation.customer_id;
-    document.getElementById("editTableId").value = reservation.table_id;
-    document.getElementById("editReservationDateTime").value = reservation.reservation_datetime;
-    document.getElementById("editGuests").value = reservation.number_of_guests;
+    const data = await res.json();
+    console.log({ data });
+    return data;
+};
 
-    document.getElementById("editModal").classList.remove("hidden");
-}
 
-// Save Edited Reservation
-document.getElementById("editReservationForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+const populateReservationTable = (reservation) => {
+    const reservationTable = document.getElementById("reservation-table");
+    for (let r of reservation) {
+        let { reservation_id, customer_id, table_id, reservation_datetime, number_of_guests, special_requests} = r;
+        const tdClass = "border px-4 py-2";
 
-    const reservationId = parseInt(document.getElementById("editReservationId").value);
-    const reservation = reservations.find((r) => r.reservation_id === reservationId);
+        const reservationRow = document.createElement("tr");
+        const reservationID = document.createElement("td");
+        const customerID = document.createElement("td");
+        const tableID = document.createElement("td");
+        const reservationDate = document.createElement("td");
+        const numGuests = document.createElement("td");
+        const requests = document.createElement("td");
 
-    reservation.position_id = parseInt(document.getElementById("editPositionId").value);
-    reservation.customer_id = parseInt(document.getElementById("editCustomerId").value);
-    reservation.table_id = parseInt(document.getElementById("editTableId").value);
-    reservation.reservation_datetime = document.getElementById("editReservationDateTime").value;
-    reservation.number_of_guests = parseInt(document.getElementById("editGuests").value);
+        reservationID.textContent = reservation_id;
+        customerID.textContent = customer_id;
+        tableID.textContent = table_id;
+        reservationDate.textContent = reservation_datetime;
+        numGuests.textContent = number_of_guests;
+        requests.textContent = special_requests;
 
-    loadReservationTable(); // Reload the table with updated data
-    closeEditModal();
-});
+        const actions = document.createElement("td");
+        const viewButton = document.createElement("button");
+        const editButton = document.createElement("button");
+        const deleteButton = document.createElement("button");
+        viewButton.textContent = "View";
+        editButton.textContent = "Edit";
+        deleteButton.textContent = "Delete";
 
-// Delete Reservation
-function deleteReservation(reservationId) {
-    const confirmed = confirm("Are you sure you want to delete this reservation?");
-    if (confirmed) {
-        const reservationIndex = reservations.findIndex((r) => r.reservation_id === reservationId);
-        reservations.splice(reservationIndex, 1);
-        loadReservationTable(); // Reload the table after deletion
+        let i = 0;
+        const colors = ["blue", "yellow", "red"];
+        for (let element of [viewButton, editButton, deleteButton]) {
+            element.className = `bg-${colors[i]}-500 text-white px-2 py-1`;
+            if (i !== 0) {
+                element.style.marginLeft = "0.25rem";
+            }
+            actions.appendChild(element);
+            i++;
+        }
+
+        const view = () => {
+            alert(
+                `Reservation ID: ${reservation_id}\nCustomer ID ${customer_id}\nTable ID: ${table_id}\nReservation Date: ${reservation_datetime}\nNumber of Guests: ${number_of_guests}\nSpecial Requests: $${special_requests}`,
+            );
+        };
+
+        const del = async () => {
+            if (confirm("Are you sure you want to delete this reservation?")) {
+                try {
+                    const res = await deleteReservation(reservation_id);
+                    reservationRow.remove();
+                    console.log({ res });
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        };
+
+        // const update = async () => {
+        //     const modal = document.getElementById("updatereservationForm");
+
+        //     const modalData = Object.fromEntries(new FormData(modal));
+        //     modalData.reservation_id = reservation_id;
+        //     modalData.firstName = first_name;
+        //     modalData.lastName = last_name;
+        //     modalData.email = email;
+        //     modalData.salary = salary;
+        //     modalData.position = position;
+        //     console.log({ modalData });
+
+        //     // Populate form with existing modalData
+        //     for (let key in modalData) {
+        //         const input = document.getElementById(key);
+        //         if (input) {
+        //             input.value = modalData[key];
+        //         }
+        //     }
+
+        //     modal.onsubmit = async (e) => {
+        //         e.preventDefault();
+        //         const fData = Object.fromEntries(new FormData(modal));
+        //         const data = {
+        //             reservation_id: reservation_id,
+        //             first_name: fData.firstName,
+        //             last_name: fData.lastName,
+        //             email: fData.email,
+        //             salary: fData.salary,
+        //             position: fData.position,
+        //         };
+        //         console.log({ data });
+        //         if (
+        //             !validateFieldsFilled(Object.values(data)) ||
+        //             !handleEmail(data.email) ||
+        //             !handleSalary(data.salary)
+        //         ) {
+        //             return;
+        //         }
+
+        //         try {
+        //             const res = await updatereservation(data);
+        //             console.log({ res });
+        //             await refreshreservationTable();
+        //             alert("reservation updated successfully");
+        //             modal.onsubmit = null;
+        //             modal.reset();
+        //         } catch (e) {
+        //             console.error(e);
+        //         }
+        //         closeUpdatereservationModal();
+        //     };
+
+        //     openUpdatereservationModal();
+        // };
+
+        viewButton.onclick = view;
+        deleteButton.onclick = del;
+        editButton.onclick = update;
+
+        for (let element of [
+            reservationID,
+            customerID,
+            tableID,
+            reservationDate,
+            numGuests,
+            requests
+        ]) {
+            element.className = tdClass;
+            reservationRow.appendChild(element);
+        }
+
+        reservationTable.children[1].appendChild(reservationRow);
     }
+};
+
+// function openUpdatereservationModal() {
+//     document.getElementById("updatereservationModal").style.display = "block";
+// }
+
+// function closeUpdatereservationModal() {
+//     document.getElementById("updatereservationModal").style.display = "none";
+// }
+
+
+
+// document.getElementById("update-modal-close").onclick = closeUpdatereservationModal;
+
+async function refreshReservationTable() {
+    const reservation = await getAllReservations();
+    const reservationTable = document.getElementById("reservation-table");
+    reservationTable.children[1].innerHTML = "";
+    populateReservationTable(reservation);
 }
 
-// View Reservation Information
-function viewReservation(reservationId) {
-    const reservation = reservations.find((r) => r.reservation_id === reservationId);
-    alert(
-        `Reservation Info:\nCustomer ID: ${reservation.customer_id}\nTable ID: ${reservation.table_id}\nDate & Time: ${reservation.reservation_datetime}\nGuests: ${reservation.number_of_guests}`,
-    );
-}
-
-// Close the Edit Modal
-function closeEditModal() {
-    document.getElementById("editModal").classList.add("hidden");
-}
-
-// Initial loading of reservation data
-loadReservationTable();
+(async function () {
+    await refreshReservationTable();
+})();
