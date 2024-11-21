@@ -148,15 +148,6 @@ async function loadInventoryTable() {
     }
 }
 
-// function openAddInventoryModal() {
-//     document.getElementById("addInventoryModal").style.display = "block";
-// }
-
-// function closeAddInventoryModal() {
-//     document.getElementById("addInventoryModal").classList.display = "none";
-// }
-
-// submitElem.addEventListener("submit", addInventory);
 
 async function restockInventory(id, quantity) {
     try {
