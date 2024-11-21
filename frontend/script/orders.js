@@ -43,7 +43,7 @@ const deleteOrder = async (orderId) => {
 const populateOrderTable = (order) => {
     const orderTable = document.getElementById("order-table");
     for (let o of order) {
-        let { order_id, customer_id, staff_id, order_date, amount,status} = o;
+        let { order_id, customer_id, staff_id, order_time, total_amount,status} = o;
         const tdClass = "border px-4 py-2";
 
         const orderRow = document.createElement("tr");
@@ -57,8 +57,8 @@ const populateOrderTable = (order) => {
         orderId.textContent = order_id;
         customerId.textContent = customer_id;
         staffId.textContent = staff_id;
-        orderTime.textContent = order_date;
-        orderAmount.textContent = amount;
+        orderTime.textContent = order_time;
+        orderAmount.textContent = total_amount;
         orderStatus.textContent = status;
 
 
@@ -83,7 +83,7 @@ const populateOrderTable = (order) => {
 
         const view = () => {
             alert(
-                `Order Id: ${order_id}\nCustomer Id: ${customer_id}\nStaff ID: ${staff_id}\nOrder Time: ${order_date}\nAmout: ${amount}\nStatus: ${status}`,
+                `Order Id: ${order_id}\nCustomer Id: ${customer_id}\nStaff ID: ${staff_id}\nOrder Time: ${order_time}\nAmout: ${total_amount}\nStatus: ${status}`,
             );
         };
 
@@ -161,6 +161,7 @@ const populateOrderTable = (order) => {
             orderTime,
             orderAmount,
             orderStatus,
+            actions,
         ]) {
             element.className = tdClass;
             orderRow.appendChild(element);
