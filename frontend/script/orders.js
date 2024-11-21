@@ -67,12 +67,12 @@ const populateOrderTable = (order) => {
         // const editButton = document.createElement("button");
         const deleteButton = document.createElement("button");
         viewButton.textContent = "View";
-        editButton.textContent = "Edit";
+        // editButton.textContent = "Edit";
         deleteButton.textContent = "Delete";
 
         let i = 0;
-        const colors = ["blue", "yellow", "red"];
-        for (let element of [viewButton, editButton, deleteButton]) {
+        const colors = ["blue", "red"];
+        for (let element of [viewButton, deleteButton]) {
             element.className = `bg-${colors[i]}-500 text-white px-2 py-1`;
             if (i !== 0) {
                 element.style.marginLeft = "0.25rem";
