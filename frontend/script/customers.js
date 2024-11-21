@@ -148,7 +148,7 @@ const populateCustomerTable = (customer) => {
                     const res = await updateCustomer(data);
                     console.log({ res });
                     await refreshCustomerTable();
-                    alert("customer updated successfully");
+                    alert("Cutomer updated successfully");
                     modal.onsubmit = null;
                     modal.reset();
                 } catch (e) {
@@ -182,11 +182,11 @@ const populateCustomerTable = (customer) => {
 
 
 function openUpdateCustomerModal() {
-    document.getElementById("updatecustomerModal").style.display = "block";
+    document.getElementById("updateCustomerModal").style.display = "block";
 }
 
 function closeUpdateCustomerModal() {
-    document.getElementById("updatecustomerModal").style.display = "none";
+    document.getElementById("updateCustomerModal").style.display = "none";
 }
 
 
