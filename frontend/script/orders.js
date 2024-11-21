@@ -1,128 +1,195 @@
-import { BASE_URL } from "./constants.js";
-import { sendBackTo } from "./utils.js";
+import { handleAdminLoggedIn } from "./utils.js";
+// import { handleEmail, validateFieldsFilled } from "./validation.js";
+handleAdminLoggedIn();
 
-import { handleLogout } from "./utils.js";
+import { handleLogout, handleError } from "./utils.js";
 const logoutButton = document.getElementById("logout");
 logoutButton.onclick = handleLogout;
 
-import { handleAdminLoggedIn } from "./utils.js";
-handleAdminLoggedIn();
+import { BASE_URL } from "./constants.js";
 
-async function getOrders() {
-    const req = await fetch(`${BASE_URL}/admin/orders/all`, {
+const getAllOrders = async () => {
+    const res = await fetch(`${BASE_URL}/admin/orders/all`, {
         credentials: "include",
     });
 
-    if (!req.ok) {
-        console.log({ req });
-        if (req.status === 401) {
-            sendBackTo();
-        }
-        throw new Error("Failed to fetch orders");
+    if (!res.ok) {
+        await handleError(res);
     }
 
-    const json = await req.json();
-    console.log({ json });
-    return json;
+    const data = await res.json();
+    console.log({ data });
+    return data;
+};
+
+
+
+const deleteOrder = async (orderId) => {
+    const res = await fetch(`${BASE_URL}/admin/orders/deleteById/${orderId}`, {
+        method: "DELETE",
+        credentials: "include",
+    });
+
+    if (!res.ok) {
+        await handleError(res);
+    }
+
+    const data = await res.json();
+    console.log({ data });
+    return data;
+};
+
+
+const populateOrderTable = (order) => {
+    const orderTable = document.getElementById("order-table");
+    for (let o of order) {
+        let { order_id, customer_id, staff_id, order_date, amount,status} = o;
+        const tdClass = "border px-4 py-2";
+
+        const orderRow = document.createElement("tr");
+        const orderId = document.createElement("td");
+        const customerId = document.createElement("td");
+        const staffId = document.createElement("td");
+        const orderTime = document.createElement("td");
+        const orderAmount = document.createElement("td");
+        const orderStaus = document.createElement("td");
+
+        orderId.textContent = order_id;
+        customerId.textContent = customer_id;
+        staffId.textContent = staff_id;
+        orderTime.textContent = order_date;
+        orderAmount.textContent = amount;
+        orderStaus.textContent = status;
+
+
+        const actions = document.createElement("td");
+        const viewButton = document.createElement("button");
+        // const editButton = document.createElement("button");
+        const deleteButton = document.createElement("button");
+        viewButton.textContent = "View";
+        editButton.textContent = "Edit";
+        deleteButton.textContent = "Delete";
+
+        let i = 0;
+        const colors = ["blue", "yellow", "red"];
+        for (let element of [viewButton, editButton, deleteButton]) {
+            element.className = `bg-${colors[i]}-500 text-white px-2 py-1`;
+            if (i !== 0) {
+                element.style.marginLeft = "0.25rem";
+            }
+            actions.appendChild(element);
+            i++;
+        }
+
+        const view = () => {
+            alert(
+                `Order Id: ${order_id}\nCustomer Id: ${customer_id}\nStaff ID ${staff_id}\nOrder Time ${order_date}\nAmout: ${amount}\nStatus: ${status}`,
+            );
+        };
+
+        const del = async () => {
+            if (confirm("Are you sure you want to delete this order?")) {
+                try {
+                    const res = await deleteOrder(order_id);
+                    orderRow.remove();
+                    console.log({ res });
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        };
+
+        // const update = async () => {
+        //     const modal = document.getElementById("updateorderForm");
+
+        //     const modalData = Object.fromEntries(new FormData(modal));
+        //     modalData.order_id = order_id;
+        //     modalData.firstName = first_name;
+        //     modalData.lastName = last_name;
+        //     modalData.email = email;
+        //     console.log({ modalData });
+
+        //     // Populate form with existing modalData
+        //     for (let key in modalData) {
+        //         const input = document.getElementById(key);
+        //         if (input) {
+        //             input.value = modalData[key];
+        //         }
+        //     }
+
+        //     modal.onsubmit = async (e) => {
+        //         e.preventDefault();
+        //         const fData = Object.fromEntries(new FormData(modal));
+        //         const data = {
+        //             order_id: order_id,
+        //             first_name: fData.firstName,
+        //             last_name: fData.lastName,
+        //             email: fData.email,
+        //         };
+        //         console.log({ data });
+        //         if (
+        //             !validateFieldsFilled(Object.values(data)) ||
+        //             !handleEmail(data.email)
+        //         ) {
+        //             return;
+        //         }
+
+        //         try {
+        //             const res = await updateorder(data);
+        //             console.log({ res });
+        //             await refreshorderTable();
+        //             alert("Cutomer updated successfully");
+        //             modal.onsubmit = null;
+        //             modal.reset();
+        //         } catch (e) {
+        //             console.error(e);
+        //         }
+        //         closeUpdateorderModal();
+        //     };
+
+        //     openUpdateorderModal();
+        // };
+
+        viewButton.onclick = view;
+        deleteButton.onclick = del;
+        // editButton.onclick = update;
+
+        for (let element of [
+            orderId,
+            customerId,
+            staffId,
+            orderTime,
+            amount,
+            status
+        ]) {
+            element.className = tdClass;
+            orderRow.appendChild(element);
+        }
+
+        orderTable.children[1].appendChild(orderRow);
+    }
+};
+
+
+
+// function openUpdateorderModal() {
+//     document.getElementById("updateorderModal").style.display = "block";
+// }
+
+// function closeUpdateorderModal() {
+//     document.getElementById("updateorderModal").style.display = "none";
+// }
+
+
+// document.getElementById("update-modal-close").onclick = closeUpdateorderModal;
+
+async function refreshOrderTable() {
+    const order = await getAllOrders();
+    const orderTable = document.getElementById("order-table");
+    orderTable.children[1].innerHTML = "";
+    populateOrderTable(order);
 }
 
 (async function () {
-    try {
-        const orders = await getOrders();
-        console.log({ orders });
-        loadOrderTable(orders);
-    } catch (e) {
-        console.log(e);
-    }
+    await refreshOrderTable();
 })();
-
-// Populate the orders table
-function loadOrderTable(orders) {
-    const tableBody = document.getElementById("orderTableBody");
-    tableBody.innerHTML = ""; // Clear existing rows
-
-    orders.forEach((order) => {
-        const row = document.createElement("tr");
-        row.classList.add("border-t");
-        row.innerHTML = `
-          <td class="py-2 px-4">${order.order_id}</td>
-          <td class="py-2 px-4">${order.customer_id}</td>
-          <td class="py-2 px-4">${order.staff_id ?? "N/A"}</td>
-          <td class="py-2 px-4">${order.order_time}</td>
-          <td class="py-2 px-4">$${parseFloat(order.total_amount).toFixed(2)}</td>
-          <td class="py-2 px-4">${order.status}</td>
-          <td class="py-2 px-4">
-            <button id="viewButton" class="bg-blue-500 text-white py-1 px-2 rounded-md mr-2">View</button>
-            <button id="editButton" onclick="editOrder(${order.order_id})" class="bg-yellow-500 text-white py-1 px-2 rounded-md mr-2">Edit</button>
-            <button id="deleteButton" onclick="deleteOrder(${order.order_id})" class="bg-red-500 text-white py-1 px-2 rounded-md">Delete</button>
-          </td>
-        `;
-        const viewButton = row.querySelector("#viewButton");
-        const editButton = row.querySelector("#editButton");
-        const deleteButton = row.querySelector("#deleteButton");
-        viewButton.onclick = () => viewOrder(order.order_id, orders);
-        editButton.onclick = () => editOrder(order.order_id, orders);
-        deleteButton.onclick = () => deleteOrder(order.order_id, orders);
-
-        tableBody.appendChild(row);
-    });
-}
-
-// View Order Information
-function viewOrder(orderId, orders) {
-    const order = orders.find((o) => o.order_id === orderId);
-    alert(
-        `Order Info:\nCustomer ID: ${order.customer_id}\nStaff ID: ${
-            order.staff_id ?? "N/A"
-        }\nOrder Time: ${order.order_time}\nTotal Amount: $${order.total_amount}\nStatus: ${order.status}`,
-    );
-}
-
-// Edit Order
-function editOrder(orderId, orders) {
-    const order = orders.find((o) => o.order_id === orderId);
-    document.getElementById("editOrderId").value = order.order_id;
-    document.getElementById("editCustomerId").value = order.customer_id;
-    document.getElementById("editStaffId").value = order.staff_id ?? "";
-    document.getElementById("editOrderTime").value = order.order_time;
-    document.getElementById("editTotalAmount").value = order.total_amount;
-    document.getElementById("editStatus").value = order.status;
-
-    document.getElementById("editModal").classList.remove("hidden");
-}
-
-// Save Edited Order
-document.getElementById("editOrderForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const orderId = parseInt(document.getElementById("editOrderId").value);
-    const order = orders.find((o) => o.order_id === orderId);
-
-    order.customer_id = parseInt(document.getElementById("editCustomerId").value);
-    order.staff_id = document.getElementById("editStaffId").value
-        ? parseInt(document.getElementById("editStaffId").value)
-        : null;
-    order.order_time = document.getElementById("editOrderTime").value;
-    order.total_amount = parseFloat(document.getElementById("editTotalAmount").value);
-    order.status = document.getElementById("editStatus").value;
-
-    loadOrderTable();
-    closeEditModal();
-});
-
-// Delete Order
-function deleteOrder(orderId, orders) {
-    const confirmed = confirm("Are you sure you want to delete this order?");
-    if (confirmed) {
-        const orderIndex = orders.findIndex((o) => o.order_id === orderId);
-        orders.splice(orderIndex, 1);
-        loadOrderTable();
-    }
-}
-
-// Close Edit Modal
-function closeEditModal() {
-    document.getElementById("editModal").classList.add("hidden");
-}
-
-document.getElementById("editCancel").onclick = closeEditModal;

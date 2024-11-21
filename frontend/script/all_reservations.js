@@ -80,7 +80,7 @@ const populateReservationTable = (reservation) => {
         const editButton = document.createElement("button");
         const deleteButton = document.createElement("button");
         viewButton.textContent = "View";
-        editButton.textContent = "Edit";
+        // editButton.textContent = "Edit";
         deleteButton.textContent = "Delete";
 
         let i = 0;
@@ -170,7 +170,7 @@ const populateReservationTable = (reservation) => {
 
         viewButton.onclick = view;
         deleteButton.onclick = del;
-        editButton.onclick = update;
+        // editButton.onclick = update;
 
         for (let element of [
             reservationID,
