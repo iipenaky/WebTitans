@@ -83,7 +83,7 @@ const populateOrderTable = (order) => {
 
         const view = () => {
             alert(
-                `Order Id: ${order_id}\nCustomer Id: ${customer_id}\nStaff ID ${staff_id}\nOrder Time ${order_date}\nAmout: ${amount}\nStatus: ${status}`,
+                `Order Id: ${order_id}\nCustomer Id: ${customer_id}\nStaff ID: ${staff_id}\nOrder Time: ${order_date}\nAmout: ${amount}\nStatus: ${status}`,
             );
         };
 
