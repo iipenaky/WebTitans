@@ -41,8 +41,8 @@ $orderRoutes = [
 
 function orderDeleteById($id)
 {
-    global $OrderService;
-    $res = $OrderService->GetById($id);
+    global $OrderService; 
+    $res = $OrderService->Delete($id);
     header($res['header']);
     echo json_encode($res['data']);
 

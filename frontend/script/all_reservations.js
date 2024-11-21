@@ -1,5 +1,4 @@
 import { handleAdminLoggedIn } from "./utils.js";
-import { handleEmail, validateFieldsFilled } from "./validation.js";
 handleAdminLoggedIn();
 
 import { handleLogout, handleError } from "./utils.js";
@@ -21,22 +20,6 @@ const getAllReservations = async () => {
     console.log({ data });
     return data;
 };
-
-// const updateReservation = async (reservation) => {
-//     const res = await fetch(`${BASE_URL}/admin/reservations/update`, {
-//         method: "PUT",
-//         body: JSON.stringify(reservation),
-//         credentials: "include",
-//     });
-
-//     if (!res.ok) {
-//         await handleError(res);
-//     }
-
-//     const data = await res.json();
-//     console.log({ data });
-//     return data;
-// };
 
 const deleteReservation = async (reservationId) => {
     const res = await fetch(`${BASE_URL}/admin/reservations/delete/${reservationId}`, {
@@ -77,10 +60,8 @@ const populateReservationTable = (reservation) => {
 
         const actions = document.createElement("td");
         const viewButton = document.createElement("button");
-        // const editButton = document.createElement("button");
         const deleteButton = document.createElement("button");
         viewButton.textContent = "View";
-        // editButton.textContent = "Edit";
         deleteButton.textContent = "Delete";
 
         let i = 0;
@@ -112,65 +93,8 @@ const populateReservationTable = (reservation) => {
             }
         };
 
-        // const update = async () => {
-        //     const modal = document.getElementById("updatereservationForm");
-
-        //     const modalData = Object.fromEntries(new FormData(modal));
-        //     modalData.reservation_id = reservation_id;
-        //     modalData.firstName = first_name;
-        //     modalData.lastName = last_name;
-        //     modalData.email = email;
-        //     modalData.salary = salary;
-        //     modalData.position = position;
-        //     console.log({ modalData });
-
-        //     // Populate form with existing modalData
-        //     for (let key in modalData) {
-        //         const input = document.getElementById(key);
-        //         if (input) {
-        //             input.value = modalData[key];
-        //         }
-        //     }
-
-        //     modal.onsubmit = async (e) => {
-        //         e.preventDefault();
-        //         const fData = Object.fromEntries(new FormData(modal));
-        //         const data = {
-        //             reservation_id: reservation_id,
-        //             first_name: fData.firstName,
-        //             last_name: fData.lastName,
-        //             email: fData.email,
-        //             salary: fData.salary,
-        //             position: fData.position,
-        //         };
-        //         console.log({ data });
-        //         if (
-        //             !validateFieldsFilled(Object.values(data)) ||
-        //             !handleEmail(data.email) ||
-        //             !handleSalary(data.salary)
-        //         ) {
-        //             return;
-        //         }
-
-        //         try {
-        //             const res = await updatereservation(data);
-        //             console.log({ res });
-        //             await refreshreservationTable();
-        //             alert("reservation updated successfully");
-        //             modal.onsubmit = null;
-        //             modal.reset();
-        //         } catch (e) {
-        //             console.error(e);
-        //         }
-        //         closeUpdatereservationModal();
-        //     };
-
-        //     openUpdatereservationModal();
-        // };
-
         viewButton.onclick = view;
         deleteButton.onclick = del;
-        // editButton.onclick = update;
 
         for (let element of [
             reservationID,
@@ -178,7 +102,7 @@ const populateReservationTable = (reservation) => {
             tableID,
             reservationDate,
             numGuests,
-            actions
+            actions,
         ]) {
             element.className = tdClass;
             reservationRow.appendChild(element);
@@ -188,17 +112,6 @@ const populateReservationTable = (reservation) => {
     }
 };
 
-// function openUpdatereservationModal() {
-//     document.getElementById("updatereservationModal").style.display = "block";
-// }
-
-// function closeUpdatereservationModal() {
-//     document.getElementById("updatereservationModal").style.display = "none";
-// }
-
-
-
-// document.getElementById("update-modal-close").onclick = closeUpdatereservationModal;
 
 async function refreshReservationTable() {
     const reservation = await getAllReservations();

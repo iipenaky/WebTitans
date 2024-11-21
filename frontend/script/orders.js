@@ -1,5 +1,4 @@
 import { handleAdminLoggedIn } from "./utils.js";
-import { handleEmail, validateFieldsFilled } from "./validation.js";
 handleAdminLoggedIn();
 
 import { handleLogout, handleError } from "./utils.js";
@@ -64,10 +63,8 @@ const populateOrderTable = (order) => {
 
         const actions = document.createElement("td");
         const viewButton = document.createElement("button");
-        // const editButton = document.createElement("button");
         const deleteButton = document.createElement("button");
         viewButton.textContent = "View";
-        // editButton.textContent = "Edit";
         deleteButton.textContent = "Delete";
 
         let i = 0;
@@ -99,60 +96,8 @@ const populateOrderTable = (order) => {
             }
         };
 
-        // const update = async () => {
-        //     const modal = document.getElementById("updateorderForm");
-
-        //     const modalData = Object.fromEntries(new FormData(modal));
-        //     modalData.order_id = order_id;
-        //     modalData.firstName = first_name;
-        //     modalData.lastName = last_name;
-        //     modalData.email = email;
-        //     console.log({ modalData });
-
-        //     // Populate form with existing modalData
-        //     for (let key in modalData) {
-        //         const input = document.getElementById(key);
-        //         if (input) {
-        //             input.value = modalData[key];
-        //         }
-        //     }
-
-        //     modal.onsubmit = async (e) => {
-        //         e.preventDefault();
-        //         const fData = Object.fromEntries(new FormData(modal));
-        //         const data = {
-        //             order_id: order_id,
-        //             first_name: fData.firstName,
-        //             last_name: fData.lastName,
-        //             email: fData.email,
-        //         };
-        //         console.log({ data });
-        //         if (
-        //             !validateFieldsFilled(Object.values(data)) ||
-        //             !handleEmail(data.email)
-        //         ) {
-        //             return;
-        //         }
-
-        //         try {
-        //             const res = await updateorder(data);
-        //             console.log({ res });
-        //             await refreshorderTable();
-        //             alert("Cutomer updated successfully");
-        //             modal.onsubmit = null;
-        //             modal.reset();
-        //         } catch (e) {
-        //             console.error(e);
-        //         }
-        //         closeUpdateorderModal();
-        //     };
-
-        //     openUpdateorderModal();
-        // };
-
         viewButton.onclick = view;
         deleteButton.onclick = del;
-        // editButton.onclick = update;
 
         for (let element of [
             orderId,
@@ -172,17 +117,6 @@ const populateOrderTable = (order) => {
 };
 
 
-
-// function openUpdateorderModal() {
-//     document.getElementById("updateorderModal").style.display = "block";
-// }
-
-// function closeUpdateorderModal() {
-//     document.getElementById("updateorderModal").style.display = "none";
-// }
-
-
-// document.getElementById("update-modal-close").onclick = closeUpdateorderModal;
 
 async function refreshOrderTable() {
     const order = await getAllOrders();
