@@ -8,7 +8,7 @@ export const writeToSessionStorage = (key, value) => {
 };
 
 export const readFromSessionStorage = (key) => {
-    return sessionStorage.getItem(key);
+    return JSON.parse(sessionStorage.getItem(key));
 };
 
 export const writeToCookieStorage = (key, value) => {
@@ -43,18 +43,39 @@ export const check401 = (res) => {
 };
 
 export const handleAdminLoggedIn = () => {
-    fetch(`${BASE_URL}/admin/info`)
+    fetch(`${BASE_URL}/admin/info`, {
+        credentials: "include",
+    })
         .then((res) => {
-            if (res.status == 401) sendBackTo();
+            if (res.status == 401) {
+                logout();
+                sendBackTo();
+            }
         })
         .catch((e) => console.log({ e }));
-    if (readFromSessionStorage("isAdminLoggedIn") !== "true") {
+    if (readFromSessionStorage("isAdminLoggedIn") !== true) {
         sendBackTo();
     }
 };
 
+export const htmlDateAndTimeTomysqlDatetime = (date, time) => {
+    const [year, month, day] = date.split("-");
+    const [hours, minutes] = time.split(":");
+    return `${year}-${month}-${day} ${hours}:${minutes}:00`;
+};
+
 export const handleUserLoggedIn = (redirect = "index.html") => {
-    if (readFromSessionStorage("isUserLoggedIn") !== "true") {
+    fetch(`${BASE_URL}/user/info`, {
+        credentials: "include",
+    })
+        .then((res) => {
+            if (res.status == 401) {
+                logout();
+                sendBackTo("./login.html");
+            }
+        })
+        .catch((e) => console.log({ e }));
+    if (readFromSessionStorage("isUserLoggedIn") !== true) {
         sendBackTo(redirect);
     }
 };
@@ -82,6 +103,7 @@ export const logout = async (redirect = "index.html") => {
     const json = await req.json();
     console.log({ json });
 
+    sessionStorage.removeItem("user");
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("isAdminLoggedIn");
     sessionStorage.removeItem("isUserLoggedIn");

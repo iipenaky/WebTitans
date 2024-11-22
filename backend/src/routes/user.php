@@ -64,6 +64,9 @@ function userHandler($verb, $subroute)
             destroySession();
             break;
         case 'info':
+            if (! checkAuth()) {
+                break;
+            }
             header('HTTP/1.1 200 OK');
             echo json_encode(['data' => 'User route']);
             break;

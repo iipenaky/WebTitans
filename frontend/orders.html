@@ -8,6 +8,8 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer type="module" src="./script/customer.js"></script>
     <style>
       body {
         display: flex;
@@ -53,44 +55,42 @@
           <ul class="flex space-x-6 text-white">
             <li>
               <a
-                href="index.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="about.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >About</a
-              >
-            </li>
-            <li>
-              <a
                 href="menu.html"
                 class="font-bold hover:text-red-600 transition duration-300"
                 >Menu</a
               >
             </li>
-            <!-- <li>
+            <li>
               <a
                 href="reservations.html"
                 class="font-bold hover:text-red-600 transition duration-300"
-                >Make Reservation</a
               >
-            </li>             -->
-            <li>
-              <a
-                href="team.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >Team</a
-              >
+                Make Reservation
+              </a>
             </li>
             <li>
-              <a id="logout" href="#0" class="font-bold hover:text-red-600 transition duration-300">
+              <a
+                href="orders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
+                Orders/Reservations
+              </a>
+            </li>
+            <li>
+              <a
+                id="logout"
+                href="#0"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
                 Log out
               </a>
             </li>
+            <!--Profile Picture-->
+            <div class="nav-center">
+              <a href="user_dashboard.html"
+                ><img src="assets/cookies.jpeg"
+              /></a>
+            </div>
           </ul>
         </nav>
       </div>

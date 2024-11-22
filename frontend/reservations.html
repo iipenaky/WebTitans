@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
+    <script type="module" defer src="./script/reservation.js"></script>
   </head>
   <body
     style="
@@ -18,26 +19,15 @@
       background-size: cover;
     "
   >
-    <header class="bg-black p-4">
+    <header class="bg-black p-4 fixed top-0 w-full z-10">
       <div class="container mx-auto flex justify-between items-center">
-        <img src="Untitled design.png" alt="Logo" class="logo w-50 h-50" />
-
+        <img
+          src="./assets/Untitled design.png"
+          alt="Logo"
+          class="logo w-50 h-50"
+        />
         <nav>
           <ul class="flex space-x-6 text-white">
-            <li>
-              <a
-                href="index.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="about.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >About</a
-              >
-            </li>
             <li>
               <a
                 href="menu.html"
@@ -46,28 +36,42 @@
               >
             </li>
             <li>
-              <a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">
+              <a
+                href="reservations.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
+                Make Reservation
+              </a>
+            </li>
+            <li>
+              <a
+                href="orders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
                 Orders/Reservations
               </a>
             </li>
             <li>
               <a
-                href="team.html"
+                id="logout"
+                href="#0"
                 class="font-bold hover:text-red-600 transition duration-300"
-                >Team</a
               >
-            </li>
-            <li>
-              <a id="logout" href="#0" class="font-bold hover:text-red-600 transition duration-300">
                 Log out
               </a>
             </li>
+            <!--Profile Picture-->
+            <div class="nav-center">
+              <a href="user_dashboard.html"
+                ><img src="assets/cookies.jpeg"
+              /></a>
+            </div>
           </ul>
         </nav>
       </div>
     </header>
 
-    <main class="container mx-auto mt-8">
+    <main class="container mx-auto mt-20">
       <div class="form-container">
         <h1 class="text-4xl font-bold mb-4">Make a Reservation</h1>
 
@@ -110,6 +114,7 @@
               type="number"
               id="guests"
               name="guests"
+              style="color: black"
               min="1"
               max="20"
               class="border border-gray-300 rounded-md p-2 w-full"
@@ -123,14 +128,27 @@
             <label for="guests" class="block text-lg font-medium"
               >Table :</label
             >
-            <input
-              type="week"
-              id="guests"
-              name="guests"
-              min="1"
-              max="20"
+            <select
+              id="table-select"
+              style="color: black"
+              name="table"
               class="border border-gray-300 rounded-md p-2 w-full"
-            />
+            ></select>
+            <p id="guestsError" class="text-red-500 hidden">
+              Please select a valid number of guests (1-20).
+            </p>
+          </div>
+
+          <div class="mb-4">
+            <label for="guests" class="block text-lg font-medium"
+              >Special Requests :</label
+            >
+            <textarea
+              id="special-requests"
+              style="color: black"
+              name="special_requests"
+              class="border border-gray-300 rounded-md p-2 w-full"
+            ></textarea>
             <p id="guestsError" class="text-red-500 hidden">
               Please select a valid number of guests (1-20).
             </p>

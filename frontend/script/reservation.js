@@ -1,37 +1,82 @@
 import { BASE_URL } from "./constants.js";
-import { sendBackTo, readFromSessionStorage } from "./utils.js";
+import {
+    sendBackTo,
+    readFromSessionStorage,
+    handleUserLoggedIn,
+    check401,
+    handleError,
+    htmlDateAndTimeTomysqlDatetime,
+} from "./utils.js";
 
-const fullnameElem = document.getElementById("name");
-const email = document.getElementById("email");
 const date = document.getElementById("date");
 const time = document.getElementById("time");
 const guests = document.getElementById("guests");
 const reservationform = document.getElementById("reservation-form");
 
-(async function () {
-    //if (readFromSessionStorage("isLoggedIn") !== "true") {
-    //    alert("Please log in to make a reservation");
-    //    sendBackTo();
-    //}
-})();
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
+handleUserLoggedIn();
+
+async function getAvailableTables() {
+    const res = await fetch(`${BASE_URL}/user/tables/available`, {
+        method: "GET",
+        credentials: "include",
+    });
+
+    if (!res.ok) {
+        console.log({ res });
+        check401(res);
+        handleError(res);
+    }
+
+    const json = await res.json();
+    console.log({ json });
+    return json;
+}
+
+function populateTableSelect(tables) {
+    const tableSelect = document.getElementById("table-select");
+    for (const table of tables) {
+        const option = document.createElement("option");
+        option.value = table.table_id;
+        option.textContent = `Table ${table.table_id} - Seats ${table.seating_capacity} - ${table.location}`;
+        tableSelect.appendChild(option);
+    }
+}
 
 async function reserveUser(e) {
     e.preventDefault();
     if (!validateReservationForm()) return;
-    const formData = new FormData(reservationform);
+    const userInfo = readFromSessionStorage("user");
+    console.log({ userInfo });
+    if (!userInfo) {
+        alert("Please login to reserve a table");
+        console.log("User not logged in");
+        return;
+    }
+    let formData = Object.fromEntries(new FormData(reservationform));
+    const payload = {
+        customer_id: userInfo.customer_id,
+        table_id: formData.table,
+        reservation_datetime: htmlDateAndTimeTomysqlDatetime(formData.date, formData.time),
+        number_of_guests: formData.guests,
+        special_requests: formData.special_requests,
+    };
+    console.log({ payload });
 
-    const req = await fetch(`${BASE_URL}/user/reserve`, {
+    const req = await fetch(`${BASE_URL}/user/reserve/add`, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify(payload),
         credentials: "include",
     });
 
     if (!req.ok) {
         console.log({ req });
-        if (req.status === 401) {
-            sendBackTo();
-        }
-        throw new Error("Failed to reserve table");
+        check401(req);
+        handleError(req);
+        return;
     }
 
     const json = await req.json();
@@ -45,30 +90,16 @@ async function reserveUser(e) {
 function validateReservationForm() {
     let isValid = true;
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const guests = document.getElementById("guests").value;
+    const table = document.getElementById("table-select").value;
 
     // Clear previous error messages
-    document.getElementById("nameError").classList.add("hidden");
-    document.getElementById("emailError").classList.add("hidden");
     document.getElementById("dateError").classList.add("hidden");
     document.getElementById("timeError").classList.add("hidden");
     document.getElementById("guestsError").classList.add("hidden");
-
-    // Validate Name
-    if (name === "") {
-        document.getElementById("nameError").classList.remove("hidden");
-        isValid = false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        document.getElementById("emailError").classList.remove("hidden");
-        isValid = false;
-    }
+    //document.getElementById("tableError").classList.add("hidden");
 
     if (date === "") {
         document.getElementById("dateError").classList.remove("hidden");
@@ -85,13 +116,25 @@ function validateReservationForm() {
         isValid = false;
     }
 
-    if (isValid) {
-        alert("Your reservation has been submitted successfully!");
-    } else {
-        alert("Please fill out all  fields correctly.");
+    if (!isValid) {
+        alert("Please fill out all fields correctly.");
     }
+    //if (isValid) {
+    //    alert("Your reservation has been submitted successfully!");
+    //} else {
+    //    alert("Please fill out all  fields correctly.");
+    //}
 
     return isValid;
 }
+
+(async function () {
+    const tables = await getAvailableTables();
+    populateTableSelect(tables);
+    if (tables.length === 0) {
+        alert("No tables available for reservation");
+        document.location.href = "./menu.html";
+    }
+})();
 
 reservationform.onsubmit = reserveUser;

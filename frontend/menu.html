@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
+    <script defer type="module" src="./script/menu.js"></script>
   </head>
   <body
     style="
@@ -30,20 +31,6 @@
           <ul class="flex space-x-6 text-white">
             <li>
               <a
-                href="index.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="about.html"
-                class="font-bold hover:text-red-600 transition duration-300"
-                >About</a
-              >
-            </li>
-            <li>
-              <a
                 href="menu.html"
                 class="font-bold hover:text-red-600 transition duration-300"
                 >Menu</a
@@ -51,25 +38,34 @@
             </li>
             <li>
               <a
-                href="team.html"
+                href="reservations.html"
                 class="font-bold hover:text-red-600 transition duration-300"
-                >Team</a
               >
-            </li>
-            <!-- Sign up when not logged in, and logout when logged in-->
-            <li>
-              <a id="logout" href="#0" class="font-bold hover:text-red-600 transition duration-300">
-                Log out
+                Make Reservation
               </a>
             </li>
             <li>
-              <a href="orders.html" class="font-bold hover:text-red-600 transition duration-300">
+              <a
+                href="orders.html"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
                 Orders/Reservations
               </a>
             </li>
-            <!--Profile Picture--> 
-            <div class="nav-center">                
-                <a href="user_dashboard.html"><img src="assets/cookies.jpeg"></a>
+            <li>
+              <a
+                id="logout"
+                href="#0"
+                class="font-bold hover:text-red-600 transition duration-300"
+              >
+                Log out
+              </a>
+            </li>
+            <!--Profile Picture-->
+            <div class="nav-center">
+              <a href="user_dashboard.html"
+                ><img src="assets/cookies.jpeg"
+              /></a>
             </div>
           </ul>
         </nav>

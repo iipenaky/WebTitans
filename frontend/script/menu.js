@@ -3,6 +3,10 @@ import { readFromSessionStorage, writeToSessionStorage, handleUserLoggedIn } fro
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 let reservations = JSON.parse(localStorage.getItem("reservations")) || [];
 
+import { handleLogout } from "./utils.js";
+const logoutButton = document.getElementById("logout");
+logoutButton.onclick = handleLogout;
+
 function openOrderForm(foodName, foodImage) {
     document.getElementById("formTitle").innerText = foodName;
     document.getElementById("formImage").src = foodImage;
@@ -152,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function checkLoginStatus() {
     const isLoggedIn = readFromSessionStorage("isLoggedIn");
-    return isLoggedIn === "true";
+    return isLoggedIn === true;
 }
 
 function validateForm() {
