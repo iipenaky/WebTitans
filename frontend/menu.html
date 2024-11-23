@@ -91,37 +91,7 @@
           <img id="formImage" src="" alt="" class="max-w-full h-auto" />
         </div>
         <form id="orderDetails" onsubmit="return validateForm()">
-          <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-white"
-              >Name:</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              class="border border-gray-300 rounded-md p-2 w-full"
-            />
-            <p id="nameError" class="text-red-500 text-sm hidden">
-              Name is required.
-            </p>
-          </div>
-          <div class="mb-4">
-            <label
-              for="phoneNumber"
-              class="block text-sm font-medium text-white"
-              >Phone Number:</label
-            >
-            <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              pattern="[0-9]{10}"
-            />
-            <p id="phoneError" class="text-red-500 text-sm hidden">
-              A valid 10-digit phone number is required.
-            </p>
-          </div>
+
           <div class="mb-4">
             <label for="quantity" class="block text-sm font-medium text-white"
               >Quantity:</label
@@ -137,26 +107,7 @@
               Quantity is required and must be at least 1.
             </p>
           </div>
-          <div class="mb-4">
-            <label
-              for="paymentMethod"
-              class="block text-sm font-medium text-white"
-              >Payment Method:</label
-            >
-            <select
-              id="paymentMethod"
-              name="paymentMethod"
-              class="border border-white rounded-md p-2 w-full"
-            >
-              <option value="">Select a payment method</option>
-              <option value="credit-card">Credit Card</option>
-              <option value="debit-card">Debit Card</option>
-              <option value="paypal">PayPal</option>
-            </select>
-            <p id="paymentError" class="text-red-500 text-sm hidden">
-              Payment method is required.
-            </p>
-          </div>
+
           <div class="mb-4">
             <label for="orderType" class="block text-sm font-medium text-white"
               >Order Type:</label
