@@ -1,17 +1,18 @@
-drop database if exists webtech_fall2024_madiba_quansah;
--- drop table if exists feedback;
--- drop table if exists payment;
--- drop table if exists order_details;
--- drop table if exists `order`;
--- drop table if exists menu_item_inventory;
--- drop table if exists inventory;
--- drop table if exists menu_item;
--- drop table if exists staff;
--- drop table if exists reservations;
--- drop table if exists customer;
--- drop table if exists `table`;
--- drop table if exists admin;
-CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
+-- drop database if exists webtech_fall2024_madiba_quansah;
+--  drop table if exists feedback;
+--  drop table if exists payment;
+--  drop table if exists order_details;
+--  drop table if exists `order`;
+--  drop table if exists menu_item_inventory;
+--  drop table if exists inventory;
+--  drop table if exists menu_item;
+--  drop table if exists staff;
+--  drop table if exists reservations;
+--  drop table if exists customer;
+--  drop table if exists `table`;
+--  drop table if exists admin;
+--  drop table if exists secret_token;
+-- CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
 
 USE webtech_fall2024_madiba_quansah;
 
@@ -68,6 +69,7 @@ CREATE table if not exists menu_item (
   description varchar(40) NOT NULL,
   price double(10, 2) NOT NULL,
   category varchar(40),
+  image varchar(255),
   CHECK (price > 0)
 );
 
@@ -279,68 +281,80 @@ INSERT INTO
     name,
     description,
     price,
-    category
+    category,
+    image
   )
 VALUES
   (
     'Margherita Pizza',
     'Tomato and mozzarella',
     12.99,
-    'Main Course'
+    'Main Course',
+    "./assets/margpizza.jpg"
   ),
   (
     'Caesar Salad',
     'Lettuce with Caesar dressing',
     8.50,
-    'Appetizer'
+    'Appetizer',
+    "./assets/caesar.jpg"
   ),
   (
     'Chocolate Cake',
     'Rich dessert',
     6.99,
-    'Dessert'
+    'Dessert',
+    "./assests/choccake.jpg"
   ),
   (
     'Steak',
     'Grilled to perfection',
     25.99,
-    'Main Course'
+    'Main Course',
+    "./assets/steak.jpg"
   ),
   (
     'Pasta Alfredo',
     'Creamy sauce with chicken',
     15.50,
-    'Main Course'
+    'Main Course',
+    "./assets/alfredo.jpg"
   ),
   (
     'Garlic Bread',
     'Toasted with garlic butter',
     3.99,
-    'Appetizer'
+    'Appetizer',
+    "./assets/gbread.jpg"
   ),
   (
     'Cheeseburger',
     'Served with fries',
     10.99,
-    'Main Course'
+    'Main Course',
+        "./assets/cheesecake.jpeg"
+
   ),
   (
     'Tiramisu',
     'Coffee-flavored dessert',
     7.50,
-    'Dessert'
+    'Dessert',
+    "./assets/tiramisu.jpg"
   ),
   (
     'Wine Glass',
     'Premium red wine',
     8.99,
-    'Beverage'
+    'Beverage',
+    "./assets/wine.jpg"
   ),
   (
     'Iced Tea',
     'Chilled and refreshing',
     2.99,
-    'Beverage'
+    'Beverage',
+    "./assets/icedtea.jpg"
   );
 
 -- 5. `inventory`
