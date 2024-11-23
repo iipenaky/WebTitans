@@ -1,6 +1,5 @@
 <?php
 
-
 require_once __DIR__.'/../db/db.php';
 
 class AdminService
@@ -27,7 +26,7 @@ class AdminService
         return count($res) >= 1;
     }
 
-    public function SignUp($username, $password)
+    public function SignUp($username, $password, $token)
     {
         if ($this->doesUserExist($username)) {
             return [
@@ -38,6 +37,15 @@ class AdminService
 
         $hash = password_hash($password, PASSWORD_BCRYPT);
         global $db;
+
+        $secret_token = $db->query('select token from secret_token')->fetchColumn();
+        if ($secret_token != $token) {
+            return [
+                'header' => 'HTTP/1.1 401 Unauthorized',
+                'data' => ['error' => 'Invalid token'],
+            ];
+        }
+
         $stmt = $db->prepare('insert into admin (username, passhash) values (:uname, :hash);');
         $stmt->bindParam(':uname', $username);
         $stmt->bindParam(':hash', $hash);
