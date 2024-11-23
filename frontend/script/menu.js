@@ -211,3 +211,47 @@ function validateForm() {
 
     return isValid;
 }
+
+///////////////////////// Order Form /////////////////////////
+async function submitOrder() {
+    const foodName = document.getElementById("formTitle").innerText;
+    const quantity = document.getElementById("quantity").value;
+    const paymentMethod = document.getElementById("paymentMethod").value;
+    const orderType = document.getElementById("orderType").value;
+
+    // Example data - Replace with actual customer and food IDs
+    const customerId = 1; // Replace with logged-in user ID
+    const menuItemId = 1; // Map `foodName` to actual ID from the menu
+
+    try {
+        const response = await fetch('orderSubmit.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer_id: customerId,
+                menu_item_id: menuItemId,
+                quantity: quantity,
+                payment_method: paymentMethod,
+                order_type: orderType,
+            }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Order placed successfully!');
+            closeOrderForm();
+            updateOrdersTable(); // Refresh order pages
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        alert('Error placing order: ' + error.message);
+    }
+}
+
+// Attach event listener to the form submit
+document.getElementById("orderDetails").addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitOrder();
+});
