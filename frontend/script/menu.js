@@ -101,49 +101,6 @@ function closeOrderForm() {
 // Attach to the global window object for inline attributes (optional if needed)
 window.closeOrderForm = closeOrderForm;
 
-// Submit an order to the backend
-async function submitOrder() {
-    const foodName = document.getElementById("formTitle").innerText;
-    const quantity = document.getElementById("quantity").value;
-    const paymentMethod = document.getElementById("paymentMethod").value;
-    const orderType = document.getElementById("orderType").value;
-
-    // Example: Replace with the actual user and menu data
-    const customerId = sessionStorage.getItem("user_id"); // Retrieve from session storage
-    const menuItemId = await getMenuItemIdByName(foodName);
-
-    if (!menuItemId || !customerId) {
-        alert("Error: Invalid food selection or user not logged in.");
-        return;
-    }
-
-    try {
-        const response = await fetch("orderSubmit.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                customer_id: customerId,
-                menu_item_id: menuItemId,
-                quantity: quantity,
-                payment_method: paymentMethod,
-                order_type: orderType,
-            }),
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            alert("Order placed successfully!");
-            closeOrderForm();
-            await refreshOrdersTable(); // Refresh the orders table
-        } else {
-            throw new Error(result.message);
-        }
-    } catch (error) {
-        alert("Error placing order: " + error.message);
-    }
-}
-
 // Map food names to menu item IDs (replace with backend call if needed)
 async function getMenuItemIdByName(foodName) {
     // Example mapping (use backend endpoint for dynamic mapping)
