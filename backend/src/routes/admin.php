@@ -17,9 +17,9 @@ $AdminService = new AdminService;
 function signUp($data)
 {
     global $AdminService;
-    $fields = ['username', 'password', 'token'];
+    $fields = ['username', 'password'];
     if (validateData($fields, $data, 'sign up')) {
-        $res = $AdminService->SignUp($data['username'], $data['password'], $data['token']);
+        $res = $AdminService->SignUp($data['username'], $data['password']);
         header($res['header']);
         echo json_encode($res['data']);
     }
@@ -98,6 +98,12 @@ function adminHandler($verb, $subroute)
                 break;
             }
             customersHandler($verb, $subroute);
+            break;
+        case 'payments':
+            if (! checkAuth()) {
+                break;
+            }
+            paymentsHandler($verb, $subroute);
             break;
         case 'orders':
             if (! checkAuth()) {
