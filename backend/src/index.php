@@ -141,6 +141,7 @@ try {
             break;
         default:
             header('HTTP/1.1 404 Not Found');
+            echo json_encode(['error' => 'Route not found']);
             exit();
             break;
     }

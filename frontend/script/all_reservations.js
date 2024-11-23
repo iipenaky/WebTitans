@@ -36,11 +36,10 @@ const deleteReservation = async (reservationId) => {
     return data;
 };
 
-
 const populateReservationTable = (reservation) => {
     const reservationTable = document.getElementById("reservation-table");
     for (let r of reservation) {
-        let { reservation_id, customer_id, table_id, reservation_datetime, number_of_guests, special_requests} = r;
+        let { reservation_id, customer_id, table_id, reservation_datetime, number_of_guests, special_requests } = r;
         const tdClass = "border px-4 py-2";
 
         const reservationRow = document.createElement("tr");
@@ -77,7 +76,7 @@ const populateReservationTable = (reservation) => {
 
         const view = () => {
             alert(
-                `Reservation ID: ${reservation_id}\nCustomer ID ${customer_id}\nTable ID: ${table_id}\nReservation Date: ${reservation_datetime}\nNumber of Guests: ${number_of_guests}\nSpecial Requests: $${special_requests}`,
+                `Reservation ID: ${reservation_id}\nCustomer ID ${customer_id}\nTable ID: ${table_id}\nReservation Date: ${reservation_datetime}\nNumber of Guests: ${number_of_guests}\nSpecial Requests: ${special_requests}`,
             );
         };
 
@@ -96,14 +95,7 @@ const populateReservationTable = (reservation) => {
         viewButton.onclick = view;
         deleteButton.onclick = del;
 
-        for (let element of [
-            reservationID,
-            customerID,
-            tableID,
-            reservationDate,
-            numGuests,
-            actions,
-        ]) {
+        for (let element of [reservationID, customerID, tableID, reservationDate, numGuests, actions]) {
             element.className = tdClass;
             reservationRow.appendChild(element);
         }
@@ -111,7 +103,6 @@ const populateReservationTable = (reservation) => {
         reservationTable.children[1].appendChild(reservationRow);
     }
 };
-
 
 async function refreshReservationTable() {
     const reservation = await getAllReservations();

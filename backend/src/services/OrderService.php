@@ -29,7 +29,7 @@ inner join menu_item on
 	order_details.menu_item_id = menu_item.menu_item_id
 inner join customer on
 	`order`.customer_id = customer.customer_id
-order by order_id asc;
+        order by order_id asc;
 SQL;
         global $db;
         $stmt = $db->prepare($query);
@@ -99,6 +99,7 @@ SQL;
 customer_id,
 `order`.order_id,
 staff_id,
+menu_item.price,
             name,
             order_time,
             total_amount,
@@ -112,7 +113,7 @@ staff_id,
         inner join menu_item on
             order_details.menu_item_id = menu_item.menu_item_id
         where 
-            customer_id = ?;
+            customer_id = ? and status <> "Cancelled";
 SQL;
         $stmt = $db->prepare($query);
         $stmt->bindParam(1, $id);
@@ -232,6 +233,7 @@ SQL;
         $stmt = $db->prepare(
             'UPDATE `order` SET customer_id = :cid, staff_id = :sid, total_amount = :amnt, status = :status WHERE order_id = :id'
         );
+
         $stmt->bindParam(':id', $order['order_id']);
         $stmt->bindParam(':cid', $order['customer_id']);
         $stmt->bindParam(':sid', $order['staff_id']);
