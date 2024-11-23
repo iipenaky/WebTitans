@@ -88,7 +88,7 @@ class ReservationService
 
         return [
             'header' => 'HTTP/1.1 201 Created',
-            'data' => ['message' => 'Reservation successfully updated', 'reservation' => $this->GetById($db->lastInsertId())['data']],
+            'data' => ['message' => 'Reservation successfully added', 'reservation' => $this->GetById($db->lastInsertId())['data']],
         ];
     }
 

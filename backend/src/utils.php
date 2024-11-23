@@ -31,12 +31,12 @@ function mysql_datetime_from_mystring($date)
 function any($array, $func)
 {
     foreach ($array as $item) {
-        if (! $func($item)) {
-            return false;
+        if ($func($item)) {  // Removed ! operator - we want to return true if ANY item matches
+            return true;
         }
     }
 
-    return true;
+    return false;
 }
 
 function slice($array, $start = 1, $end = null)
@@ -84,10 +84,8 @@ function handleBody($func)
 
 function isAnyEmpty($array)
 {
-    return any($array, function ($item) {
-        if (gettype($item) == 'string') {
-            return empty($item);
-        }
+    return any(array_values($array), function ($item) {
+        return empty($item);
     });
 }
 
