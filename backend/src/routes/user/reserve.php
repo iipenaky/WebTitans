@@ -4,7 +4,7 @@ require_once __DIR__.'/../../services/ReservationService.php';
 require_once __DIR__.'/../../utils.php';
 
 $ReservationService = new ReservationService;
-$reserveFields = ['reservation_id', 'customer_id', 'table_id', 'reservation_datetime', 'number_of_guests', 'special_requests'];
+$reserveFields = ['reservation_id', 'customer_id', 'table_id', 'reservation_datetime', 'number_of_guests'];
 
 function validateNewReservation($data)
 {
@@ -48,9 +48,6 @@ function makeReservation($data)
 {
     global $ReservationService;
     if (! validateNewReservation($data)) {
-        header('HTTP/1.1 400 Bad Request');
-        echo json_encode(['error' => 'Invalid reservation data']);
-
         return;
     }
     $res = $ReservationService->Add($data);

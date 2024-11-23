@@ -62,7 +62,7 @@ async function reserveUser(e) {
         table_id: formData.table,
         reservation_datetime: htmlDateAndTimeTomysqlDatetime(formData.date, formData.time),
         number_of_guests: formData.guests,
-        special_requests: formData.special_requests,
+        special_requests: formData.special_requests || "N\\A",
     };
     console.log({ payload });
 

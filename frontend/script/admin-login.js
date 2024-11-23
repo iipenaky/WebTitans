@@ -29,7 +29,6 @@ async function loginUser(e) {
     const msg = json.message;
     writeToSessionStorage("isAdminLoggedIn", "true");
     loginForm.reset();
-    alert(msg);
     document.location.href = "./dashboard.html";
 }
 

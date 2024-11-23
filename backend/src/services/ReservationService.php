@@ -44,7 +44,7 @@ class ReservationService
     {
         if (mysql_datetime(time()) > mysql_datetime_from_mystring($reservation['reservation_datetime'])) {
             return [
-                'header' => 'HTTP/1.1 500 Internal Server Error',
+                'header' => 'HTTP/1.1 400 Internal Server Error',
                 'data' => ['error' => 'Reservation date and time must be in the future'],
             ];
 

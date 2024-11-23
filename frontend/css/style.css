@@ -3,14 +3,14 @@ html {
 }
 
 /* Profile Picture */
-.nav-center a img{
+#ppic,
+.nav-center a img {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  object-fit:fill;
+  object-fit: fill;
   margin-right: 30px;
 }
-
 
 h2 {
   /* Style for general headings. */
