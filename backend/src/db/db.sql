@@ -68,7 +68,6 @@ CREATE table if not exists menu_item (
   description varchar(40) NOT NULL,
   price double(10, 2) NOT NULL,
   category varchar(40),
-  availability_status bool,
   CHECK (price > 0)
 );
 
@@ -115,36 +114,14 @@ CREATE table if not exists order_details (
   FOREIGN KEY (menu_item_id) REFERENCES menu_item (menu_item_id)
 );
 
-CREATE table if not exists payment (
-  payment_id int AUTO_INCREMENT PRIMARY KEY,
-  order_id int NOT NULL,
-  payment_method varchar(40),
-  payment_time datetime DEFAULT (CURRENT_TIMESTAMP()),
-  amount decimal(10, 2) NOT NULL,
-  `status` varchar(40),
-  FOREIGN KEY (order_id) REFERENCES `order` (order_id),
-  CHECK (`status` IN ('Completed', 'Pending', 'Cancelled'))
-);
-
-CREATE table if not exists feedback (
-  feedback_id int AUTO_INCREMENT PRIMARY KEY,
-  customer_id int NOT NULL,
-  order_id int NOT NULL,
-  rating int NOT NULL,
-  comments varchar(255),
-  feedback_date date NOT NULL DEFAULT (current_date()),
-  FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
-  FOREIGN KEY (order_id) REFERENCES `order` (order_id),
-  CHECK (
-    rating >= 1
-    AND rating <= 5
-  )
-);
-
 create table if not exists admin (
   admin_id int AUTO_INCREMENT PRIMARY KEY,
   username varchar(100) not null,
   passhash varchar(255) not null
+);
+
+create table if not exists secret_token (
+token varchar(255) not null
 );
 
 
@@ -302,79 +279,68 @@ INSERT INTO
     name,
     description,
     price,
-    category,
-    availability_status
+    category
   )
 VALUES
   (
     'Margherita Pizza',
     'Tomato and mozzarella',
     12.99,
-    'Main Course',
-    TRUE
+    'Main Course'
   ),
   (
     'Caesar Salad',
     'Lettuce with Caesar dressing',
     8.50,
-    'Appetizer',
-    TRUE
+    'Appetizer'
   ),
   (
     'Chocolate Cake',
     'Rich dessert',
     6.99,
-    'Dessert',
-    TRUE
+    'Dessert'
   ),
   (
     'Steak',
     'Grilled to perfection',
     25.99,
-    'Main Course',
-    TRUE
+    'Main Course'
   ),
   (
     'Pasta Alfredo',
     'Creamy sauce with chicken',
     15.50,
-    'Main Course',
-    TRUE
+    'Main Course'
   ),
   (
     'Garlic Bread',
     'Toasted with garlic butter',
     3.99,
-    'Appetizer',
-    TRUE
+    'Appetizer'
   ),
   (
     'Cheeseburger',
     'Served with fries',
     10.99,
-    'Main Course',
-    TRUE
+    'Main Course'
   ),
   (
     'Tiramisu',
     'Coffee-flavored dessert',
     7.50,
-    'Dessert',
-    TRUE
+    'Dessert'
   ),
   (
     'Wine Glass',
     'Premium red wine',
     8.99,
-    'Beverage',
-    TRUE
+    'Beverage'
   ),
   (
     'Iced Tea',
     'Chilled and refreshing',
     2.99,
-    'Beverage',
-    TRUE
+    'Beverage'
   );
 
 -- 5. `inventory`
@@ -408,3 +374,8 @@ VALUES
   (10, 10, 1);
 
 INSERT INTO admin (username, passhash) values ("madiba", "$2y$10$Wb6MPRNp0oO7/eM81Ma8HO4kVapyl0o.O1vkvSp3/IiWYW5oGsjyW");
+
+INSERT INTO staff (first_name,last_name,`position`,email,hire_date,salary,passhash) VALUES
+	 ('Madiba','Hudson-Quansah','Chef','mhquansah@gmail.com','2024-11-10',7500.3300,'$2y$10$QotuIQTHHiwOtYhj1U8i/OmcLRyp0WBBWp7QmpodIxh9w//o9n3Uy'),
+	 ('Dusty','Cole','Waiter','fakedata80364@gmail.com','2024-11-23',144.0000,'$2y$10$b5kVY6WfPaAvOgqxzvMv8uOCscPdUS6w3PkkzHOYfDjWdQxSdma26'),
+	 ('Madiba','Hudson-Quansah','Waiter','mhq@gmail.com','2024-11-20',40000.0000,'$2y$10$Jjx8spFXwRIiNaoXUF52pO0Cn8fjm6xOtLqQd.J0xMRIozqc6TQKe');
