@@ -17,9 +17,9 @@ $AdminService = new AdminService;
 function signUp($data)
 {
     global $AdminService;
-    $fields = ['username', 'password'];
+    $fields = ['username', 'password', 'token'];
     if (validateData($fields, $data, 'sign up')) {
-        $res = $AdminService->SignUp($data['username'], $data['password']);
+        $res = $AdminService->SignUp($data['username'], $data['password'], $data['token']);
         header($res['header']);
         echo json_encode($res['data']);
     }
