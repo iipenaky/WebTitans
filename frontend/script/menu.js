@@ -12,11 +12,17 @@ function openOrderForm(foodName, foodImage) {
     document.getElementById("orderForm").style.display = "block";
 }
 
+// Attach to the global window object for inline attributes (optional if needed)
+window.openOrderForm = openOrderForm;
+
 // Close the order form
 function closeOrderForm() {
     document.getElementById("orderForm").style.display = "none";
     document.getElementById("orderDetails").reset();
 }
+
+// Attach to the global window object for inline attributes (optional if needed)
+window.closeOrderForm = closeOrderForm;
 
 // Submit an order to the backend
 async function submitOrder() {
@@ -98,13 +104,23 @@ async function refreshOrdersTable() {
     }
 }
 
+// Add event listeners to "Order Now" buttons
+document.addEventListener("DOMContentLoaded", () => {
+    const orderButtons = document.querySelectorAll("[data-order-button]");
+    orderButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const foodName = button.getAttribute("data-food-name");
+            const foodImage = button.getAttribute("data-food-image");
+            openOrderForm(foodName, foodImage);
+        });
+    });
+
+    // Ensure user is logged in
+    handleUserLoggedIn("login.html");
+});
+
 // Attach event listener to the form submit
 document.getElementById("orderDetails").addEventListener("submit", (e) => {
     e.preventDefault();
     submitOrder();
-});
-
-// Ensure user is logged in
-document.addEventListener("DOMContentLoaded", () => {
-    handleUserLoggedIn("login.html");
 });
