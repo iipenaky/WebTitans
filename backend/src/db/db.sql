@@ -304,7 +304,7 @@ VALUES
     'Rich dessert',
     6.99,
     'Dessert',
-    "./assests/choccake.jpg"
+    "./assets/choccake.jpg"
   ),
   (
     'Steak',
