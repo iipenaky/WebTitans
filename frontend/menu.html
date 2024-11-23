@@ -10,15 +10,13 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./script/menu.js"></script>
+    <style>
+      body {
+        background-color: #0066b2;
+      }
+    </style>
   </head>
-  <body
-    style="
-      background-image: url(./assets/somesome.jpg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    "
-  >
+  <body>
     <header class="bg-black p-4">
       <div class="container mx-auto flex justify-between items-center">
         <img
@@ -72,369 +70,370 @@
       </div>
     </header>
 
-    <div class="searchBar">
-      <input type="text" placeholder="Search for food..." />
-    </div>
-    <!--Order now button should go to either log in or signup if not logged in-->
-    <div class="featuredFood">
-      <img src="./assets/lasagna.jpeg" alt="Featured Food Image" />
-      <h2 class="text-2xl font-bold mb-2">Featured Food of the Day</h2>
-      <p class="mb-2">
-        Lasagna is a delicious Italian dish made by layering sheets of pasta
-        with a rich filling of ricotta and mozzarella cheese, savory meat or
-        vegetables, and marinara sauce, then baking until golden and bubbly.
-        Perfect for a comforting meal, it can be easily customized to suit your
-        taste!
-      </p>
-
-      <button
-        onclick="openOrderForm('Lasagna', './assets/lasagna.jpeg')"
-        class="bg-black text-white py-4 px-4 rounded hover:bg-red-600"
-      >
-        Order Now
-      </button>
-    </div>
-
-    <h3 class="text-white text-4xl">Pastries</h3>
-    <div class="FoodScroll">
-      <div class="FoodBox">
-        <img src="./assets/croissant.jpeg" alt="Croissant" />
-        <h2>Croissant</h2>
-        <p>Flaky and buttery French pastry.</p>
-
-        <button
-          onclick="openOrderForm('Croissant', './assets/croissant.jpeg')"
-          class="bg-black text-white py-4 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
+    <main class="container mx-auto mt-16">
+      <div class="searchBar">
+        <input type="text" placeholder="Search for food..." />
       </div>
-      <div class="FoodBox">
-        <img src="./assets/danish.jpeg" alt="Danish Pastry" />
-        <h2>Danish Pastry</h2>
-        <p>Light pastry with fruit or custard filling.</p>
-
-        <button
-          onclick="openOrderForm('Danish', './assets/danish.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
+      <!--Order now button should go to either log in or signup if not logged in-->
+      <div id="current-order" class="m-5 p-2 rounded-md bg-white">
+        <h2 class="text-4xl font-bold mb-2">Current Order</h2>
+        <div
+          id="items"
+          class="flex overflow-y-hidden overflow-x-scroll flex-row"
+        ></div>
       </div>
-      <div class="FoodBox">
-        <img src="./assets/muffin.jpeg" alt="Muffin" />
-        <h2>Blueberry Muffin</h2>
-        <p>Moist and fluffy with bursts of blueberry.</p>
 
-        <button
-          onclick="openOrderForm('Muffin', './assets/muffin.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/scone.jpeg" alt="Scone" />
-        <h2>Classic Scone</h2>
-        <p>Buttery scones, perfect with tea.</p>
+      <div>
+        <h3 class="text-4xl">Pastries</h3>
+        <div class="FoodScroll">
+          <div class="FoodBox">
+            <img src="./assets/croissant.jpeg" alt="Croissant" />
+            <h2>Croissant</h2>
+            <p>Flaky and buttery French pastry.</p>
 
-        <button
-          onclick="openOrderForm('Scone', './assets/scone.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/bagel.jpeg" alt="Bagel" />
-        <h2>Bagel</h2>
-        <p>Chewy, dense, and perfect for breakfast.</p>
+            <button
+              onclick="openOrderForm('Croissant', './assets/croissant.jpeg')"
+              class="bg-black text-white py-4 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/danish.jpeg" alt="Danish Pastry" />
+            <h2>Danish Pastry</h2>
+            <p>Light pastry with fruit or custard filling.</p>
 
-        <button
-          onclick="openOrderForm('Bagel', './assets/bagel.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/pretzel.jpeg" alt="Pretzel" />
-        <h2>Pretzel</h2>
-        <p>Soft pretzels with a dash of salt.</p>
+            <button
+              onclick="openOrderForm('Danish', './assets/danish.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/muffin.jpeg" alt="Muffin" />
+            <h2>Blueberry Muffin</h2>
+            <p>Moist and fluffy with bursts of blueberry.</p>
 
-        <button
-          onclick="openOrderForm('Pretzel', './assets/pretzel.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-    </div>
+            <button
+              onclick="openOrderForm('Muffin', './assets/muffin.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/scone.jpeg" alt="Scone" />
+            <h2>Classic Scone</h2>
+            <p>Buttery scones, perfect with tea.</p>
 
-    <h3 class="text-white text-4xl mt-5 mb-2">Main Dishes</h3>
-    <div class="FoodScroll">
-      <div class="FoodBox">
-        <img src="./assets/spaghetti.jpeg" alt="Spaghetti Bolognese" />
-        <h2>Spaghetti Bolognese</h2>
-        <p>Classic Italian pasta dish with rich meat sauce.</p>
+            <button
+              onclick="openOrderForm('Scone', './assets/scone.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/bagel.jpeg" alt="Bagel" />
+            <h2>Bagel</h2>
+            <p>Chewy, dense, and perfect for breakfast.</p>
 
-        <button
-          onclick="openOrderForm('Spaghetti', './assets/spaghetti.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/grilled-chicken.jpeg" alt="Grilled Chicken" />
-        <h2>Grilled Chicken</h2>
-        <p>Juicy chicken grilled to perfection.</p>
+            <button
+              onclick="openOrderForm('Bagel', './assets/bagel.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/pretzel.jpeg" alt="Pretzel" />
+            <h2>Pretzel</h2>
+            <p>Soft pretzels with a dash of salt.</p>
 
-        <button
-          onclick="openOrderForm('Chicken', './assets/grilled-chicken.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/tacos.jpeg" alt="Tacos" />
-        <h2>Beef Tacos</h2>
-        <p>Crispy tacos filled with seasoned beef.</p>
-
-        <button
-          onclick="openOrderForm('Tacos', './assets/tacos.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/salmon.jpeg" alt="Salmon" />
-        <h2>Grilled Salmon</h2>
-        <p>Fresh salmon grilled with lemon and herbs.</p>
-
-        <button
-          onclick="openOrderForm('Salmon', './assets/salmon.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/burger.jpeg" alt="Burger" />
-        <h2>Classic Cheeseburger</h2>
-        <p>Juicy beef patty with melted cheese.</p>
-
-        <button
-          onclick="openOrderForm('Cheeseburger', './assets/burger.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/pizza.jpeg" alt="Pizza" />
-        <h2>Margherita Pizza</h2>
-        <p>Thin crust pizza with fresh tomatoes and basil.</p>
-
-        <button
-          onclick="openOrderForm('Pizza', './assets/pizza.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-    </div>
-
-    <h3 class="text-white text-4xl mt-5 mb-2">Desserts</h3>
-    <div class="FoodScroll">
-      <div class="FoodBox">
-        <img src="./assets/cheesecake.jpeg" alt="Cheesecake" />
-        <h2>Cheesecake</h2>
-        <p>Creamy cheesecake with a graham cracker crust.</p>
-        <p>Rating: ★★★★★</p>
-        <button
-          onclick="openOrderForm('Cheesecake', './assets/cheesecake.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/brownie.jpeg" alt="Brownie" />
-        <h2>Chocolate Brownie</h2>
-        <p>Rich and fudgy chocolate brownie.</p>
-
-        <button
-          onclick="openOrderForm('Brownie', './assets/brownie.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/ice-cream.jpeg" alt="Ice Cream" />
-        <h2>Vanilla Ice Cream</h2>
-        <p>Classic homemade vanilla ice cream.</p>
-
-        <button
-          onclick="openOrderForm('Ice Cream', './assets/ice-cream.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/pavlova.jpeg" alt="Pavlova" />
-        <h2>Pavlova</h2>
-        <p>Light meringue dessert topped with fruit.</p>
-
-        <button
-          onclick="openOrderForm('Pavlova', './assets/pavlova.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/tiramisu.jpeg" alt="Tiramisu" />
-        <h2>Tiramisu</h2>
-        <p>Italian coffee-flavored dessert.</p>
-
-        <button
-          onclick="openOrderForm('tiramisu', './assets/tiramisu.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/cupcake.jpeg" alt="Cupcake" />
-        <h2>Chocolate Cupcake</h2>
-        <p>Delicious chocolate cupcakes with frosting.</p>
-
-        <button
-          onclick="openOrderForm('Cupcake', './assets/cupcake.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-      <div class="FoodBox">
-        <img src="./assets/cookies.jpeg" alt="Cookies" />
-        <h2>Chocolate Chip Cookies</h2>
-        <p>Classic cookies loaded with chocolate chips.</p>
-
-        <button
-          onclick="openOrderForm('Cookies', './assets/cookies.jpeg')"
-          class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Order Now
-        </button>
-      </div>
-    </div>
-    <div class="order-form" id="orderForm">
-      <h2 class="text-2xl font-bold mb-4 text-white" id="formTitle">
-        Order Form
-      </h2>
-      <div class="flex justify-center mb-4">
-        <img id="formImage" src="" alt="" class="max-w-full h-auto" />
-      </div>
-      <form id="orderDetails" onsubmit="return validateForm()">
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-white"
-            >Name:</label
-          >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="border border-gray-300 rounded-md p-2 w-full"
-          />
-          <p id="nameError" class="text-red-500 text-sm hidden">
-            Name is required.
-          </p>
+            <button
+              onclick="openOrderForm('Pretzel', './assets/pretzel.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
         </div>
-        <div class="mb-4">
-          <label for="phoneNumber" class="block text-sm font-medium text-white"
-            >Phone Number:</label
-          >
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            class="border border-gray-300 rounded-md p-2 w-full"
-            pattern="[0-9]{10}"
-          />
-          <p id="phoneError" class="text-red-500 text-sm hidden">
-            A valid 10-digit phone number is required.
-          </p>
+      </div>
+
+      <div>
+        <h3 class="text-4xl mt-5 mb-2">Main Dishes</h3>
+        <div class="FoodScroll">
+          <div class="FoodBox">
+            <img src="./assets/spaghetti.jpeg" alt="Spaghetti Bolognese" />
+            <h2>Spaghetti Bolognese</h2>
+            <p>Classic Italian pasta dish with rich meat sauce.</p>
+
+            <button
+              onclick="openOrderForm('Spaghetti', './assets/spaghetti.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/grilled-chicken.jpeg" alt="Grilled Chicken" />
+            <h2>Grilled Chicken</h2>
+            <p>Juicy chicken grilled to perfection.</p>
+
+            <button
+              onclick="openOrderForm('Chicken', './assets/grilled-chicken.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/tacos.jpeg" alt="Tacos" />
+            <h2>Beef Tacos</h2>
+            <p>Crispy tacos filled with seasoned beef.</p>
+
+            <button
+              onclick="openOrderForm('Tacos', './assets/tacos.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/salmon.jpeg" alt="Salmon" />
+            <h2>Grilled Salmon</h2>
+            <p>Fresh salmon grilled with lemon and herbs.</p>
+
+            <button
+              onclick="openOrderForm('Salmon', './assets/salmon.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/burger.jpeg" alt="Burger" />
+            <h2>Classic Cheeseburger</h2>
+            <p>Juicy beef patty with melted cheese.</p>
+
+            <button
+              onclick="openOrderForm('Cheeseburger', './assets/burger.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
+          <div class="FoodBox">
+            <img src="./assets/pizza.jpeg" alt="Pizza" />
+            <h2>Margherita Pizza</h2>
+            <p>Thin crust pizza with fresh tomatoes and basil.</p>
+
+            <button
+              onclick="openOrderForm('Pizza', './assets/pizza.jpeg')"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Order Now
+            </button>
+          </div>
         </div>
-        <div class="mb-4">
-          <label for="quantity" class="block text-sm font-medium text-white"
-            >Quantity:</label
+      </div>
+
+      <h3 class="text-white text-4xl mt-5 mb-2">Desserts</h3>
+      <div class="FoodScroll">
+        <div class="FoodBox">
+          <img src="./assets/cheesecake.jpeg" alt="Cheesecake" />
+          <h2>Cheesecake</h2>
+          <p>Creamy cheesecake with a graham cracker crust.</p>
+          <p>Rating: ★★★★★</p>
+          <button
+            onclick="openOrderForm('Cheesecake', './assets/cheesecake.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
           >
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            class="border border-gray-300 rounded-md p-2 w-full"
-          />
-          <p id="quantityError" class="text-red-500 text-sm hidden">
-            Quantity is required and must be at least 1.
-          </p>
+            Order Now
+          </button>
         </div>
-        <div class="mb-4">
-          <label
-            for="paymentMethod"
-            class="block text-sm font-medium text-white"
-            >Payment Method:</label
+        <div class="FoodBox">
+          <img src="./assets/brownie.jpeg" alt="Brownie" />
+          <h2>Chocolate Brownie</h2>
+          <p>Rich and fudgy chocolate brownie.</p>
+
+          <button
+            onclick="openOrderForm('Brownie', './assets/brownie.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
           >
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            class="border border-white rounded-md p-2 w-full"
-          >
-            <option value="">Select a payment method</option>
-            <option value="credit-card">Credit Card</option>
-            <option value="debit-card">Debit Card</option>
-            <option value="paypal">PayPal</option>
-          </select>
-          <p id="paymentError" class="text-red-500 text-sm hidden">
-            Payment method is required.
-          </p>
+            Order Now
+          </button>
         </div>
-        <div class="mb-4">
-          <label for="orderType" class="block text-sm font-medium text-white"
-            >Order Type:</label
+        <div class="FoodBox">
+          <img src="./assets/ice-cream.jpeg" alt="Ice Cream" />
+          <h2>Vanilla Ice Cream</h2>
+          <p>Classic homemade vanilla ice cream.</p>
+
+          <button
+            onclick="openOrderForm('Ice Cream', './assets/ice-cream.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
           >
-          <select
-            id="orderType"
-            name="orderType"
-            class="border border-gray-300 rounded-md p-2 w-full"
-          >
-            <option value="">Select an order type</option>
-            <option value="pickup">Pickup</option>
-            <option value="delivery">Delivery</option>
-          </select>
-          <p id="orderTypeError" class="text-red-500 text-sm hidden">
-            Order type is required.
-          </p>
+            Order Now
+          </button>
         </div>
-        <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded">
-          Submit Order
-        </button>
-        <button
-          type="button"
-          onclick="closeOrderForm()"
-          class="bg-gray-600 text-white py-2 px-4 rounded"
-        >
-          Cancel
-        </button>
-      </form>
-    </div>
+        <div class="FoodBox">
+          <img src="./assets/pavlova.jpeg" alt="Pavlova" />
+          <h2>Pavlova</h2>
+          <p>Light meringue dessert topped with fruit.</p>
+
+          <button
+            onclick="openOrderForm('Pavlova', './assets/pavlova.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+          >
+            Order Now
+          </button>
+        </div>
+        <div class="FoodBox">
+          <img src="./assets/tiramisu.jpeg" alt="Tiramisu" />
+          <h2>Tiramisu</h2>
+          <p>Italian coffee-flavored dessert.</p>
+
+          <button
+            onclick="openOrderForm('tiramisu', './assets/tiramisu.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+          >
+            Order Now
+          </button>
+        </div>
+        <div class="FoodBox">
+          <img src="./assets/cupcake.jpeg" alt="Cupcake" />
+          <h2>Chocolate Cupcake</h2>
+          <p>Delicious chocolate cupcakes with frosting.</p>
+
+          <button
+            onclick="openOrderForm('Cupcake', './assets/cupcake.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+          >
+            Order Now
+          </button>
+        </div>
+        <div class="FoodBox">
+          <img src="./assets/cookies.jpeg" alt="Cookies" />
+          <h2>Chocolate Chip Cookies</h2>
+          <p>Classic cookies loaded with chocolate chips.</p>
+
+          <button
+            onclick="openOrderForm('Cookies', './assets/cookies.jpeg')"
+            class="bg-black text-white py-2 px-4 rounded hover:bg-red-600"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="order-form" id="orderForm">
+        <h2 class="text-2xl font-bold mb-4 text-white" id="formTitle">
+          Order Form
+        </h2>
+        <div class="flex justify-center mb-4">
+          <img id="formImage" src="" alt="" class="max-w-full h-auto" />
+        </div>
+        <form id="orderDetails" onsubmit="return validateForm()">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-white"
+              >Name:</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="border border-gray-300 rounded-md p-2 w-full"
+            />
+            <p id="nameError" class="text-red-500 text-sm hidden">
+              Name is required.
+            </p>
+          </div>
+          <div class="mb-4">
+            <label
+              for="phoneNumber"
+              class="block text-sm font-medium text-white"
+              >Phone Number:</label
+            >
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              class="border border-gray-300 rounded-md p-2 w-full"
+              pattern="[0-9]{10}"
+            />
+            <p id="phoneError" class="text-red-500 text-sm hidden">
+              A valid 10-digit phone number is required.
+            </p>
+          </div>
+          <div class="mb-4">
+            <label for="quantity" class="block text-sm font-medium text-white"
+              >Quantity:</label
+            >
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              class="border border-gray-300 rounded-md p-2 w-full"
+            />
+            <p id="quantityError" class="text-red-500 text-sm hidden">
+              Quantity is required and must be at least 1.
+            </p>
+          </div>
+          <div class="mb-4">
+            <label
+              for="paymentMethod"
+              class="block text-sm font-medium text-white"
+              >Payment Method:</label
+            >
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              class="border border-white rounded-md p-2 w-full"
+            >
+              <option value="">Select a payment method</option>
+              <option value="credit-card">Credit Card</option>
+              <option value="debit-card">Debit Card</option>
+              <option value="paypal">PayPal</option>
+            </select>
+            <p id="paymentError" class="text-red-500 text-sm hidden">
+              Payment method is required.
+            </p>
+          </div>
+          <div class="mb-4">
+            <label for="orderType" class="block text-sm font-medium text-white"
+              >Order Type:</label
+            >
+            <select
+              id="orderType"
+              name="orderType"
+              class="border border-gray-300 rounded-md p-2 w-full"
+            >
+              <option value="">Select an order type</option>
+              <option value="pickup">Pickup</option>
+              <option value="delivery">Delivery</option>
+            </select>
+            <p id="orderTypeError" class="text-red-500 text-sm hidden">
+              Order type is required.
+            </p>
+          </div>
+          <button
+            type="submit"
+            class="bg-blue-600 text-white py-2 px-4 rounded"
+          >
+            Submit Order
+          </button>
+          <button
+            type="button"
+            onclick="closeOrderForm()"
+            class="bg-gray-600 text-white py-2 px-4 rounded"
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </main>
 
     <footer class="bg-black text-white py-8 text-center">
       <p>

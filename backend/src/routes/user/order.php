@@ -44,6 +44,7 @@ function validateOrder($data)
 $userOrderRoutes = [
     'GET' => [
         'id' => ordersByCustomer(...),
+        'menu' => menuItems(...),
     ],
 
     'POST' => [
@@ -52,6 +53,16 @@ $userOrderRoutes = [
     ],
 
 ];
+
+function menuItems()
+{
+
+    require_once __DIR__.'/../../services/MenuItemService.php';
+    $MenuItemService = new MenuItemService;
+    $res = $MenuItemService->GetAll();
+    header($res['header']);
+    echo json_encode($res['data']);
+}
 
 function ordersByCustomer($id)
 {
