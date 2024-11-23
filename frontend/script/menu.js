@@ -74,10 +74,27 @@ async function getMenuItemIdByName(foodName) {
         "Lasagna": 1,
         "Croissant": 2,
         "Danish Pastry": 3,
-        // Add all menu items here
+        "Blueberry Muffin": 4, // Ensure exact match
+        "Classic Scone": 5,
+        "Bagel": 6,
+        "Pretzel": 7,
+        "Spaghetti Bolognese": 8,
+        "Grilled Chicken": 9,
+        "Beef Tacos": 10,
+        "Grilled Salmon": 11,
+        "Classic Cheeseburger": 12,
+        "Margherita Pizza": 13,
+        "Cheesecake": 14,
+        "Chocolate Brownie": 15,
+        "Vanilla Ice Cream": 16,
+        "Pavlova": 17,
+        "Tiramisu": 18,
+        "Chocolate Cupcake": 19,
+        "Chocolate Chip Cookies": 20
     };
     return menuItems[foodName] || null;
 }
+
 
 // Refresh orders table (fetch data from backend)
 async function refreshOrdersTable() {
