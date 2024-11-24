@@ -26,7 +26,7 @@ async function getMenuItems() {
 let items = [];
 
 function renderItems(items) {
-    console.log({items})
+    console.log({ items });
     const itemsDiv = document.getElementById("items");
     itemsDiv.innerHTML = "";
     for (const item of items) {
@@ -41,11 +41,11 @@ function renderItems(items) {
         const itemQuant = document.createElement("h3");
         itemQuant.textContent = `x${quantity}`;
 
-        itemDiv.appendChild(itemQuant)
+        itemDiv.appendChild(itemQuant);
         itemsDiv.appendChild(itemDiv);
         itemsDiv.onclick = () => {
             removeMenuItem(item);
-        }
+        };
     }
     items = items.sort((a, b) => a.menu_item_id - b.menu_item_id);
 }
@@ -57,16 +57,21 @@ function addMenuItem(item) {
         image: item.image,
         quantity: item.quantity,
     });
-    renderItems(items)
+    renderItems(items);
 }
 
 function removeMenuItem(item) {
     const index = item.menu_item_id;
     items = items.splice(index, 1);
-    renderItems(items)
+    renderItems(items);
 }
 
 async function submitOrder() {
+    if (items.length == 0) {
+        alert("No items in cart");
+        return;
+    }
+
     const user = readFromSessionStorage("user");
     const { customer_id, first_name, last_name, email } = user;
     const order = {
@@ -75,7 +80,7 @@ async function submitOrder() {
         },
         order_details: items.map((i) => ({ menu_item_id: i.menu_item_id, quantity: i.quantity })),
     };
-    console.log({order})
+    console.log({ order });
     const res = await fetch(`${BASE_URL}/user/order/add`, {
         method: "POST",
         credentials: "include",
@@ -88,7 +93,7 @@ async function submitOrder() {
     }
 
     items = [];
-    renderItems(items)
+    renderItems(items);
     const json = await res.json();
     console.log({ json });
     return json;
@@ -96,7 +101,7 @@ async function submitOrder() {
 
 (async function () {
     const menuItems = await getMenuItems();
-    displayMenuItems(menuItems)
+    displayMenuItems(menuItems);
 })();
 
 // Open the order form
@@ -118,14 +123,13 @@ function closeOrderForm() {
 // Attach to the global window object for inline attributes (optional if needed)
 window.closeOrderForm = closeOrderForm;
 
-
 // Attach event listener to the form submit
 document.getElementById("orderDetails").addEventListener("submit", (e) => {
     e.preventDefault();
     // submitOrder();
 });
 
-// 
+//
 function groupMenuItemsByCategory(menuItems) {
     return menuItems.reduce((categories, item) => {
         const { category } = item; // Ensure `category` is a property in your menu items
@@ -138,13 +142,13 @@ function groupMenuItemsByCategory(menuItems) {
 }
 
 document.getElementById("complete").onclick = async () => {
-    console.log({items})
+    console.log({ items });
     try {
         const req = await submitOrder();
     } catch (e) {
-        console.error(e)
+        console.error(e);
     }
-}
+};
 
 function displayMenuItems(menuItems) {
     // Group menu items by category
@@ -191,37 +195,37 @@ function displayMenuItems(menuItems) {
                 <p class="text-lg font-bold text-blue-600 mb-2">$${price.toFixed(2)}</p>
             `;
 
-            const orderButton = document.createElement("button")
+            const orderButton = document.createElement("button");
             orderButton.className = `order-now-btn bg-blue-600 text-white px-4 py-2 rounded`;
             orderButton.textContent = "Order Now";
             orderButton.onclick = (e) => {
-                e.preventDefault()
-                const modal = document.getElementById("orderDetails")
+                e.preventDefault();
+                const modal = document.getElementById("orderDetails");
 
                 modal.onsubmit = () => {
-                    const quantityElem = document.getElementById("quantity")
-                    const quantity = parseInt(quantityElem.value)
+                    const quantityElem = document.getElementById("quantity");
+                    const quantity = parseInt(quantityElem.value);
                     if (quantityElem.value === "") {
-                        alert("Empty fields")
+                        alert("Empty fields");
                         return false;
                     }
-                    console.log({item})
-                    let i = {...item, quantity}
-                    console.log(i)
-                    addMenuItem(i)
-                    modal.onsubmit = null
+                    console.log({ item });
+                    let i = { ...item, quantity };
+                    console.log(i);
+                    addMenuItem(i);
+                    modal.onsubmit = null;
                     modal.reset();
                     closeOrderForm();
-                }
-                openOrderForm(name, image)
-            }
+                };
+                openOrderForm(name, image);
+            };
 
-            itemDiv.appendChild(orderButton)
+            itemDiv.appendChild(orderButton);
             itemsGrid.appendChild(itemDiv);
         });
 
         categorySection.appendChild(itemsGrid);
         menuItemsDiv.appendChild(categorySection);
     });
-
 }
+

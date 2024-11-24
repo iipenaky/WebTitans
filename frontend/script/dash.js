@@ -25,7 +25,8 @@ const getNum = async (path) => {
 (async function () {
     const numCustomers = await getNum("customers");
     const numStaff = await getNum("staff");
+    const numOrders = await getNum("orders");
     document.getElementById("cust-num").innerText = numCustomers;
     document.getElementById("staff-num").innerText = numStaff;
+    document.getElementById("pendingOrders").innerText = numOrders;
 })();
-

@@ -23,6 +23,7 @@ $orderRoutes = [
     'GET' => [
         'all' => ordersAll(...),
         'id' => ordersByCustomerId(...),
+        'num' => numOrders(...),
     ],
 
     /*"POST" => array(*/
@@ -39,9 +40,17 @@ $orderRoutes = [
 
 ];
 
+function numOrders()
+{
+    global $OrderService;
+    $res = $OrderService->GetNumPendingOrders();
+    header($res['header']);
+    echo json_encode($res['data']);
+}
+
 function orderDeleteById($id)
 {
-    global $OrderService; 
+    global $OrderService;
     $res = $OrderService->Delete($id);
     header($res['header']);
     echo json_encode($res['data']);

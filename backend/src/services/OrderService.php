@@ -6,6 +6,40 @@ require_once __DIR__.'/./StaffService.php';
 
 class OrderService
 {
+    public function GetNumPendingOrders()
+    {
+        global $db;
+        $stmt = $db->prepare('SELECT COUNT(*) FROM `order` WHERE status = "Pending"');
+        if (! $stmt->execute()) {
+            return [
+                'header' => 'HTTP/1.1 500 Internal Server Error',
+                'data' => ['error' => 'Error fetching number of pending orders'],
+            ];
+        }
+
+        return [
+            'header' => 'HTTP/1.1 200 OK',
+            'data' => $stmt->fetchColumn(),
+        ];
+    }
+
+    public function GetNumOrders()
+    {
+        global $db;
+        $stmt = $db->prepare('SELECT COUNT(*) FROM `order`');
+        if (! $stmt->execute()) {
+            return [
+                'header' => 'HTTP/1.1 500 Internal Server Error',
+                'data' => ['error' => 'Error fetching number of orders'],
+            ];
+        }
+
+        return [
+            'header' => 'HTTP/1.1 200 OK',
+            'data' => $stmt->fetchColumn(),
+        ];
+    }
+
     public function GetAll()
     {
         $query = <<<'SQL'
