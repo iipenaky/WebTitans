@@ -221,8 +221,4 @@ document.getElementById("inventory-table").addEventListener("click", async funct
     }
 });
 
-// document.getElementById("add-button").onclick = openAddInventoryModal;
-// document.getElementById("close-form").onclick = closeAddInventoryModal;
-//document.getElementById("restock-inventory").onclick = restockInventory;
-
 loadInventoryTable();
