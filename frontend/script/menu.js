@@ -88,6 +88,7 @@ async function submitOrder() {
     }
 
     items = [];
+    renderItems(items)
     const json = await res.json();
     console.log({ json });
     return json;
