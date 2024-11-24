@@ -71,7 +71,7 @@ const addStaff = async (staff) => {
 const populateStaffTable = (staff) => {
     const staffTable = document.getElementById("staff-table");
     for (let s of staff) {
-        let { staff_id, first_name, last_name, email, salary, position, hire_date } = s;
+        let { staff_id, first_name, last_name, email, salary, position, hire_date, passhash } = s;
         salary = parseFloat(salary).toFixed(2);
         const tdClass = "border px-4 py-2";
 
@@ -159,6 +159,7 @@ const populateStaffTable = (staff) => {
                     email: fData.email,
                     salary: fData.salary,
                     position: fData.position,
+                    passhash,
                 };
                 console.log({ data });
                 if (
