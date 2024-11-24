@@ -27,7 +27,7 @@ h3 {
   font-size: 28px; /* Set font size */
   margin: 10px 0; /* Add margin above and below */
   text-align: center; /* Center-align text */
-  color: rgb(240, 255, 243);
+  /*color: rgb(255, 243, 240); */
 }
 p {
   font-size: 14px; /* Set font size */

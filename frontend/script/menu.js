@@ -6,6 +6,8 @@ import { BASE_URL } from "./constants.js";
 const logoutButton = document.getElementById("logout");
 logoutButton.onclick = handleLogout;
 
+handleUserLoggedIn("login.html");
+
 async function getMenuItems() {
     const res = await fetch(`${BASE_URL}/user/order/menu`, {
         credentials: "include",
@@ -24,17 +26,26 @@ async function getMenuItems() {
 let items = [];
 
 function renderItems(items) {
+    console.log({items})
     const itemsDiv = document.getElementById("items");
+    itemsDiv.innerHTML = "";
     for (const item of items) {
         const { menu_item_id, name, image, quantity } = item;
         const itemDiv = document.createElement("div");
         const itemImage = document.createElement("img");
         itemImage.src = image;
         itemImage.alt = name;
-        itemImage.style = "max-width: 100%; boreder-radius: 10px";
+        itemImage.style = "max-width: 10rem; boreder-radius: 10px";
         itemDiv.appendChild(itemImage);
         itemDiv.style = "border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 10px";
+        const itemQuant = document.createElement("h3");
+        itemQuant.textContent = `x${quantity}`;
+
+        itemDiv.appendChild(itemQuant)
         itemsDiv.appendChild(itemDiv);
+        itemsDiv.onclick = () => {
+            removeMenuItem(item);
+        }
     }
     items = items.sort((a, b) => a.menu_item_id - b.menu_item_id);
 }
@@ -46,11 +57,13 @@ function addMenuItem(item) {
         image: item.image,
         quantity: item.quantity,
     });
+    renderItems(items)
 }
 
 function removeMenuItem(item) {
     const index = item.menu_item_id;
-    items.splice(index, 1);
+    items = items.splice(index, 1);
+    renderItems(items)
 }
 
 async function submitOrder() {
@@ -62,20 +75,21 @@ async function submitOrder() {
         },
         order_details: items.map((i) => ({ menu_item_id: i.menu_item_id, quantity: i.quantity })),
     };
-    const res = await fetch(`${BASE_URL}/user/order/add`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(order),
-    });
+    console.log({order})
+    // const res = await fetch(`${BASE_URL}/user/order/add`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     body: JSON.stringify(order),
+    // });
 
-    if (!res.ok) {
-        console.log({ res });
-        handleError(res);
-    }
+    // if (!res.ok) {
+    //     console.log({ res });
+    //     handleError(res);
+    // }
 
-    const json = await res.json();
-    console.log({ json });
-    return json;
+    // const json = await res.json();
+    // console.log({ json });
+    // return json;
 }
 
 (async function () {
@@ -102,78 +116,11 @@ function closeOrderForm() {
 // Attach to the global window object for inline attributes (optional if needed)
 window.closeOrderForm = closeOrderForm;
 
-// Map food names to menu item IDs (replace with backend call if needed)
-async function getMenuItemIdByName(foodName) {
-    // Example mapping (use backend endpoint for dynamic mapping)
-    const menuItems = {
-        Lasagna: 1,
-        Croissant: 2,
-        "Danish Pastry": 3,
-        "Blueberry Muffin": 4, // Ensure exact match
-        "Classic Scone": 5,
-        Bagel: 6,
-        Pretzel: 7,
-        "Spaghetti Bolognese": 8,
-        "Grilled Chicken": 9,
-        "Beef Tacos": 10,
-        "Grilled Salmon": 11,
-        "Classic Cheeseburger": 12,
-        "Margherita Pizza": 13,
-        Cheesecake: 14,
-        "Chocolate Brownie": 15,
-        "Vanilla Ice Cream": 16,
-        Pavlova: 17,
-        Tiramisu: 18,
-        "Chocolate Cupcake": 19,
-        "Chocolate Chip Cookies": 20,
-    };
-    return menuItems[foodName] || null;
-}
-
-// Refresh orders table (fetch data from backend)
-async function refreshOrdersTable() {
-    try {
-        const response = await fetch("getOrders.php");
-        const orders = await response.json();
-
-        // Populate the orders table
-        const ordersContainer = document.getElementById("ordersContainer");
-        ordersContainer.innerHTML = "";
-
-        orders.forEach((order) => {
-            const orderDiv = document.createElement("div");
-            orderDiv.innerHTML = `
-                <h2>Order #${order.order_id}</h2>
-                <p>Food: ${order.menu_item_name}</p>
-                <p>Quantity: ${order.quantity}</p>
-                <p>Status: ${order.status}</p>
-            `;
-            ordersContainer.appendChild(orderDiv);
-        });
-    } catch (error) {
-        console.error("Error fetching orders:", error);
-    }
-}
-
-// Add event listeners to "Order Now" buttons
-document.addEventListener("DOMContentLoaded", () => {
-    const orderButtons = document.querySelectorAll("[data-order-button]");
-    orderButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const foodName = button.getAttribute("data-food-name");
-            const foodImage = button.getAttribute("data-food-image");
-            openOrderForm(foodName, foodImage);
-        });
-    });
-
-    // Ensure user is logged in
-    handleUserLoggedIn("login.html");
-});
 
 // Attach event listener to the form submit
 document.getElementById("orderDetails").addEventListener("submit", (e) => {
     e.preventDefault();
-    submitOrder();
+    // submitOrder();
 });
 
 // 
@@ -186,6 +133,15 @@ function groupMenuItemsByCategory(menuItems) {
         categories[category].push(item);
         return categories;
     }, {});
+}
+
+document.getElementById("complete").onclick = async () => {
+    console.log({items})
+    try {
+        const req = await submitOrder();
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 function displayMenuItems(menuItems) {
@@ -231,15 +187,33 @@ function displayMenuItems(menuItems) {
                 <h3 class="text-lg font-bold mb-1">${name}</h3>
                 <p class="text-sm text-gray-600 mb-1">${description}</p>
                 <p class="text-lg font-bold text-blue-600 mb-2">$${price.toFixed(2)}</p>
-                <button 
-                    class="order-now-btn bg-blue-600 text-white px-4 py-2 rounded" 
-                    data-food-name="${name}" 
-                    data-food-image="${image}"
-                >
-                    Order Now
-                </button>
             `;
 
+            const orderButton = document.createElement("button")
+            orderButton.className = `order-now-btn bg-blue-600 text-white px-4 py-2 rounded`;
+            orderButton.textContent = "Order Now";
+            orderButton.onclick = (e) => {
+                e.preventDefault()
+                const modal = document.getElementById("orderDetails")
+
+                modal.onsubmit = () => {
+                    const quantityElem = document.getElementById("quantity")
+                    const quantity = parseInt(quantityElem.value)
+                    if (quantityElem.value === "") {
+                        alert("Empty fields")
+                        return false;
+                    }
+                    console.log({item})
+                    let i = {...item, quantity}
+                    console.log(i)
+                    addMenuItem(i)
+                    modal.onsubmit = null
+                    closeOrderForm();
+                }
+                openOrderForm(name, image)
+            }
+
+            itemDiv.appendChild(orderButton)
             itemsGrid.appendChild(itemDiv);
         });
 
@@ -247,18 +221,4 @@ function displayMenuItems(menuItems) {
         menuItemsDiv.appendChild(categorySection);
     });
 
-    // Add event listeners to the "Order Now" buttons
-    const orderNowButtons = document.querySelectorAll(".order-now-btn");
-    orderNowButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const foodName = button.getAttribute("data-food-name");
-            const foodImage = button.getAttribute("data-food-image");
-            openOrderForm(foodName, foodImage);
-        });
-    });
 }
-
-(async function () {
-    const menuItems = await getMenuItems(); // Fetch menu items from the backend
-    displayMenuItems(menuItems); // Render grouped menu items
-})();

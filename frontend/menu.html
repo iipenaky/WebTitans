@@ -72,12 +72,15 @@
 
     <main class="container mx-auto mt-16">
       <!--Order now button should go to either log in or signup if not logged in-->
-      <div id="current-order" class="m-5 p-2 rounded-md bg-white">
+      <div id="current-order" class="m-5 p-2 rounded-md bg-white flex flex-col justify-center">
         <h2 class="text-4xl font-bold mb-2">Current Order</h2>
         <div
           id="items"
           class="flex overflow-y-hidden overflow-x-scroll flex-row"
         ></div>
+        <button id="complete" class="bg-blue-600 text-white text-xl px-4 py-2 rounded">
+          Complete Order
+        </button>
       </div>
 
       <div id="menu_items" class=" gap-6 mt-6">
@@ -90,13 +93,14 @@
         <div class="flex justify-center mb-4">
           <img id="formImage" src="" alt="" class="max-w-full h-auto" />
         </div>
-        <form id="orderDetails" onsubmit="return validateForm()">
+        <form id="orderDetails" class="mb-4">
 
           <div class="mb-4">
             <label for="quantity" class="block text-sm font-medium text-white"
               >Quantity:</label
             >
             <input
+            value="1"
               type="number"
               id="quantity"
               name="quantity"
