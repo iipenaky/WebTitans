@@ -11,9 +11,10 @@ html {
   object-fit: fill;
   margin-right: 30px;
 }
+
 .logo{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 h2 {
   /* Style for general headings. */
@@ -162,3 +163,4 @@ input[type="text"] {
   color: black;
   border-radius: 4px;
 }
+
