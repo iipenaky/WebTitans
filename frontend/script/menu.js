@@ -76,20 +76,21 @@ async function submitOrder() {
         order_details: items.map((i) => ({ menu_item_id: i.menu_item_id, quantity: i.quantity })),
     };
     console.log({order})
-    // const res = await fetch(`${BASE_URL}/user/order/add`, {
-    //     method: "POST",
-    //     credentials: "include",
-    //     body: JSON.stringify(order),
-    // });
+    const res = await fetch(`${BASE_URL}/user/order/add`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(order),
+    });
 
-    // if (!res.ok) {
-    //     console.log({ res });
-    //     handleError(res);
-    // }
+    if (!res.ok) {
+        console.log({ res });
+        handleError(res);
+    }
 
-    // const json = await res.json();
-    // console.log({ json });
-    // return json;
+    items = [];
+    const json = await res.json();
+    console.log({ json });
+    return json;
 }
 
 (async function () {
@@ -208,6 +209,7 @@ function displayMenuItems(menuItems) {
                     console.log(i)
                     addMenuItem(i)
                     modal.onsubmit = null
+                    modal.reset();
                     closeOrderForm();
                 }
                 openOrderForm(name, image)
