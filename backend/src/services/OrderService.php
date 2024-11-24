@@ -19,7 +19,7 @@ class OrderService
 
         return [
             'header' => 'HTTP/1.1 200 OK',
-            'data' => $stmt->fetchColumn(),
+            'data' => ['num' => $stmt->fetchColumn()],
         ];
     }
 
