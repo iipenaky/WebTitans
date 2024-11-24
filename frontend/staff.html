@@ -43,7 +43,7 @@
   <body>
     <header class="bg-black p-4">
       <div class="container mx-auto flex justify-between items-center">
-        <img src="logo.png" alt="Logo" class="logo w-50 h-50" />
+        <img src="./assets/logo.png" alt="Logo" class="logo w-50 h-50" />
         <nav>
           <ul class="flex space-x-6 text-white">
             <li>
@@ -290,121 +290,5 @@
         </div>
       </div>
     </main>
-
-    <!--<script>-->
-    <!--  const staffMembers = JSON.parse(localStorage.getItem("staffMembers")) || [-->
-    <!--    {-->
-    <!--      staff_id: 1,-->
-    <!--      first_name: "John",-->
-    <!--      last_name: "Doe",-->
-    <!--      position: "Manager",-->
-    <!--      email: "john.doe@example.com",-->
-    <!--      hire_date: "2021-01-01",-->
-    <!--      salary: 50000.0,-->
-    <!--    },-->
-    <!--    {-->
-    <!--      staff_id: 2,-->
-    <!--      first_name: "Jane",-->
-    <!--      last_name: "Smith",-->
-    <!--      position: "Assistant",-->
-    <!--      email: "jane.smith@example.com",-->
-    <!--      hire_date: "2022-02-15",-->
-    <!--      salary: 35000.0,-->
-    <!--    },-->
-    <!--  ];-->
-    <!---->
-    <!--  function loadStaffTable() {-->
-    <!--    const tbody = document.getElementById("staffTableBody");-->
-    <!--    tbody.innerHTML = "";-->
-    <!--    staffMembers.forEach((staff) => {-->
-    <!--      const row = `-->
-    <!--      <tr>-->
-    <!--        <td class="border px-4 py-2">${staff.staff_id}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.first_name}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.last_name}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.position}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.email}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.hire_date}</td>-->
-    <!--        <td class="border px-4 py-2">${staff.salary}</td>-->
-    <!--        <td class="border px-4 py-2">-->
-    <!--          <button onclick="viewStaff(${staff.staff_id})" class="bg-blue-500 text-white px-2 py-1">View</button>-->
-    <!--          <button onclick="editStaff(${staff.staff_id})" class="bg-yellow-500 text-white px-2 py-1">Edit</button>-->
-    <!--          <button onclick="deleteStaff(${staff.staff_id})" class="bg-red-500 text-white px-2 py-1">Delete</button>-->
-    <!--        </td>-->
-    <!--      </tr>-->
-    <!--    `;-->
-    <!--      tbody.insertAdjacentHTML("beforeend", row);-->
-    <!--    });-->
-    <!--  }-->
-    <!---->
-    <!--  function openAddStaffModal() {-->
-    <!--    document.getElementById("addStaffModal").style.display = "block";-->
-    <!--  }-->
-    <!---->
-    <!--  function closeAddStaffModal() {-->
-    <!--    document.getElementById("addStaffModal").style.display = "none";-->
-    <!--  }-->
-    <!---->
-    <!--  document-->
-    <!--    .getElementById("addStaffForm")-->
-    <!--    .addEventListener("submit", function (event) {-->
-    <!--      event.preventDefault();-->
-    <!---->
-    <!--      const newStaff = {-->
-    <!--        staff_id: staffMembers.length + 1,-->
-    <!--        first_name: document.getElementById("firstName").value,-->
-    <!--        last_name: document.getElementById("lastName").value,-->
-    <!--        position: document.getElementById("position").value,-->
-    <!--        email: document.getElementById("email").value,-->
-    <!--        hire_date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD format-->
-    <!--        salary: parseFloat(document.getElementById("salary").value),-->
-    <!--      };-->
-    <!--      staffMembers.push(newStaff);-->
-    <!--      localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
-    <!--      loadStaffTable();-->
-    <!--      closeAddStaffModal();-->
-    <!--    });-->
-    <!---->
-    <!--  function viewStaff(staffId) {-->
-    <!--    const staff = staffMembers.find((s) => s.staff_id === staffId);-->
-    <!--    alert(-->
-    <!--      `Staff Name: ${staff.first_name} ${staff.last_name}\nPosition: ${staff.position}\nEmail: ${staff.email}\nHire Date: ${staff.hire_date}\nSalary: $${staff.salary}`,-->
-    <!--    );-->
-    <!--  }-->
-    <!---->
-    <!--  function editStaff(staffId) {-->
-    <!--    const staff = staffMembers.find((s) => s.staff_id === staffId);-->
-    <!--    const firstName = prompt("Edit First Name:", staff.first_name);-->
-    <!--    const lastName = prompt("Edit Last Name:", staff.last_name);-->
-    <!--    const position = prompt("Edit Position:", staff.position);-->
-    <!--    const email = prompt("Edit Email:", staff.email);-->
-    <!--    const salary = parseFloat(prompt("Edit Salary:", staff.salary));-->
-    <!---->
-    <!--    if (firstName && lastName && position && email && salary > 0) {-->
-    <!--      staff.first_name = firstName;-->
-    <!--      staff.last_name = lastName;-->
-    <!--      staff.position = position;-->
-    <!--      staff.email = email;-->
-    <!--      staff.salary = salary;-->
-    <!--      localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
-    <!--      loadStaffTable();-->
-    <!--    } else {-->
-    <!--      alert("Invalid input. Please try again.");-->
-    <!--    }-->
-    <!--  }-->
-    <!---->
-    <!--  function deleteStaff(staffId) {-->
-    <!--    const staffIndex = staffMembers.findIndex(-->
-    <!--      (s) => s.staff_id === staffId,-->
-    <!--    );-->
-    <!--    if (staffIndex !== -1) {-->
-    <!--      if (confirm("Are you sure you want to delete this staff member?")) {-->
-    <!--        staffMembers.splice(staffIndex, 1);-->
-    <!--        localStorage.setItem("staffMembers", JSON.stringify(staffMembers));-->
-    <!--        loadStaffTable();-->
-    <!--      }-->
-    <!--    }-->
-    <!--  }-->
-    <!--</script>-->
   </body>
 </html>

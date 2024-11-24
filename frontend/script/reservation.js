@@ -119,11 +119,6 @@ function validateReservationForm() {
     if (!isValid) {
         alert("Please fill out all fields correctly.");
     }
-    //if (isValid) {
-    //    alert("Your reservation has been submitted successfully!");
-    //} else {
-    //    alert("Please fill out all  fields correctly.");
-    //}
 
     return isValid;
 }

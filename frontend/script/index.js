@@ -27,13 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//addElementToElementOnCondition(document.getElementById("topbar"), checkLoginStatus(), () => {
-//    const listItem = document.createElement("li");
-//    const logoutButton = document.createElement("a");
-//    logoutButton.className = "font-bold hover:text-red-600 transition duration-300";
-//    listItem.appendChild(logoutButton);
-//});
-
 /**
  * Checks if the user is logged in.
  * @returns {boolean} True if logged in, false otherwise.

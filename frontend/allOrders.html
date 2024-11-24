@@ -24,7 +24,7 @@
     <!-- Header Section -->
     <header class="bg-black p-4">
       <div class="container mx-auto flex justify-between items-center">
-        <img src="#logo.png" alt="Logo" class="logo w-50 h-50" />
+        <img src="./assets/logo.png" alt="Logo" class="logo w-50 h-50" />
         <nav>
           <ul class="flex space-x-6 text-white">
             <li>
@@ -104,97 +104,6 @@
         </tbody>
       </table>
     </main>
-
-    <!-- Edit Order Modal -->
-    <!-- <div
-      id="editModal"
-      class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden"
-    >
-      <div class="bg-white p-6 rounded-lg w-96">
-        <h2 class="text-2xl font-bold mb-4">Edit Order</h2>
-        <form id="editOrderForm">
-          <input type="hidden" id="editOrderId" name="orderId" />
-          <div class="mb-4">
-            <label for="editCustomerId" class="block text-lg font-medium"
-              >Customer ID</label
-            >
-            <input
-              type="number"
-              id="editCustomerId"
-              name="customerId"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editStaffId" class="block text-lg font-medium"
-              >Staff ID</label
-            >
-            <input
-              type="number"
-              id="editStaffId"
-              name="staffId"
-              class="border border-gray-300 rounded-md p-2 w-full"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editOrderTime" class="block text-lg font-medium"
-              >Order Time</label
-            >
-            <input
-              type="datetime-local"
-              id="editOrderTime"
-              name="orderTime"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editTotalAmount" class="block text-lg font-medium"
-              >Total Amount</label
-            >
-            <input
-              type="number"
-              id="editTotalAmount"
-              name="totalAmount"
-              step="0.01"
-              min="0"
-              class="border border-gray-300 rounded-md p-2 w-full"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="editStatus" class="block text-lg font-medium"
-              >Status</label
-            >
-            <select
-              id="editStatus"
-              name="status"
-              class="border border-gray-300 rounded-md p-2 w-full"
-              required
-            >
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
-          </div>
-          <div class="flex justify-end">
-            <button
-              type="button"
-              id="editCancel"
-              class="bg-gray-500 text-white py-2 px-4 rounded-md mr-4"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="bg-blue-600 text-white py-2 px-4 rounded-md"
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div> -->
     <script defer type="module" src="./script/orders.js"></script>
   </body>
 </html>
