@@ -1,11 +1,11 @@
 <?php
 
-require_once __DIR__.'/../../services/OrderService.php';
-require_once __DIR__.'/../../utils.php';
+require_once __DIR__ . '/../../services/OrderService.php';
+require_once __DIR__ . '/../../utils.php';
 
 $OrderService = new OrderService;
 /*$orderFields = ["order_id","customer_id","staff_id", "total_amount"];*/
-$orderFields = ['order_id', 'customer_id', 'staff_id'];
+$orderFields = ['order_id', 'customer_id'];
 $orderDetailsFields = ['order_detail_id', 'menu_item_id', 'quantity'];
 
 function validateOrderDetails($data)
@@ -57,7 +57,7 @@ $userOrderRoutes = [
 function menuItems()
 {
 
-    require_once __DIR__.'/../../services/MenuItemService.php';
+    require_once __DIR__ . '/../../services/MenuItemService.php';
     $MenuItemService = new MenuItemService;
     $res = $MenuItemService->GetAll();
     header($res['header']);
@@ -101,7 +101,6 @@ function cancelOrder($data)
     $res = $OrderService->Update($data);
     header($res['header']);
     echo json_encode($res['data']);
-
 }
 
 function userOrderHandler($verb, $uri)

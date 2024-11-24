@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../db/db.php';
 require_once __DIR__.'/./MenuItemService.php';
+require_once __DIR__.'/./StaffService.php';
 
 class OrderService
 {
@@ -173,11 +174,20 @@ SQL;
         global $db;
         try {
             $db->beginTransaction();
+
+            // Assign the orders to a waiter randomly
+            $StaffService = new StaffService;
+            $staff = $StaffService->GetAllOfPosition('Waiter')['data'];
+
+            $selected = array_rand($staff);
+            $selected = $staff[$selected];
+
             $stmt = $db->prepare(
                 'INSERT INTO `order` ( customer_id, staff_id, total_amount) VALUES (:cid, :sid, :amnt)'
             );
+
             $stmt->bindParam(':cid', $order['customer_id']);
-            $stmt->bindParam(':sid', $order['staff_id']);
+            $stmt->bindParam(':sid', $selected['staff_id']);
             $stmt->bindParam(':amnt', $totalAmount);
             if (! $stmt->execute()) {
                 $db->rollBack();
@@ -277,6 +287,5 @@ SQL;
             'header' => 'HTTP/1.1 200 OK',
             'data' => ['message' => 'Order deleted successfully'],
         ];
-
     }
 }
