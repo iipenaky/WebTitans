@@ -70,9 +70,6 @@ function staffUpdate($data)
         $res = $StaffService->Update($data);
         header($res['header']);
         echo json_encode($res['data']);
-    } else {
-        header('HTTP/1.1 400 Bad Request');
-        echo json_encode(['error' => 'Invalid staff data']);
     }
 }
 
