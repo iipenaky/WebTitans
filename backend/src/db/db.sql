@@ -1,4 +1,4 @@
--- drop database if exists webtech_fall2024_madiba_quansah;
+drop database if exists webtech_fall2024_madiba_quansah;
 --  drop table if exists feedback;
 --  drop table if exists payment;
 --  drop table if exists order_details;
@@ -12,7 +12,7 @@
 --  drop table if exists `table`;
 --  drop table if exists admin;
 --  drop table if exists secret_token;
--- CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
+CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
 
 USE webtech_fall2024_madiba_quansah;
 
@@ -101,7 +101,7 @@ CREATE table if not exists `order` (
   order_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   total_amount decimal(10, 2),
   status varchar(20) NOT NULL DEFAULT 'Pending',
-  FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
+  FOREIGN KEY (customer_id) REFERENCES customer (customer_id) on delete cascade,
   FOREIGN KEY (staff_id) REFERENCES staff (staff_id),
   CHECK (total_amount >= 0),
   CHECK (status IN ('Completed', 'Pending', 'Cancelled'))
@@ -332,7 +332,7 @@ VALUES
     'Served with fries',
     10.99,
     'Main Course',
-        "./assets/cheesecake.jpeg"
+        "./assets/burger.jpg"
 
   ),
   (
@@ -373,19 +373,55 @@ VALUES
   ('Pasta', 90,  15);
 
 -- 6. `menu_item_inventory`
-INSERT INTO
-  menu_item_inventory (menu_item_id, inventory_id, quantity_used)
+
+INSERT INTO menu_item_inventory (menu_item_id, inventory_id, quantity_used)
 VALUES
-  (1, 1, 2),
-  (2, 2, 1),
-  (3, 3, 3),
-  (4, 4, 2),
-  (5, 5, 3),
-  (6, 6, 1),
-  (7, 7, 2),
-  (8, 8, 1),
-  (9, 9, 1),
-  (10, 10, 1);
+  -- Margherita Pizza (requires Tomatoes, Flour, Cheese)
+  (1, 1, 2),  -- Tomatoes
+  (1, 3, 3),  -- Flour
+  (1, 7, 2),  -- Cheese
+  
+  -- Caesar Salad (requires Lettuce, Cheese, Butter for dressing)
+  (2, 2, 1),  -- Lettuce
+  (2, 7, 1),  -- Cheese
+  (2, 6, 1),  -- Butter
+  
+  -- Chocolate Cake (requires Flour, Butter, Eggs, etc.)
+  (3, 3, 4),  -- Flour
+  (3, 6, 2),  -- Butter
+  
+  -- Steak (requires Beef, Butter)
+  (4, 4, 2),  -- Beef
+  (4, 6, 1),  -- Butter
+  
+  -- Pasta Alfredo (requires Chicken, Pasta, Butter)
+  (5, 5, 3),  -- Chicken
+  (5, 10, 3), -- Pasta
+  (5, 6, 1),  -- Butter
+  
+  -- Garlic Bread (requires Flour, Butter, Cheese)
+  (6, 3, 1),  -- Flour
+  (6, 6, 1),  -- Butter
+  (6, 7, 1),  -- Cheese
+  
+  -- Cheeseburger (requires Beef, Flour for buns, Lettuce, Cheese)
+  (7, 4, 2),  -- Beef
+  (7, 3, 2),  -- Flour
+  (7, 2, 1),  -- Lettuce
+  (7, 7, 1),  -- Cheese
+  
+  -- Tiramisu (requires Coffee Beans, Butter, Flour)
+  (8, 9, 2),  -- Coffee Beans
+  (8, 6, 1),  -- Butter
+  (8, 3, 3),  -- Flour
+  
+  -- Wine Glass (requires Wine Bottles)
+  (9, 8, 1),  -- Wine Bottles
+  
+  -- Iced Tea (requires Tea leaves, Water, Sugar)
+  (10, 9, 1),  -- Coffee Beans (or similar ingredient for Iced Tea)
+  (10, 2, 1);  -- Lettuce (used for garnish or flavoring)
+
 
 INSERT INTO admin (username, passhash) values ("madiba", "$2y$10$Wb6MPRNp0oO7/eM81Ma8HO4kVapyl0o.O1vkvSp3/IiWYW5oGsjyW");
 

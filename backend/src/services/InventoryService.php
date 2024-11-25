@@ -57,6 +57,37 @@ class InventoryService
 
     }
 
+    public function GetByMenuItemId($id)
+    {
+        global $db;
+        $query = <<<'SQL'
+select
+	quantity,
+	quantity_used
+from
+	inventory
+inner join menu_item_inventory on
+	menu_item_inventory.inventory_id = inventory.inventory_id
+inner join menu_item on
+	menu_item.menu_item_id = menu_item_inventory.menu_item_id
+where
+	menu_item.menu_item_id = ?;
+SQL;
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(1, $id);
+        if (! $stmt->execute()) {
+            return [
+                'header' => 'HTTP/1.1 404 Not Found',
+                'data' => ['error' => "inventory with menu item id $id not found"],
+            ];
+        }
+
+        return [
+            'header' => 'HTTP/1.1 200 OK',
+            'data' => $stmt->fetchAll(),
+        ];
+    }
+
     public function Restock($id, $quantity)
     {
         if ($quantity <= 0) {

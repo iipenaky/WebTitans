@@ -135,10 +135,21 @@ async function loadInventoryTable() {
             tbody.insertAdjacentHTML("beforeend", row);
             document.getElementById(`restock-inventory-${item.inventory_id}`).onclick = async () => {
                 try {
-                    const res = await restockByQty(item.inventory_id, 10);
-                    alert(`Restocked ${item.item_name} by 10 units`);
+                    const qty = parseInt(prompt("Enter the quantity to restock:"), 10);
+
+                    if (isNaN(qty) || qty <= 0) {
+                        throw new Error("Invalid quantity. Please enter a positive number.");
+                    }
+
+                    if (!confirm(`Are you sure you want to restock ${item.item_name} by ${qty} units?`)) {
+                        return;
+                    }
+
+                    const res = await restockByQty(item.inventory_id, qty);
+                    alert(`Restocked ${item.item_name} by ${qty} units`);
                     loadInventoryTable();
                 } catch (error) {
+                    alert(error.message);
                     console.error(error);
                 }
             };
@@ -147,7 +158,6 @@ async function loadInventoryTable() {
         console.error(error);
     }
 }
-
 
 async function restockInventory(id, quantity) {
     try {

@@ -1,0 +1,11 @@
+{
+    "name": "mads/backend",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Madiba Hudson-Quansah",
+            "email": "mhquansah@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../db/db.php';
 require_once __DIR__.'/./MenuItemService.php';
+require_once __DIR__.'/./InventoryService.php';
 require_once __DIR__.'/./StaffService.php';
 
 class OrderService
@@ -237,7 +238,20 @@ SQL;
                 'INSERT INTO order_details (order_id, menu_item_id, quantity) VALUES (:oid, :mid, :qty)'
             );
 
+            $InventoryService = new InventoryService;
             foreach ($orderDetails as $orderDetail) {
+                $ingredients = $InventoryService->GetByMenuItemId($orderDetail['menu_item_id'])['data'];
+                foreach ($ingredients as $ing) {
+                    if ($ing['quantity'] < $ing['quantity_used'] * $orderDetail['quantity']) {
+                        $db->rollBack();
+
+                        return [
+                            'header' => 'HTTP/1.1 400 Bad Request',
+                            'data' => ['error' => 'Not enough ingredients in inventory'],
+                        ];
+                    }
+                }
+
                 $stmt->bindParam(':oid', $orderId);
                 $stmt->bindParam(':mid', $orderDetail['menu_item_id']);
                 $stmt->bindParam(':qty', $orderDetail['quantity']);
