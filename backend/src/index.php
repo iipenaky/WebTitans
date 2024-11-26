@@ -22,23 +22,9 @@ define('HEADERS', [
     'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
 ]);
 
-define('RULES', [
-    'POST /auth/signup' => ['email' => ['required' => true], 'password' => ['required' => true], 'username' => ['required' => true],
-        'fname' => ['required' => true], 'lname' => ['required' => true],
-    ],
-    'POST /auth/login' => ['email' => ['required' => true], 'password' => ['required' => true]],
-]);
-
 $requestOrigin = rtrim($_SERVER['HTTP_ORIGIN'], '/');
-// Set headers
 $handler = new MiddlewareHandler;
-/*if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {*/
-/*    header('Access-Control-Allow-Origin: http://localhost:8080');*/
-/*    header('Access-Control-Allow-Credentials: true');*/
-/*    foreach (HEADERS as $header) {*/
-/*        header($header);*/
-/*    }*/
-/*}*/
+
 if ($requestOrigin == '') {
     header('Access-Control-Allow-Origin: http://169.239.251.102:3341');
     header('Access-Control-Allow-Credentials: true');
@@ -46,13 +32,6 @@ if ($requestOrigin == '') {
         header($header);
     }
 } else {
-    /*$allowedOrigins = [*/
-    /*    'http://localhost:80',*/
-    /*    'http://localhost:8080',*/
-    /*    'http://169.239.251.102:3341',*/
-    /*    'http://169.239.251.102:3341/~madiba.quansah/frontend',*/
-    /*];*/
-
     $corsOptions = [
         'allowedOrigins' => [
             'http://localhost:80',
@@ -72,30 +51,6 @@ if ($requestOrigin == '') {
         header('HTTP/1.1 403 Forbidden');
         echo json_encode(['error' => 'Middleware error']);
     }
-
-    /*if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {*/
-    /*    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");*/
-    /*    header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE');*/
-    /*    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');*/
-    /*    header('HTTP/1.1 204 No Content');*/
-    /*    exit();*/
-    /*}*/
-    /**/
-    /*if (isset($requestOrigin) && in_array($requestOrigin, $allowedOrigins)) {*/
-    /*    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");*/
-    /*    header('Access-Control-Allow-Credentials: true');*/
-    /*    foreach (HEADERS as $header) {*/
-    /*        header($header);*/
-    /*    }*/
-    /*} else {*/
-    /*    header('HTTP/1.1 403 Forbidden');*/
-    /*    echo json_encode([*/
-    /*        'error' => 'Origin not allowed',*/
-    /*        'requestOrigin' => $requestOrigin,*/
-    /*        'allowedOrigins' => $allowedOrigins,*/
-    /*    ]);*/
-    /*    exit();*/
-    /*}*/
 }
 
 // Get the URI and split it into its components
@@ -121,7 +76,6 @@ if (! isset($uri[0])) {
 
 try {
     // Match the first element of the URI to the appropriate route
-    /*echo json_encode($uri);*/
     switch ($uri[0]) {
         case 'info':
             header('HTTP/1.1 200 OK');

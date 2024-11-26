@@ -14,19 +14,16 @@ async function getMenuItems() {
     });
 
     if (!res.ok) {
-        console.log({ res });
         handleError(res);
     }
 
     const json = await res.json();
-    console.log({ json });
     return json;
 }
 
 let items = [];
 
 function renderItems(items) {
-    console.log({ items });
     const itemsDiv = document.getElementById("items");
     itemsDiv.innerHTML = "";
     for (const item of items) {
@@ -80,7 +77,6 @@ async function submitOrder() {
         },
         order_details: items.map((i) => ({ menu_item_id: i.menu_item_id, quantity: i.quantity })),
     };
-    console.log({ order });
     const res = await fetch(`${BASE_URL}/user/order/add`, {
         method: "POST",
         credentials: "include",
@@ -88,14 +84,12 @@ async function submitOrder() {
     });
 
     if (!res.ok) {
-        console.log({ res });
         handleError(res);
     }
 
     items = [];
     renderItems(items);
     const json = await res.json();
-    console.log({ json });
     return json;
 }
 
@@ -142,7 +136,6 @@ function groupMenuItemsByCategory(menuItems) {
 }
 
 document.getElementById("complete").onclick = async () => {
-    console.log({ items });
     try {
         const req = await submitOrder();
     } catch (e) {
@@ -209,9 +202,7 @@ function displayMenuItems(menuItems) {
                         alert("Empty fields");
                         return false;
                     }
-                    console.log({ item });
                     let i = { ...item, quantity };
-                    console.log(i);
                     addMenuItem(i);
                     modal.onsubmit = null;
                     modal.reset();
@@ -228,4 +219,3 @@ function displayMenuItems(menuItems) {
         menuItemsDiv.appendChild(categorySection);
     });
 }
-

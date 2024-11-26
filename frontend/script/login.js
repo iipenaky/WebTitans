@@ -19,7 +19,6 @@ async function loginUser(e) {
     }
 
     const json = await req.json();
-    console.log({ json });
 
     // Save login state (e.g., token or flag) to localStorage
 

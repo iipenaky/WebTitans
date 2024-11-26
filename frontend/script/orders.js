@@ -17,11 +17,8 @@ const getAllOrders = async () => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
-
-
 
 const deleteOrder = async (orderId) => {
     const res = await fetch(`${BASE_URL}/admin/orders/deleteById/${orderId}`, {
@@ -34,15 +31,13 @@ const deleteOrder = async (orderId) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
-
 
 const populateOrderTable = (order) => {
     const orderTable = document.getElementById("order-table");
     for (let o of order) {
-        let { order_id, customer_id, staff_id, order_time, total_amount,status} = o;
+        let { order_id, customer_id, staff_id, order_time, total_amount, status } = o;
         const tdClass = "border px-4 py-2";
 
         const orderRow = document.createElement("tr");
@@ -59,7 +54,6 @@ const populateOrderTable = (order) => {
         orderTime.textContent = order_time;
         orderAmount.textContent = total_amount;
         orderStatus.textContent = status;
-
 
         const actions = document.createElement("td");
         const viewButton = document.createElement("button");
@@ -89,7 +83,6 @@ const populateOrderTable = (order) => {
                 try {
                     const res = await deleteOrder(order_id);
                     orderRow.remove();
-                    console.log({ res });
                 } catch (e) {
                     console.error(e);
                 }
@@ -99,15 +92,7 @@ const populateOrderTable = (order) => {
         viewButton.onclick = view;
         deleteButton.onclick = del;
 
-        for (let element of [
-            orderId,
-            customerId,
-            staffId,
-            orderTime,
-            orderAmount,
-            orderStatus,
-            actions,
-        ]) {
+        for (let element of [orderId, customerId, staffId, orderTime, orderAmount, orderStatus, actions]) {
             element.className = tdClass;
             orderRow.appendChild(element);
         }
@@ -115,8 +100,6 @@ const populateOrderTable = (order) => {
         orderTable.children[1].appendChild(orderRow);
     }
 };
-
-
 
 async function refreshOrderTable() {
     const order = await getAllOrders();

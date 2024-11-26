@@ -41,7 +41,6 @@ async function signupUser(e) {
     });
 
     if (!req.ok) {
-        console.log({ req });
         return;
     }
 

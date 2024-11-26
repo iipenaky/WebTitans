@@ -18,7 +18,6 @@ const getAllCustomer = async () => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -34,7 +33,6 @@ const updateCustomer = async (customer) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -49,15 +47,13 @@ const deleteCustomer = async (customerId) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
-
 
 const populateCustomerTable = (customer) => {
     const customerTable = document.getElementById("customer-table");
     for (let c of customer) {
-        let { customer_id, first_name, last_name, email} = c;
+        let { customer_id, first_name, last_name, email } = c;
         const tdClass = "border px-4 py-2";
 
         const customerRow = document.createElement("tr");
@@ -70,7 +66,6 @@ const populateCustomerTable = (customer) => {
         customerFirstName.textContent = first_name;
         customerLastName.textContent = last_name;
         customerEmail.textContent = email;
-
 
         const actions = document.createElement("td");
         const viewButton = document.createElement("button");
@@ -92,9 +87,7 @@ const populateCustomerTable = (customer) => {
         }
 
         const view = () => {
-            alert(
-                `customer Name: ${first_name} ${last_name}\nEmail: ${email}`,
-            );
+            alert(`customer Name: ${first_name} ${last_name}\nEmail: ${email}`);
         };
 
         const del = async () => {
@@ -102,7 +95,6 @@ const populateCustomerTable = (customer) => {
                 try {
                     const res = await deleteCustomer(customer_id);
                     customerRow.remove();
-                    console.log({ res });
                 } catch (e) {
                     console.error(e);
                 }
@@ -117,7 +109,6 @@ const populateCustomerTable = (customer) => {
             modalData.firstName = first_name;
             modalData.lastName = last_name;
             modalData.email = email;
-            console.log({ modalData });
 
             // Populate form with existing modalData
             for (let key in modalData) {
@@ -136,17 +127,12 @@ const populateCustomerTable = (customer) => {
                     last_name: fData.lastName,
                     email: fData.email,
                 };
-                console.log({ data });
-                if (
-                    !validateFieldsFilled(Object.values(data)) ||
-                    !handleEmail(data.email)
-                ) {
+                if (!validateFieldsFilled(Object.values(data)) || !handleEmail(data.email)) {
                     return;
                 }
 
                 try {
                     const res = await updateCustomer(data);
-                    console.log({ res });
                     await refreshCustomerTable();
                     alert("Cutomer updated successfully");
                     modal.onsubmit = null;
@@ -164,13 +150,7 @@ const populateCustomerTable = (customer) => {
         deleteButton.onclick = del;
         editButton.onclick = update;
 
-        for (let element of [
-            customerId,
-            customerFirstName,
-            customerLastName,
-            customerEmail,
-            actions,
-        ]) {
+        for (let element of [customerId, customerFirstName, customerLastName, customerEmail, actions]) {
             element.className = tdClass;
             customerRow.appendChild(element);
         }
@@ -179,8 +159,6 @@ const populateCustomerTable = (customer) => {
     }
 };
 
-
-
 function openUpdateCustomerModal() {
     document.getElementById("updateCustomerModal").style.display = "block";
 }
@@ -188,7 +166,6 @@ function openUpdateCustomerModal() {
 function closeUpdateCustomerModal() {
     document.getElementById("updateCustomerModal").style.display = "none";
 }
-
 
 document.getElementById("update-modal-close").onclick = closeUpdateCustomerModal;
 

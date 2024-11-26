@@ -18,7 +18,6 @@ async function getCustomerOrders() {
     }
 
     const json = await req.json();
-    console.log({ json });
     return json;
 }
 
@@ -35,7 +34,6 @@ async function getCustomerReservations() {
     }
 
     const json = await req.json();
-    console.log({ json });
     return json;
 }
 
@@ -52,7 +50,6 @@ async function cancelOrder(order) {
     }
 
     const json = await req.json();
-    console.log({ json });
     return json;
 }
 
@@ -68,7 +65,6 @@ async function cancelReservation(reservation_id) {
     }
 
     const json = await req.json();
-    console.log({ json });
     return json;
 }
 
@@ -122,7 +118,6 @@ function renderOrders(orders, container) {
             if (confirm("Are you sure you want to cancel this order?")) {
                 try {
                     const req = await cancelOrder(order);
-                    console.log({ req });
                     await refreshTable();
                 } catch (error) {
                     console.error(error);
@@ -134,7 +129,6 @@ function renderOrders(orders, container) {
         orderDiv.appendChild(cancelButton);
         container.appendChild(orderDiv);
     }
-    console.log({ orderGroups });
 }
 
 function renderReservations(reservations, container) {
@@ -155,7 +149,6 @@ function renderReservations(reservations, container) {
             if (confirm("Are you sure you want to cancel this reservation?")) {
                 try {
                     const req = await cancelReservation(reservation_id);
-                    console.log({ req });
                     await refreshTable();
                 } catch (error) {
                     console.error(error);

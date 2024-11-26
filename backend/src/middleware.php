@@ -2,6 +2,9 @@
 
 interface Middleware
 {
+    /**
+     * @return void
+     */
     public function handle();
 }
 
@@ -9,6 +12,9 @@ class CorsMiddleware implements Middleware
 {
     private array $options;
 
+    /**
+     * @param  array<int,mixed>  $options
+     */
     public function __construct(array $options = [])
     {
         $this->options = array_merge([
@@ -128,7 +134,7 @@ class CorsMiddleware implements Middleware
 
 class JsonMiddleware implements Middleware
 {
-    public function handle()
+    public function handle(): bool
     {
         header('Content-Type: application/json; charset=UTF-8');
 
@@ -140,14 +146,14 @@ class MiddlewareHandler
 {
     private array $middlewares = [];
 
-    public function add(Middleware $middleware)
+    public function add(Middleware $middleware): MiddlewareHandler
     {
         $this->middlewares[] = $middleware;
 
         return $this;
     }
 
-    public function handle()
+    public function handle(): bool
     {
         foreach ($this->middlewares as $middleware) {
             if (! $middleware->handle()) {

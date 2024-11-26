@@ -17,7 +17,6 @@ const getAllReservations = async () => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -32,7 +31,6 @@ const deleteReservation = async (reservationId) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -85,7 +83,6 @@ const populateReservationTable = (reservation) => {
                 try {
                     const res = await deleteReservation(reservation_id);
                     reservationRow.remove();
-                    console.log({ res });
                 } catch (e) {
                     console.error(e);
                 }

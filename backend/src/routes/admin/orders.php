@@ -4,20 +4,6 @@ require_once __DIR__.'/../../services/OrderService.php';
 require_once __DIR__.'/../../utils.php';
 
 $OrderService = new OrderService;
-/*$oFields = ["payment_id","order_id","amount",  "payment_time", "amount", "status"];*/
-/**/
-/*function validateNewPayment($data)*/
-/*{*/
-/*    global $oFields;*/
-/*    return validateNewData($oFields, $data, "order");*/
-/*}*/
-/**/
-/**/
-/*function validatePayment($data)*/
-/*{*/
-/*    global $oFields;*/
-/*    return validateData($oFields, $data, "order");*/
-/*}*/
 
 $orderRoutes = [
     'GET' => [
@@ -25,14 +11,6 @@ $orderRoutes = [
         'id' => ordersByCustomerId(...),
         'num' => numOrders(...),
     ],
-
-    /*"POST" => array(*/
-    /*"add" => paymentsAdd(...),*/
-    /*),*/
-    /**/
-    /*"PUT" => array(*/
-    /*"update" => paymentsUpdate(...),*/
-    /*),*/
 
     'DELETE' => [
         'deleteById' => orderDeleteById(...),

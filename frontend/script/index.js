@@ -3,7 +3,6 @@ import { readFromSessionStorage, writeToSessionStorage, addElementToElementOnCon
 (async function () {
     const req = await fetch("http://169.239.251.102:3341/~madiba.quansah/backend/src/index.php/health");
     if (!req.ok) {
-        console.log({ req });
         return;
     }
     const json = await req.json();

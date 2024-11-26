@@ -24,7 +24,6 @@ function validateAddInventory() {
     const quant = quantElem.value.trim();
     const reorderLevel = reorderlevelElement.value.trim();
 
-    console.log({ itemName, reorderLevel, quant });
     if (!itemName || !reorderLevel || !quant) {
         messageDiv.innerText = "All fields must be filled out.";
         return false;
@@ -44,13 +43,11 @@ async function addInventory(e) {
 
     if (!req.ok) {
         check401();
-        console.log({ req });
         throw new Error("Failed to add inventory");
     }
 
     const json = await req.json();
     const data = json.message;
-    console.log({ data });
     alert(data);
     signupForm.reset();
     document.location.href = "./stock.html";
@@ -62,7 +59,6 @@ async function getinventory() {
     });
 
     if (!req.ok) {
-        console.log({ req });
         if (req.status === 401) {
             sendBackTo();
         }
@@ -71,7 +67,6 @@ async function getinventory() {
 
     const json = await req.json();
     const data = json;
-    console.log({ data });
     return data;
 }
 
@@ -83,7 +78,6 @@ async function restockByQty(id, qty) {
     });
 
     if (!req.ok) {
-        console.log({ req });
         if (req.status === 401) {
             sendBackTo();
         }
@@ -92,7 +86,6 @@ async function restockByQty(id, qty) {
 
     const json = await req.json();
     const data = json;
-    console.log({ data });
     return data;
 }
 
@@ -102,7 +95,6 @@ async function getinventorybyId() {
     });
 
     if (!req.ok) {
-        console.log({ req });
         if (req.status === 401) {
             sendBackTo();
         }
@@ -111,7 +103,6 @@ async function getinventorybyId() {
 
     const json = await req.json();
     const data = json;
-    console.log({ data });
     return data;
 }
 

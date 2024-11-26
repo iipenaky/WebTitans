@@ -26,13 +26,11 @@ async function getAvailableTables() {
     });
 
     if (!res.ok) {
-        console.log({ res });
         check401(res);
         handleError(res);
     }
 
     const json = await res.json();
-    console.log({ json });
     return json;
 }
 
@@ -50,7 +48,6 @@ async function reserveUser(e) {
     e.preventDefault();
     if (!validateReservationForm()) return;
     const userInfo = readFromSessionStorage("user");
-    console.log({ userInfo });
     if (!userInfo) {
         alert("Please login to reserve a table");
         console.log("User not logged in");
@@ -64,7 +61,6 @@ async function reserveUser(e) {
         number_of_guests: formData.guests,
         special_requests: formData.special_requests || "N\\A",
     };
-    console.log({ payload });
 
     const req = await fetch(`${BASE_URL}/user/reserve/add`, {
         method: "POST",
@@ -73,7 +69,6 @@ async function reserveUser(e) {
     });
 
     if (!req.ok) {
-        console.log({ req });
         check401(req);
         handleError(req);
         return;
@@ -81,7 +76,6 @@ async function reserveUser(e) {
 
     const json = await req.json();
     const data = json.message;
-    console.log({ data });
     alert(data);
     reservationform.reset();
     document.location.href = "./menu.html";

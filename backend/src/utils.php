@@ -2,6 +2,7 @@
 
 function destroySession()
 {
+    // Try evetything to destroy the session
     session_start();
     $destroy = session_destroy();
     $unset = session_unset();
@@ -183,6 +184,9 @@ function routeHandler($verb, $uri, $routes)
             exit();
         }
 
+        // Handle the request based on the HTTP verb
+        // GET and DELETE requests do not have a body
+        // POST and PUT requests have a body
         match ($verb) {
             'GET', 'DELETE' => handleNoBody($uri, $func),
             'POST', 'PUT' => handleBody($func),

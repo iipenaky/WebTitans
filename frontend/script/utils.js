@@ -20,7 +20,6 @@ export const writeToCookieStorage = (key, value) => {
 };
 
 export const readFromCookieStorage = (key) => {
-    console.log(document.cookie);
     return document.cookie.split(";").find((cookie) => {
         return cookie.includes(key);
     });
@@ -83,7 +82,7 @@ export const handleUserLoggedIn = (redirect = "index.html") => {
 export const handleError = async (err) => {
     const e = await err.json();
     alert(e.error);
-    console.log({ e });
+    console.error({ e });
     throw new Error(e.error);
 };
 
@@ -94,14 +93,11 @@ export const logout = async (redirect = "index.html") => {
     });
 
     if (!req.ok) {
-        console.log({ req });
         const err = await req.json();
-        console.log({ err });
         throw new Error("Failed to log out");
     }
 
     const json = await req.json();
-    console.log({ json });
 
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("isLoggedIn");
@@ -115,7 +111,6 @@ export const handleLogout = async (e) => {
     try {
         const res = await logout();
     } catch (error) {
-        console.log(error);
         alert("Failed to log out");
     }
 };

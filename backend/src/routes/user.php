@@ -47,12 +47,12 @@ function login($data)
 
 function checkAuth()
 {
-    /*if (! isset($_SESSION['customer'])) {*/
-    /*    header('HTTP/1.1 401 Unauthorized');*/
-    /*    echo json_encode(['data' => ['error' => 'Unauthorized']]);*/
-    /**/
-    /*    return false;*/
-    /*}*/
+    if (! isset($_SESSION['customer'])) {
+        header('HTTP/1.1 401 Unauthorized');
+        echo json_encode(['data' => ['error' => 'Unauthorized']]);
+
+        return false;
+    }
 
     return true;
 }

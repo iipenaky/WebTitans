@@ -18,7 +18,6 @@ const getAllStaff = async () => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -34,7 +33,6 @@ const updateStaff = async (staff) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -49,7 +47,6 @@ const deleteStaff = async (staffId) => {
     }
 
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -60,11 +57,9 @@ const addStaff = async (staff) => {
         body: JSON.stringify(staff),
     });
     if (!res.ok) {
-        console.log({ res });
         await handleError(res);
     }
     const data = await res.json();
-    console.log({ data });
     return data;
 };
 
@@ -122,7 +117,6 @@ const populateStaffTable = (staff) => {
                 try {
                     const res = await deleteStaff(staff_id);
                     staffRow.remove();
-                    console.log({ res });
                 } catch (e) {
                     console.error(e);
                 }
@@ -139,7 +133,6 @@ const populateStaffTable = (staff) => {
             modalData.email = email;
             modalData.salary = salary;
             modalData.position = position;
-            console.log({ modalData });
 
             // Populate form with existing modalData
             for (let key in modalData) {
@@ -161,7 +154,6 @@ const populateStaffTable = (staff) => {
                     position: fData.position,
                     passhash,
                 };
-                console.log({ data });
                 if (
                     !validateFieldsFilled(Object.values(data)) ||
                     !handleEmail(data.email) ||
@@ -172,7 +164,6 @@ const populateStaffTable = (staff) => {
 
                 try {
                     const res = await updateStaff(data);
-                    console.log({ res });
                     await refreshStaffTable();
                     alert("Staff updated successfully");
                     modal.onsubmit = null;
@@ -236,7 +227,6 @@ const handleAddStaff = async (e) => {
         position: fData.position,
         password: fData.password,
     };
-    console.log({ data });
     if (
         !validateFieldsFilled(Object.values(data)) ||
         !handleEmail(data.email) ||
@@ -248,7 +238,6 @@ const handleAddStaff = async (e) => {
 
     try {
         const res = await addStaff(data);
-        console.log({ res });
         await refreshStaffTable();
         alert("Staff added successfully");
         form.reset();

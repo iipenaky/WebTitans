@@ -15,7 +15,6 @@ async function loginUser(e) {
     });
 
     if (!res.ok) {
-        console.log({ res });
         const err = await res.json();
         console.log({ err });
         alert("Login Error! Please try again");
@@ -23,9 +22,6 @@ async function loginUser(e) {
     }
 
     const json = await res.json();
-    console.log({ res });
-    console.log(res.headers);
-    console.log({ json });
     const msg = json.message;
     writeToSessionStorage("isAdminLoggedIn", "true");
     loginForm.reset();
