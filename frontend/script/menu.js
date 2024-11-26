@@ -41,8 +41,8 @@ function renderItems(items) {
 
         itemDiv.appendChild(itemQuant);
         itemsDiv.appendChild(itemDiv);
-        itemsDiv.onclick = () => {
-            removeMenuItem(item);
+        itemDiv.onclick = () => {
+            removeMenuItem(item.menu_item_id);
         };
     }
     items = items.sort((a, b) => a.menu_item_id - b.menu_item_id);
@@ -58,8 +58,8 @@ function addMenuItem(item) {
     renderItems(items);
 }
 
-function removeMenuItem(item) {
-    const index = item.menu_item_id;
+function removeMenuItem(index) {
+    console.log({ index });
     items = items.filter((i) => i.menu_item_id !== index);
     renderItems(items);
 }
