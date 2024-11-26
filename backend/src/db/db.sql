@@ -1,18 +1,18 @@
-drop database if exists webtech_fall2024_madiba_quansah;
---  drop table if exists feedback;
---  drop table if exists payment;
---  drop table if exists order_details;
---  drop table if exists `order`;
---  drop table if exists menu_item_inventory;
---  drop table if exists inventory;
---  drop table if exists menu_item;
---  drop table if exists staff;
---  drop table if exists reservations;
---  drop table if exists customer;
---  drop table if exists `table`;
---  drop table if exists admin;
---  drop table if exists secret_token;
-CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
+-- drop database if exists webtech_fall2024_madiba_quansah;
+drop table if exists feedback;
+drop table if exists payment;
+drop table if exists order_details;
+drop table if exists `order`;
+drop table if exists menu_item_inventory;
+drop table if exists inventory;
+drop table if exists menu_item;
+drop table if exists staff;
+drop table if exists reservations;
+drop table if exists customer;
+drop table if exists `table`;
+drop table if exists admin;
+drop table if exists secret_token;
+-- CREATE DATABASE if not exists webtech_fall2024_madiba_quansah;
 
 USE webtech_fall2024_madiba_quansah;
 
@@ -425,7 +425,7 @@ VALUES
      4.99,
      'Beverage',
      './assets/chocfloat.jpg'
-   )
+   ),
   (
      'Coke',
      'Classic Coca-Cola beverage',
