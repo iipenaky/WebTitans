@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants.js";
+import { handleError } from "./utils.js";
 
 // Example form handling code (if needed for other forms)
 const fnameElem = document.getElementById("first_name");
@@ -41,6 +42,7 @@ async function signupUser(e) {
     });
 
     if (!req.ok) {
+        handleError(req);
         return;
     }
 
