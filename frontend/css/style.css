@@ -12,10 +12,15 @@ html {
   margin-right: 30px;
 }
 
-.logo{
+.logo {
   width: 40px;
   height: 40px;
 }
+
+.menu-item:hover {
+  cursor: pointer;
+}
+
 h2 {
   /* Style for general headings. */
   font-family: "Lucida Handwriting"; /* Set specific font for headings */
@@ -163,4 +168,3 @@ input[type="text"] {
   color: black;
   border-radius: 4px;
 }
-

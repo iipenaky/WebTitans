@@ -32,8 +32,9 @@ function renderItems(items) {
         const itemImage = document.createElement("img");
         itemImage.src = image;
         itemImage.alt = name;
-        itemImage.style = "max-width: 10rem; boreder-radius: 10px";
+        itemImage.style = "max-width: 10rem; border-radius: 10px";
         itemDiv.appendChild(itemImage);
+        itemDiv.classList.add("menu-item");
         itemDiv.style = "border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 10px";
         const itemQuant = document.createElement("h3");
         itemQuant.textContent = `x${quantity}`;
@@ -59,7 +60,7 @@ function addMenuItem(item) {
 
 function removeMenuItem(item) {
     const index = item.menu_item_id;
-    items = items.splice(index, 1);
+    items = items.filter((i) => i.menu_item_id !== index);
     renderItems(items);
 }
 
