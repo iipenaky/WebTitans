@@ -66,7 +66,7 @@ CREATE table if not exists staff (
 CREATE table if not exists menu_item (
   menu_item_id int AUTO_INCREMENT PRIMARY KEY,
   name varchar(40) NOT NULL,
-  description varchar(40) NOT NULL,
+  description varchar(255) NOT NULL,
   price double(10, 2) NOT NULL,
   category varchar(40),
   image varchar(255),
@@ -355,7 +355,106 @@ VALUES
     2.99,
     'Beverage',
     "./assets/icedtea.jpg"
-  );
+  ),
+ (
+    'Burritos',
+    'Filled tortillas with meat and beans',
+    9.99,
+    'Main Course',
+    './assets/burrito.jpg'
+  ),
+  (
+    'Crispy Squid',
+    'Fried calamari served with dip',
+    12.50,
+    'Main Course',
+    './assets/crispy_squid.jpg'
+  ),
+  (
+    'Croissants',
+    'Buttery, flaky pastry',
+    4.99,
+    'Appetizer',
+    './assets/croissants.jpg'
+  ),
+  (
+    'Falafel',
+    'Fried chickpea balls with spices',
+    5.99,
+    'Appetizer',
+    './assets/falafel.jpg'
+  ),
+  (
+    'Nachos',
+    'Corn chips topped with cheese and salsa',
+    6.99,
+    'Appetizer',
+    './assets/nachos.jpg'
+  ),
+  (
+    'Sushi',
+    'Assorted seafood and rice rolls',
+    15.99,
+    'Appetizer',
+    './assets/sushi.jpg'
+  ),
+  (
+     'Almond Sundae',
+     'Ice cream topped with almonds',
+     5.99,
+     'Dessert',
+     './assets/almondsundae.jpg'
+   ),
+   (
+     'Cheesecake',
+     'Classic cheesecake with a graham cracker crust',
+     7.99,
+     'Dessert',
+     './assets/cheesecake.jpg'
+   ),
+   (
+     'Chocolate Crepes',
+     'Crepes filled with rich chocolate',
+     6.50,
+     'Dessert',
+     './assets/choccrepes.jpg'
+   ),
+   (
+     'Chocolate Float',
+     'Chilled soda with chocolate ice cream',
+     4.99,
+     'Beverage',
+     './assets/chocfloat.jpg'
+   )
+  (
+     'Coke',
+     'Classic Coca-Cola beverage',
+     1.99,
+     'Beverage',
+     './assets/coke.jpg'
+   ),
+   (
+     'Fanta',
+     'Orange-flavored soda',
+     1.99,
+     'Beverage',
+     './assets/fanta.jpg'
+   ),
+   (
+     'Sprite',
+     'Lemon-lime soda',
+     1.99,
+     'Beverage',
+     './assets/sprite.jpg'
+   ),
+   (
+     'Water',
+     'Pure bottled water',
+     0.99,
+     'Beverage',
+     './assets/water.jpg'
+   )
+  ;
 
 -- 5. `inventory`
 INSERT INTO
@@ -370,7 +469,27 @@ VALUES
   ('Cheese', 75,  20),
   ('Wine Bottles', 40,  10),
   ('Coffee Beans', 50,  10),
-  ('Pasta', 90,  15);
+  ('Pasta', 90,  15),
+  ('Tortillas', 50, 10),
+  ('Beans', 40, 10),
+  ('Calamari', 30, 5),
+  ('Pastry Dough', 60, 15),
+  ('Chickpeas', 50, 10),
+  ('Corn Chips', 50, 10),
+  ('Seaweed', 40, 10),
+  ('Rice', 80, 15),
+  ('Fish', 70, 20),
+  ('Almonds', 40, 10),
+  ('Ice Cream', 60, 15),
+  ('Graham Crackers', 30, 10),
+  ('Cream Cheese', 50, 15),
+  ('Cocoa Powder', 20, 5),
+  ('Soda', 50, 10),
+  ('Coke Bottles', 100, 20),
+  ('Fanta Bottles', 100, 20),
+  ('Sprite Bottles', 100, 20),
+  ('Water Bottles', 100, 20)
+  ;
 
 -- 6. `menu_item_inventory`
 
@@ -420,7 +539,67 @@ VALUES
   
   -- Iced Tea (requires Tea leaves, Water, Sugar)
   (10, 9, 1),  -- Coffee Beans (or similar ingredient for Iced Tea)
-  (10, 2, 1);  -- Lettuce (used for garnish or flavoring)
+  (10, 2, 1),  -- Lettuce (used for garnish or flavoring)
+  
+    -- Burritos (requires Tortillas, Beans, Cheese)
+  (11, 11, 2),  -- Tortillas
+  (11, 12, 3),  -- Beans
+  (11, 7, 1),   -- Cheese
+
+  -- Crispy Squid (requires Calamari, Flour, Butter)
+  (12, 13, 2),  -- Calamari
+  (12, 3, 1),   -- Flour
+  (12, 6, 1),   -- Butter
+
+  -- Croissants (requires Pastry Dough, Butter)
+  (13, 14, 3),  -- Pastry Dough
+  (13, 6, 1),   -- Butter
+
+  -- Falafel (requires Chickpeas, Flour, Butter)
+  (14, 15, 3),  -- Chickpeas
+  (14, 3, 1),   -- Flour
+  (14, 6, 1),   -- Butter
+
+  -- Nachos (requires Corn Chips, Cheese, Tomatoes)
+  (15, 16, 3),  -- Corn Chips
+  (15, 7, 2),   -- Cheese
+  (15, 1, 1),   -- Tomatoes
+
+  -- Sushi (requires Seaweed, Rice, Fish)
+  (16, 17, 1),  -- Seaweed
+  (16, 18, 2),  -- Rice
+  (16, 19, 2),  -- Fish
+
+  -- Almond Sundae (requires Ice Cream, Almonds)
+  (17, 12, 2),  -- Ice Cream
+  (17, 11, 1),  -- Almonds
+
+  -- Cheesecake (requires Graham Crackers, Cream Cheese, Butter)
+  (18, 13, 2),  -- Graham Crackers
+  (18, 14, 3),  -- Cream Cheese
+  (18, 6, 1),   -- Butter
+
+  -- Chocolate Crepes (requires Flour, Butter, Cocoa Powder)
+  (19, 3, 2),   -- Flour
+  (19, 6, 1),   -- Butter
+  (19, 15, 1),  -- Cocoa Powder
+
+  -- Chocolate Float (requires Soda, Ice Cream, Cocoa Powder)
+  (20, 16, 1),  -- Soda
+  (20, 12, 1),  -- Ice Cream
+  (20, 15, 1),  -- Cocoa Powder
+
+  -- Coke (requires Coke Bottles)
+  (21, 17, 1),  -- Coke Bottles
+
+   -- Fanta (requires Fanta Bottles)
+  (22, 18, 1),  -- Fanta Bottles
+
+   -- Sprite (requires Sprite Bottles)
+  (23, 19, 1),  -- Sprite Bottles
+
+   -- Water (requires Water Bottles)
+  (24, 20, 1);  -- Water Bottles
 
 
 INSERT INTO admin (username, passhash) values ("madiba", "$2y$10$Wb6MPRNp0oO7/eM81Ma8HO4kVapyl0o.O1vkvSp3/IiWYW5oGsjyW");
